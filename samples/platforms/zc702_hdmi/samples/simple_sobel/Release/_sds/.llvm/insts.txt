@@ -1,0 +1,25 @@
+SW(2)@79\n   call void @llvm.dbg.value(metadata !{i32 %in_buffer}, i64 0, metadata !80), !dbg !81
+SW(3)@79\n   call void @llvm.dbg.value(metadata !{i32 %out_buffer}, i64 0, metadata !82), !dbg !83
+SW(4)@81\n   call void @llvm.dbg.value(metadata !84, i64 0, metadata !85), !dbg !86
+SW(5)@81\n   call void @llvm.dbg.value(metadata !87, i64 0, metadata !88), !dbg !89
+SW(6)@81\n   call void @llvm.dbg.value(metadata !90, i64 0, metadata !91), !dbg !92
+SW(7)@83\n   %1 = call i64 @sds_clock_counter() #3, !dbg !93
+SW(8)@83\n   %2 = trunc i64 %1 to i32, !dbg !93
+SW(9)@83\n   call void @llvm.dbg.value(metadata !{i32 %2}, i64 0, metadata !94), !dbg !93
+SW(10)@79\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !80), !dbg !81
+SW(11)@84\n   %3 = inttoptr i32 %in_buffer to i32*, !dbg !95
+SW(12)@79\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !82), !dbg !83
+SW(13)@84\n   %4 = inttoptr i32 %out_buffer to i32*, !dbg !95
+SW(14)@81\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !85), !dbg !86
+SW(15)@81\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !88), !dbg !89
+SW(16)@81\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !91), !dbg !92
+SW(17)@85\n   %5 = call i64 @sds_clock_counter() #3, !dbg !96
+SW(18)@85\n   %6 = trunc i64 %5 to i32, !dbg !96
+SW(19)@83\n   call void @llvm.dbg.value(metadata !{i32 %6}, i64 0, metadata !98), !dbg !93
+SW(20)@83\n   call void @llvm.dbg.value(metadata !{null}, i64 0, metadata !94), !dbg !93
+SW(21)@85\n   %7 = sub i32 %6, %2, !dbg !96
+SW(22)@85\n   %8 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([19 x i8]* @.str, i32 0, i32 0), i32 %7) #3, !dbg !96
+SW(23)@85\n   %9 = call i64 @sds_clock_counter() #3, !dbg !96
+SW(24)@85\n   %10 = trunc i64 %9 to i32, !dbg !96
+SW(25)@83\n   call void @llvm.dbg.value(metadata !{i32 %10}, i64 0, metadata !94), !dbg !93
+SW(26)@87\n   ret void, !dbg !99

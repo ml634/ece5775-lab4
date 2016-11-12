@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xd" xd:functionName="img_process" xd:componentRef="img_process" xd:initiationInterval="21687432" xd:clockPeriod="5.950000" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:controlReg xd:name="control" xd:interfaceRef="ap_ctrl" xd:busTypeRef="acc_handshake" xd:type="acc_handshake"/>
+  <xd:arg xd:name="rgb_data_in[]" xd:originalName="rgb_data_in" xd:direction="in" xd:interfaceRef="rgb_data_in" xd:busTypeRef="acc_fifo" xd:arraySize="2211840" xd:dataWidth="32"/>
+  <xd:arg xd:name="rgb_data_out[]" xd:originalName="rgb_data_out" xd:direction="out" xd:interfaceRef="rgb_data_out" xd:busTypeRef="acc_fifo" xd:arraySize="2211840" xd:dataWidth="32"/>
+  <xd:arg xd:name="isobelInvert" xd:originalName="isobelInvert" xd:direction="in" xd:interfaceRef="isobelInvert" xd:busTypeRef="register" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="iminsobelSensitivity" xd:originalName="iminsobelSensitivity" xd:direction="in" xd:interfaceRef="iminsobelSensitivity" xd:busTypeRef="register" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="imaxsobelSensitivity" xd:originalName="imaxsobelSensitivity" xd:direction="in" xd:interfaceRef="imaxsobelSensitivity" xd:busTypeRef="register" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:latencyEstimates xd:best-case="21687431" xd:worst-case="21687431" xd:average-case="21687431"/>
+  <xd:resourceEstimates xd:LUT="795" xd:FF="581" xd:BRAM="4" xd:DSP="3"/>
+</xd:acceleratorMap>

@@ -1,0 +1,55 @@
+(c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
+#-----------------------------------------------------------
+# Tool version  : sdscc 2015.2.1 20150925
+# Start time    : Tue Nov 08 14:18:10 EST 2016
+# Command line  : sdscc -Wall -O3 -I../hw -sds-pf /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi -c -fmessage-length=0 -MMD -MP -MFsrc/main_app.d -MTsrc/main_app.d -osrc/main_app.o ../src/main_app.c
+# Log file      : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_main_app.log
+# Journal file  : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_main_app.jou
+# Report file   : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_main_app.rpt
+#-----------------------------------------------------------
+
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang_wrapper -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g    -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include -I../hw -Wall -fmessage-length=0 -MMD -MP -D __SDSCC__ -emit-llvm -S /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/src/main_app.s
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include/pthread.h:745:12: warning: declaration of built-in function '__sigsetjmp' requires inclusion of the header <setjmp.h> [-Wbuiltin-requires-header]
+extern int __sigsetjmp (struct __jmp_buf_tag *__env, int __savemask) __THROWNL;
+           ^
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:85:1: warning: format specifies type 'unsigned long' but the argument has type 'unsigned int' [-Wformat]
+TIME_STAMP
+^~~~~~~~~~
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:67:86: note: expanded from macro 'TIME_STAMP'
+#define TIME_STAMP  { clock_end = sds_clock_counter(); printf("elapsed time %lu \n", clock_end-clock_start); clock_start = sds_clock_counter();  }
+                                                                            ~~~      ^~~~~~~~~~~~~~~~~~~~~
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:118:26: warning: incompatible integer to pointer conversion passing 'unsigned int' to parameter of type 'void *' [-Wint-conversion]
+                sds_mmap(input_frame[i], map_len, virtual_addr_in);
+                         ^~~~~~~~~~~~~~
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include/sds_lib.h:32:30: note: passing argument to parameter 'physical_addr' here
+extern void *sds_mmap( void *physical_addr, size_t size, void *virtual_addr);
+                             ^
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:119:26: warning: incompatible integer to pointer conversion passing 'unsigned int' to parameter of type 'void *' [-Wint-conversion]
+                sds_mmap(output_frame[i], map_len, virtual_addr_out);
+                         ^~~~~~~~~~~~~~~
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include/sds_lib.h:32:30: note: passing argument to parameter 'physical_addr' here
+extern void *sds_mmap( void *physical_addr, size_t size, void *virtual_addr);
+                             ^
+INFO: [SDSoC 0-0] Compiling /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c
+arm-xilinx-linux-gnueabi-gcc -c -I../hw -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__ -MF/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/src/main_app.d -MT/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/src/main_app.d  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c -o src/main_app.o
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c: In function 'sw_sobel_processing':
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:85:1: warning: format '%lu' expects argument of type 'long unsigned int', but argument 2 has type 'unsigned int' [-Wformat=]
+ TIME_STAMP
+ ^
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c: In function 'thread_sw_sync':
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:118:17: warning: passing argument 1 of 'sds_mmap' makes pointer from integer without a cast
+                 sds_mmap(input_frame[i], map_len, virtual_addr_in);
+                 ^
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include/sds_lib.h:32:14: note: expected 'void *' but argument is of type 'unsigned int'
+ extern void *sds_mmap( void *physical_addr, size_t size, void *virtual_addr);
+              ^
+/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c:119:17: warning: passing argument 1 of 'sds_mmap' makes pointer from integer without a cast
+                 sds_mmap(output_frame[i], map_len, virtual_addr_out);
+                 ^
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include/sds_lib.h:32:14: note: expected 'void *' but argument is of type 'unsigned int'
+ extern void *sds_mmap( void *physical_addr, size_t size, void *virtual_addr);
+              ^
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdsdata=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/main_app.o.xml src/main_app.o
+sdscc log file saved as /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_main_app.log
+sdscc completed at Tue Nov 08 14:18:15 EST 2016

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table, th, td
+    {
+      border-collapse:collapse;
+      border:1px solid black;
+    }
+    th, td
+    {
+      padding:5px;
+    }
+    p
+    {
+      font-size:200%
+    }
+  </style>
+</head>
+<body>
+<p>Partition 0</p>
+<table>
+<caption><b><font size="5">Data Motion Network</font></b></caption>
+<tr>
+<th>Accelerator</th>
+<th>Argument</th>
+<th>IP Port</th>
+<th>Direction</th>
+<th>Declared Size(bytes)</th>
+<th>Pragmas</th>
+<th>Connection</th>
+</tr>
+<tr>
+<td>img_process_0</td>
+<td>rgb_data_in</td>
+<td>rgb_data_in</td>
+<td>IN</td>
+<td>2211840*4</td>
+<td><ul>
+<li>mem_attribute:CACHEABLE.PHYSICAL_CONTIGUOUS</li>
+</ul>
+</td>
+<td>S_AXI_HP1:AXIDMA_SG</td>
+</tr>
+<td></td>
+<td>rgb_data_out</td>
+<td>rgb_data_out</td>
+<td>OUT</td>
+<td>2211840*4</td>
+<td><ul>
+<li>mem_attribute:CACHEABLE.PHYSICAL_CONTIGUOUS</li>
+</ul>
+</td>
+<td>S_AXI_HP1:AXIDMA_SG</td>
+</tr>
+<td></td>
+<td>isobelInvert</td>
+<td>isobelInvert</td>
+<td>IN</td>
+<td>4</td>
+<td><ul>
+</ul>
+</td>
+<td>M_AXI_GP1:AXILITE:0x80</td>
+</tr>
+<td></td>
+<td>iminsobelSensitivity</td>
+<td>iminsobelSensitivity</td>
+<td>IN</td>
+<td>4</td>
+<td><ul>
+</ul>
+</td>
+<td>M_AXI_GP1:AXILITE:0x84</td>
+</tr>
+<td></td>
+<td>imaxsobelSensitivity</td>
+<td>imaxsobelSensitivity</td>
+<td>IN</td>
+<td>4</td>
+<td><ul>
+</ul>
+</td>
+<td>M_AXI_GP1:AXILITE:0x88</td>
+</tr>
+</table>
+
+<table>
+<caption><b><font size="5">Accelerator Callsites</font></b></caption>
+<tr>
+<th>Accelerator</th>
+<th>Callsite</th>
+<th>IP Port</th>
+<th>Transfer Size(bytes)</th>
+<th>Paged or Contiguous</th>
+<th>Cacheable or Non-cacheable</th>
+</tr>
+<tr>
+<td>img_process_0</td>
+<td>main_app.c:84:2</td>
+<td>rgb_data_in</td>
+<td>2211840 * 4</td>
+<td>paged</td>
+<td>cacheable</td>
+</tr>
+<td></td>
+<td></td>
+<td>rgb_data_out</td>
+<td>2211840 * 4</td>
+<td>paged</td>
+<td>cacheable</td>
+</tr>
+<td></td>
+<td></td>
+<td>isobelInvert</td>
+<td>4</td>
+<td>paged</td>
+<td>cacheable</td>
+</tr>
+<td></td>
+<td></td>
+<td>iminsobelSensitivity</td>
+<td>4</td>
+<td>paged</td>
+<td>cacheable</td>
+</tr>
+<td></td>
+<td></td>
+<td>imaxsobelSensitivity</td>
+<td>4</td>
+<td>paged</td>
+<td>cacheable</td>
+</tr>
+</table>
+</body>
+</html>

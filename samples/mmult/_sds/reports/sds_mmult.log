@@ -1,0 +1,59 @@
+(c) Copyright 2012-2016 Xilinx, Inc. All Rights Reserved.
+#-----------------------------------------------------------
+# Tool version  : sds++ 2016.1 SW Build on May 20 2016 18:38:18
+# Start time    : Tue Nov 08 14:08:06 EST 2016
+# Command line  : sds++ -sds-pf zc702 -sds-hw mmult mmult.cpp -sds-end -poll-mode 1 -Wall -O3 -c -MMD -MP -MFmmult.d mmult.cpp -o mmult.o
+# Log file      : /home/student/ml634/2015/samples/mmult/_sds/reports/sds_mmult.log
+# Journal file  : /home/student/ml634/2015/samples/mmult/_sds/reports/sds_mmult.jou
+# Report file   : /home/student/ml634/2015/samples/mmult/_sds/reports/sds_mmult.rpt
+#-----------------------------------------------------------
+
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang_wrapper -target arm-linux-gnueabihf -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -O0 -g     -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include  -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/include   -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2 -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/arm-linux-gnueabihf -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/backward -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include-fixed -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/libc/usr/include  -Wall -MMD -MP -D __SDSCC__ -emit-llvm -S /home/student/ml634/2015/samples/mmult/mmult.cpp -o /home/student/ml634/2015/samples/mmult/_sds/.llvm/mmult.s
+INFO: [SDSoC 0-0] Performing accelerator source linting for mmult
+sdslint -func mmult /home/student/ml634/2015/samples/mmult/mmult.cpp -- -c -target arm-linux-gnueabihf -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -O0 -g -w    -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include  -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/include   -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2 -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/arm-linux-gnueabihf -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/backward -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include-fixed -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/libc/usr/include  -Wall -MMD -MP -D __SDSCC__
+arm-linux-gnueabihf-g++ -c /home/student/ml634/2015/samples/mmult/_sds/swstubs/mmult.cpp -o /home/student/ml634/2015/samples/mmult/_sds/swstubs/mmult.o
+arm-linux-gnueabihf-objcopy --add-section .xdinfo=/home/student/ml634/2015/samples/mmult/_sds/swstubs/mmult.o.xml /home/student/ml634/2015/samples/mmult/_sds/swstubs/mmult.o
+INFO: [SDSoC 0-0] Performing pragma generation
+clang_wrapper -E -target arm-linux-gnueabihf -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -O0 -g -w    -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include  -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/include   -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2 -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/arm-linux-gnueabihf -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/backward -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include-fixed -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/libc/usr/include -Wall -MMD -MP -D __SDSCC__ -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include -I/home/student/ml634/2015/samples/mmult -D __SDSVHLS__ /home/student/ml634/2015/samples/mmult/mmult.cpp -o /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_pp.cpp
+pragma_gen  -func mmult   -tcl /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult.tcl  /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_pp.cpp   --  -c  -target arm-linux-gnueabihf -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -O0 -g -w    -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include  -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/include   -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2 -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/arm-linux-gnueabihf -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include/c++/4.9.2/backward -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/lib/gcc/arm-linux-gnueabihf/4.9.2/include-fixed -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/include -I/work/zhang/common/tools/xilinx/SDSoC/2016.1/SDK/2016.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/arm-linux-gnueabihf/libc/usr/include  -D __SDSVHLS__  -Wall -O3 -MMD -MP -D __SDSCC__  -I /work/zhang/common/tools/xilinx/SDSoC/2016.1/aarch32-linux/include -I/home/student/ml634/2015/samples/mmult
+INFO: [SDSoC 0-0] Successfully generated tcl script: /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult.tcl
+INFO: [SDSoC 0-0] Moving function mmult to Programmable Logic
+/work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/bin/vivado_hls /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2016.1
+  Build 1538259 on Fri Apr 08 16:12:49 MDT 2016
+  Copyright (C) 1986-2016 Xilinx, Inc. All Rights Reserved.
+================================================================
+INFO: [HLS 200-10] Running '/work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'ml634' on host 'en-ec-zhang-01.coecis.cornell.edu' (Linux_x86_64 version 2.6.32-642.3.1.el6.x86_64) on Tue Nov 08 14:08:08 EST 2016
+INFO: [HLS 200-10] On os "CentOS release 6.8 (Final)"
+INFO: [HLS 200-10] In directory '/home/student/ml634/2015/samples/mmult/_sds/vhls'
+INFO: [HLS 200-10] Creating and opening project '/home/student/ml634/2015/samples/mmult/_sds/vhls/mmult'.
+INFO: [HLS 200-10] Adding design file '/home/student/ml634/2015/samples/mmult/mmult.cpp' to the project
+INFO: [HLS 200-10] Creating and opening solution '/home/student/ml634/2015/samples/mmult/_sds/vhls/mmult/solution'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-10] Setting target device to ' xc7z020clg484-1 '
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 8.5ns.
+INFO: [HLS 200-10] Analyzing design file '/home/student/ml634/2015/samples/mmult/mmult.cpp' ... 
+INFO: [HLS 200-10] Validating synthesis directives ...
+INFO: [HLS 200-10] Starting code transformations ...
+CRITICAL WARNING: [SYNCHK 200-79] Cannot find the top function 'mmult' in the design. Possible causes are: (1) the top function name is misspelled; (2) the top function is nonexistent or declared as static.
+CRITICAL WARNING: [HLS 200-70] Synthesizability check failed.
+INFO: [HLS 200-111] Elapsed time: 0.93 seconds; current memory usage: 0.19 MB.
+command 'ap_source' returned error code
+    while executing
+"source /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl"
+    invoked from within
+"hls::main /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
+INFO: [HLS 200-112] Total elapsed time: 2.833 seconds; peak memory usage: 0.19 MB.
+ERROR: [SDSoC 0-0] Exiting sds++ : Error when calling '/work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/bin/vivado_hls /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl'
+sds++ log file saved as /home/student/ml634/2015/samples/mmult/_sds/reports/sds_mmult.log
+sds++ completed at Tue Nov 08 14:08:10 EST 2016

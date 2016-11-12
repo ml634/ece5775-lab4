@@ -1,0 +1,13 @@
+{
+	"file":	"/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src/main_app.c",
+	"callers":	[{
+			"call":	"img_process",
+			"line":	84,
+			"repl":	"_p0_img_process_0"
+		}],
+	"parents":	[{
+			"function":	"sw_sobel_processing",
+			"proto":	"#ifdef __cplusplus\nextern \"C\" {\n#endif\nvoid _p0_img_process_0(int rgb_data_in[2211840], int rgb_data_out[2211840], int isobelInvert, int iminsobelSensitivity, int imaxsobelSensitivity);\n#ifdef __cplusplus\n}\n#endif\n"
+		}],
+	"waits":	[]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:addressMap xmlns:xd="http://www.xilinx.com/xd">
+  <xd:addressRange xd:componentRef="TPG_VDMA" xd:addressSpace="Data_S2MM" xd:segment="SEG1" xd:slaveRef="processing_system7_1" xd:slaveInterface="S_AXI_HP0" xd:slaveSegment="HP0_DDR_LOWOCM" xd:baseAddr="0x30000000" xd:range="0x10000000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG7" xd:slaveRef="logicvc_1" xd:slaveInterface="s_axi" xd:slaveSegment="Reg" xd:baseAddr="0x40030000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG3" xd:slaveRef="v_cresample_1" xd:slaveInterface="ctrl" xd:slaveSegment="Reg" xd:baseAddr="0x40040000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG4" xd:slaveRef="v_tc_1" xd:slaveInterface="ctrl" xd:slaveSegment="Reg" xd:baseAddr="0x40070000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG1" xd:slaveRef="v_tpg_1" xd:slaveInterface="ctrl" xd:slaveSegment="Reg" xd:baseAddr="0x40080000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG6" xd:slaveRef="v_ycrcb2rgb_1" xd:slaveInterface="ctrl" xd:slaveSegment="Reg" xd:baseAddr="0x40050000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG2" xd:slaveRef="TPG_VDMA" xd:slaveInterface="S_AXI_LITE" xd:slaveSegment="Reg" xd:baseAddr="0x40090000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="logicvc_1" xd:addressSpace="videoData" xd:segment="SEG1" xd:slaveRef="processing_system7_1" xd:slaveInterface="S_AXI_HP0" xd:slaveSegment="HP0_DDR_LOWOCM" xd:baseAddr="0x30000000" xd:range="0x10000000"/>
+  <xd:addressRange xd:componentRef="datamover_0" xd:addressSpace="Data_MM2S" xd:segment="SEG_processing_system7_1_HP1_DDR_LOWOCM" xd:slaveRef="processing_system7_1" xd:slaveInterface="S_AXI_HP1" xd:slaveSegment="HP1_DDR_LOWOCM" xd:baseAddr="0x00000000" xd:range="0x40000000"/>
+  <xd:addressRange xd:componentRef="datamover_0" xd:addressSpace="Data_S2MM" xd:segment="SEG_processing_system7_1_HP1_DDR_LOWOCM" xd:slaveRef="processing_system7_1" xd:slaveInterface="S_AXI_HP1" xd:slaveSegment="HP1_DDR_LOWOCM" xd:baseAddr="0x00000000" xd:range="0x40000000"/>
+  <xd:addressRange xd:componentRef="datamover_0" xd:addressSpace="Data_SG" xd:segment="SEG_processing_system7_1_HP1_DDR_LOWOCM" xd:slaveRef="processing_system7_1" xd:slaveInterface="S_AXI_HP1" xd:slaveSegment="HP1_DDR_LOWOCM" xd:baseAddr="0x00000000" xd:range="0x40000000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG_datamover_0_Reg" xd:slaveRef="datamover_0" xd:slaveInterface="S_AXI_LITE" xd:slaveSegment="Reg" xd:baseAddr="0x80400000" xd:range="0x10000"/>
+  <xd:addressRange xd:componentRef="processing_system7_1" xd:addressSpace="Data" xd:segment="SEG_img_process_0_if_Reg" xd:slaveRef="img_process_0_if" xd:slaveInterface="S_AXI" xd:slaveSegment="Reg" xd:baseAddr="0x83C00000" xd:range="0x10000"/>
+</xd:addressMap>

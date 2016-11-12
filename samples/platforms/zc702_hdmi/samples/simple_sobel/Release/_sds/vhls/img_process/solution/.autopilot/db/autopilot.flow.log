@@ -1,0 +1,1056 @@
+@I [HLS-0] Workspace /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution opened at Tue Nov 08 14:18:22 EST 2016
+@I [HLS-100] Command 'open_solution' returned 0; elapsed 0.02Total elapsed time: 1.297 sec.
+@I [HLS-100] Command "set_part  xc7z020clg484-1  "
+@I [HLS-100] Command "add_library xilinx/zynq/zynq:xc7z020:clg484:-1 "
+@I [HLS-100] Command "get_default_platform "
+@I [HLS-100] Command 'get_default_platform' returned 0; elapsed 0Total elapsed time: 1.322 sec.
+@I [HLS-100] Command "license_exists VIVADO_HLS "
+@I [HLS-100] Command 'license_exists' returned 1; elapsed 0.02Total elapsed time: 1.357 sec.
+@I [HLS-100] Command "license_exists ap_opencl "
+@I [HLS-100] Command 'license_exists' returned 1; elapsed 0.02Total elapsed time: 1.392 sec.
+@I [HLS-100] Command "license_exists ap_sdsoc "
+@I [HLS-100] Command 'license_exists' returned 0; elapsed 0Total elapsed time: 1.392 sec.
+@I [HLS-100] Command "open_platform DefaultPlatform "
+@I [HLS-100] Command 'open_platform' returned 0; elapsed 0Total elapsed time: 1.408 sec.
+@I [HLS-100] Command "import_lib /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.lib "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/xilinx_interface.lib "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.432 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.436 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.446 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.447 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.448 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.448 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.455 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.467 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.476 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.477 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.480 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_old.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.484 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_vivado.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.495 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.hlp "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/target_info.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.510 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/xilinx_interface.hlp "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.522 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.523 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.523 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.527 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.527 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/dsp48e1.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.535 sec.
+@I [HLS-100] Command "get_default_platform "
+@I [HLS-100] Command 'get_default_platform' returned 0; elapsed 0Total elapsed time: 1.536 sec.
+@I [HLS-100] Command "config_chip_info -quiet -resource  {SLICE 13300}  {LUT 53200}     {FF 106400} {DSP48E 220}   {BRAM 280}  "
+@I [HLS-100] Command 'config_chip_info' returned 0; elapsed 0Total elapsed time: 1.536 sec.
+@I [HLS-100] Command "config_chip_info -quiet -speed medium "
+@I [HLS-100] Command 'config_chip_info' returned 0; elapsed 0.01Total elapsed time: 1.536 sec.
+@I [HLS-100] Command 'import_lib' returned 0; elapsed 0.02Total elapsed time: 1.538 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.565 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.574 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.583 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.594 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.620 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.620 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.642 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.670 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.13Total elapsed time: 1.816 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/tps/tcl/tcllib1.11.1/struct/list.tcl "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/tps/tcl/tcllib1.11.1/cmdline/cmdline.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.863 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.864 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/tps/tcl/tcllib1.11.1/math/bignum.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.883 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 1.891 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.901 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 1.911 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.22Total elapsed time: 1.911 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 1.923 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.22Total elapsed time: 1.923 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.22Total elapsed time: 1.923 sec.
+@I [HLS-100] Command "get_default_platform "
+@I [HLS-100] Command 'get_default_platform' returned 0; elapsed 0Total elapsed time: 1.926 sec.
+@I [HLS-100] Command "config_chip_info -quiet -resource  {SLICE 13300}  {LUT 53200}     {FF 106400} {DSP48E 220}   {BRAM 280}  "
+@I [HLS-100] Command 'config_chip_info' returned 0; elapsed 0Total elapsed time: 1.926 sec.
+@I [HLS-100] Command "config_chip_info -quiet -speed slow "
+@I [HLS-100] Command 'config_chip_info' returned 0; elapsed 0Total elapsed time: 1.926 sec.
+@I [HLS-100] Command 'add_library' returned 0; elapsed 0.28Total elapsed time: 1.929 sec.
+@I [HLS-100] Command "add_library xilinx/zynq/zynq_fpv6 "
+@I [HLS-100] Command "get_default_platform "
+@I [HLS-100] Command 'get_default_platform' returned 0; elapsed 0Total elapsed time: 1.930 sec.
+@I [HLS-100] Command "license_exists VIVADO_HLS "
+@I [HLS-100] Command 'license_exists' returned 1; elapsed 0.03Total elapsed time: 2.16 sec.
+@I [HLS-100] Command "license_exists ap_opencl "
+@I [HLS-100] Command 'license_exists' returned 1; elapsed 0.02Total elapsed time: 2.51 sec.
+@I [HLS-100] Command "license_exists ap_sdsoc "
+@I [HLS-100] Command 'license_exists' returned 0; elapsed 0Total elapsed time: 2.51 sec.
+@I [HLS-100] Command "open_platform DefaultPlatform "
+@I [HLS-100] Command 'open_platform' returned 0; elapsed 0Total elapsed time: 2.51 sec.
+@I [HLS-100] Command "import_lib /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6 "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv7.lib "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.57 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv.hlp "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.hlp "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/target_info.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.90 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/xilinx_interface.hlp "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.91 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.91 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.91 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.hlp "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.92 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.92 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.93 sec.
+@I [HLS-100] Command 'import_lib' returned 0; elapsed 0.02Total elapsed time: 2.98 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.102 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.102 sec.
+@I [HLS-100] Command 'add_library' returned 0; elapsed 0.07Total elapsed time: 2.105 sec.
+@I [HLS-10] Setting target device to ' xc7z020clg484-1 '
+@I [HLS-100] Command 'set_part' returned 0; elapsed 0.35Total elapsed time: 2.105 sec.
+@I [HLS-100] Command "create_clock -period 5.95 "
+@I [HLS-100] Command "config_clock -quiet -name default -period 5.95 -default=false "
+@I [SYN-201] Setting up clock 'default' with a period of 5.95ns.
+@I [HLS-100] Command 'config_clock' returned 0; elapsed 0Total elapsed time: 2.108 sec.
+@I [HLS-100] Command 'create_clock' returned 0; elapsed 0Total elapsed time: 2.108 sec.
+@I [HLS-100] Command "config_rtl -reset_level low "
+@I [HLS-100] Command 'config_rtl' returned 0; elapsed 0Total elapsed time: 2.111 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process.tcl "
+@I [HLS-100] Command "set_directive_interface -mode ap_fifo img_process rgb_data_in "
+@I [HLS-100] Command 'set_directive_interface' returned 0; elapsed 0Total elapsed time: 2.112 sec.
+@I [HLS-100] Command "set_directive_interface -mode ap_fifo img_process rgb_data_out "
+@I [HLS-100] Command 'set_directive_interface' returned 0; elapsed 0Total elapsed time: 2.112 sec.
+@I [HLS-100] Command "set_directive_latency -min 1 img_process "
+@I [HLS-100] Command 'set_directive_latency' returned 0; elapsed 0Total elapsed time: 2.112 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 2.113 sec.
+@I [HLS-100] Command "csynth_design "
+@I [HLS-100] Command "elaborate -effort=medium -skip_syncheck=0 -lm=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 "
+@I [HLS-10] Analyzing design file '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c' ... 
+@0 [HLS-0] Analyzing design file '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c' ... 
+@I [HLS-0] Compiling one TU...
+@I [HLS-0] 
+Checking before pre-process: exec clang -fno-limit-debug-info -gcc-toolchain "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/gcc" -hls  -Wall -O3 -fmessage-length=0 -MMD -MP -D__SDSCC__ -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -D__SDSVHLS__ -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release -w  -fno-math-errno -c -emit-llvm -O0  -mllvm -disable-llvm-optzns -std=gnu89   -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot" -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot/ap_sysc" -include etc/autopilot_ssdm_op.h  "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c"  -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.00.o"
+
+@I [HLS-100] Command "is_encrypted /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.00.o "
+@I [HLS-100] Command 'is_encrypted' returned 0; elapsed 0Total elapsed time: 3.241 sec.
+@I [HLS-0] Syntax Checker time: 1 seconds per iteration
+@I [HLS-0] 
+Source preprocessing: exec clang -fno-limit-debug-info -gcc-toolchain "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/gcc" -hls -fno-exceptions  -D__llvm__  -CC -E "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c"   -Wall -O3 -fmessage-length=0 -MMD -MP -D__SDSCC__ -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -D__SDSVHLS__ -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release -w  -fno-math-errno -c -emit-llvm -O0  -mllvm -disable-llvm-optzns -std=gnu89   -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot" -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot/ap_sysc" -include etc/autopilot_ssdm_op.h  -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c"
+
+@I [HLS-0] GCC PP time: 0 seconds per iteration
+@I [HLS-0] Setting directive 'INTERFACE' ap_fifo=positionBoolean0mode port=positionBooleanTextRequiredrgb_data_in 
+@I [HLS-0] Setting directive 'INTERFACE' ap_fifo=positionBoolean0mode port=positionBooleanTextRequiredrgb_data_out 
+@I [HLS-0] Setting directive 'LATENCY' min=1 
+@I [HLS-100] Command "list_core -type functional_unit "
+@I [HLS-100] Command 'list_core' returned 0; elapsed 0Total elapsed time: 3.317 sec.
+@I [HLS-0] Marker-Pragma convertor: /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c.ap-line.c /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c.ap-line.c.CXX 1
+@I [HLS-0] 
+Source processor: exec /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/tps/lnx64/jre/bin/java -Xmx512m -classpath   "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/autopilot.sourceprocessor.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/org.eclipse.cdt.core_5.3.0.xilinx_patch.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/org.eclipse.core.runtime_3.7.0.v20110110.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/org.eclipse.equinox.common_3.6.0.v20110523.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/com.ibm.icu_4.4.2.v20110208.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lib/classes/jargs.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/eclipse/plugins/org.eclipse.emf.common_2.10.0.v20140514-1158.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/eclipse/plugins/org.eclipse.emf.ecore_2.10.0.v20140514-1158.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.10.0.v20140514-1158.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/eclipse/plugins/com.autoesl.autopilot.ui.directiveFileModel_1.0.0.jar:/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/eclipse/plugins/com.autoesl.autopilot.ui.common_1.0.0.jar"  autopilot.sourceprocessor.CParser  "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c.ap-line.c"  -m "img_process" -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c.ap-cdt.c" -c --pp --directive /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/solution.directive --source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c --error /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db --funcunit "AddSub AddSub_DSP AddSubnS DAddSub_fulldsp DAddSub_nodsp DDiv DExp_fulldsp DExp_meddsp DExp_nodsp DLog_fulldsp DLog_meddsp DLog_nodsp DMul_fulldsp DMul_maxdsp DMul_meddsp DMul_nodsp DRSqrt DRecip DSqrt DivnS FAddSub_fulldsp FAddSub_nodsp FDiv FExp_fulldsp FExp_meddsp FExp_nodsp FLog_fulldsp FLog_meddsp FLog_nodsp FMul_fulldsp FMul_maxdsp FMul_meddsp FMul_nodsp FRSqrt_fulldsp FRSqrt_nodsp FRecip_fulldsp FRecip_nodsp FSqrt Mul Mul2S Mul3S Mul4S Mul5S Mul6S MulnS MuxnS" --ca --gf --df --pd --p2d /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db --sd --scff /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/.systemc_flag --ad
+
+@I [HLS-0] Marker-Pragma convertor: /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pp.0.c.ap-cdt.c /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pragma.0.c /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pragma.0.c.ap-line.CXX 0
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/pragma.status.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 7.423 sec.
+@I [HLS-0] CDT processor time: 4 seconds per iteration
+@I [HLS-0] Pragma handling time: 0 seconds per iteration
+@I [HLS-0] 
+Source preprocessing: exec clang -fno-limit-debug-info -gcc-toolchain "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/gcc" -hls -fno-exceptions  -D__llvm__  -CC -E "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pragma.1.c"   -Wall -O3 -fmessage-length=0 -MMD -MP -D__SDSCC__ -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -D__SDSVHLS__ -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release -w  -fno-math-errno -c -emit-llvm -O0  -mllvm -disable-llvm-optzns -std=gnu89   -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot" -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot/ap_sysc" -include etc/autopilot_ssdm_op.h  -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pragma.2.c"
+
+@I [HLS-0] exec clang -fno-limit-debug-info -gcc-toolchain /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/tools/gcc -hls -hls-analyze-label -hls-analyze-pragma -fno-exceptions  -D__llvm__  -w  "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.pragma.2.c"  -Wall -O3 -fmessage-length=0 -MMD -MP -D__SDSCC__ -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -D__SDSVHLS__ -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release -w  -fno-math-errno -c -emit-llvm -O0  -mllvm -disable-llvm-optzns -std=gnu89  -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot" -I "/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/autopilot/ap_sysc" -include etc/autopilot_ssdm_op.h -g -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.g.bc"
+@I [HLS-10] Validating synthesis directives ...
+@0 [HLS-0] Validating synthesis directives ...
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/pragma.status.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 7.688 sec.
+@I [HLS-0] Linking all ...
+@I [HLS-0] exec llvm-ld  "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.bc"  -disable-opt  -L/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/lib -lm_basic -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.pre"
+@I [HLS-0] Link time: 0 seconds per iteration
+@I [HLS-0] Linking all ...
+@I [HLS-0] exec llvm-ld  "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_filters.g.bc"  -disable-opt  -L/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/lnx64/lib -lm_basic -o "/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.pre"
+@I [HLS-0] Link time: 0 seconds per iteration
+@I [HLS-100] Command "opt_and_import_c a -opt_level=2 -skip_syncheck=0 -ng=0 "
+@I [HLS-100] Command "cleanup_all_models "
+@I [HLS-100] Command 'cleanup_all_models' returned 0; elapsed 0Total elapsed time: 7.953 sec.
+@I [HLS-10] Starting code transformations ...
+@0 [HLS-0] Starting code transformations ...
+@I [HLS-0] std xform: transform -hls -share-std-xform -always-inline -promote-dbg-pointer  -interface-preproc  -scalarrepl -mem2reg -keep-read-access -instcombine -dce  -promote-dbg-pointer  -bitop-raise  -indvars -loop-simplify -xunroll  -constprop -instcombine -simplifycfg -indvars  -simplifycfg -dce -globaldce  -basicaa  -simplifycfg -mem2reg -globalopt  -global-constprop -deadargelim -instcombine -simplifycfg  -prune-eh -simplifycfg  -scalarrepl -instcombine -reassociate -licm  -simplifycfg -loop-simplify -indvars -instcombine  -simplifycfg -mem2reg -loop-simplify -indvars -instcombine  -gvn -gvn -instcombine -adce  -break-crit-edges  -simplifycfg -loop-delete  -global-array-opt -dce -dse -adce  -find-syn-modules -top img_process  -deadargelim  -mem2reg -instcombine -dce  -presyn-prepare -auto-rom-infer  -interface-preproc  -syn-check -check-rec-only  -find-region -simplifycfg -func-extr -function-inline  -globaldce -mem2reg -instcombine -dce   -gvn -globaldce -adce -adse  -constprop -instcombine -bit-constprop  -instcombine -dce -simplifycfg -bitop-raise  -simplifycfg -dce -loop-delete -reassociate  -globalopt -global-privatize -mem2reg -dce  -global-constprop -pointer-simplify -constprop -dce  -func-inst -deadargelim  -promote-dbg-pointer  -norm-name   /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.0.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.1.bc -f  -phase std-opt
+@I [HLS-0] Std xform time: 0 seconds per iteration
+@I [HLS-100] Command "is_encrypted /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.1.bc "
+@I [HLS-100] Command 'is_encrypted' returned 0; elapsed 0Total elapsed time: 8.323 sec.
+@I [HLS-10] Checking synthesizability ...
+@0 [HLS-0] Checking synthesizability ...
+@I [HLS-0] syn check 1/2: transform -hls -syn-check -check-rec-only -disaggr -scalarrepl -norm-name -dce  -mem2reg -instcombine  -function-uniquify -directive-preproc -mem2reg -dse -dce -auto-rom-infer -dce  -array-normalize -instcombine -dce  -array-seg-normalize -instcombine -dce  -array-flatten -instcombine -dce  -array-burst -dce  -deadargelim -promote-global-argument  -function-inline -globaldce -dce  -doublePtrSimplify -doublePtrElim -dce  -doublePtrSimplify -promote-dbg-pointer  -dce -scalarrepl -dse -adse -instcombine  -ptrLegalization  -simplifycfg -dce -instcombine  -pointer-simplify -ptrArgReplace -dce -instcombine   -disaggr -scalarrepl -norm-name -dce  -mem2reg -instcombine -ptrLegalization   -simplifycfg -deadargelim  -instcombine -dce -inst-simplify  -function-uniquify -directive-preproc -mem2reg -dse -dce  -globaldce    /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.1.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.2.prechk.bc -f
+@I [XFORM-602] Inlining function 'rgb2y' into 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:74) automatically.
+@I [HLS-0] Syn check 1/2 time: 0 seconds per iteration
+@I [HLS-0] syn check 2/2: transform -syn-check   /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.2.prechk.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.2.bc -f  -phase syn-check
+@I [HLS-0] Syn check 2/2 time: 0 seconds per iteration
+@I [HLS-0] Compiler optimizing ...
+@I [HLS-0] Share syncheck's 1.bc for syn flow: copy /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.g.1.bc to /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.1.bc
+@I [HLS-0] presyn 1: transform -hls -tmp /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db -type-info  -function-uniquify -directive-preproc -mem2reg -dse -dce  -disaggr -scalarrepl -norm-name -deadargelim  -mem2reg -instcombine -dce -auto-rom-infer -dce -function-uniquify  -clib-intrinsic-prepare -dce  -func-buffer -dce -array-normalize  -func-legal -instcombine -gvn -constprop -dce   -ptrArgReplace -mem2reg -instcombine -dce  -array-seg-normalize -deadargelim  -instcombine -dce  -pointer-simplify -dce  -port-alignment -dce  -interface-preproc  -data-pack -instcombine -dce   -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn  -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce  -loop-simplify -indvars -instcombine  -gvn -loop-simplify -mem2reg -dce -simplifycfg  -find-region -instcombine  -auto-loop-pipeline  -inst-simplify  -interface-preproc  -indvars -auto-loop-unroll -loop-simplify -loop-bound -xunroll  -constprop -instcombine -simplifycfg -indvars  -simplifycfg -dce -globaldce  -attach-range  -gvn -disable-agg-range -inst-simplify  -constprop -simplifycfg -dce  -pointer-simplify -dce  -globalopt -constprop -dce  -array-promote -constprop -instcombine -dce  -ptrArgReplace -mem2reg  -instcombine -simplifycfg -dce  -auto-par -instcombine -dce  -array-transform-check  -array-reshape -instcombine -simplifycfg -dce  -ptrArgReplace -deadargelim -mem2reg  -instcombine -simplifycfg -dce   -array-partition -instcombine -simplifycfg -dce  -ptrArgReplace -global-constprop -deadargelim -mem2reg  -func-legal -instcombine -dce -global-constprop -deadargelim -mem2reg  -instcombine -simplifycfg -dce   -globalopt -constprop -dce  -array-promote -constprop -instcombine -dce  -ptrArgReplace -mem2reg  -instcombine -simplifycfg -dce   -mem-intrinsic-preproc -dce  -global-privatize  -mem2reg -globaldce  -promote-global-argument  -ptrArgReplace -mem2reg -instcombine -dce  -globalopt -mergereturn -simplify-global-access -mem2reg -dce  -pointer-simplify -dce  -functionattrs  -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn  -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce  -inst-simplify -dce -norm-name  -function-inline -globaldce  -func-inst -constprop -instcombine -simplifycfg -dce  -func-legal -dce   -loop-bound  -arraycheck -bitwidthmin -on-by-dataflow  -loop-delete -instcombine -simplifycfg -dce -loop-simplify -clean-region -simplifycfg -loop-stream -instcombine -simplifycfg -dce -globaldce  -stream-intrinsic-preproc -dce  -check-ap-stream -check-dataflow-syntax  -legalize-stream-variable -legalize-global -legalize-global-1  -extract-subproc -scalar-propagation -globaldce -mem2reg  -check-dataflow-channels -function-stream -dce -globaldce  -prop-fifo-spec -internal-stream-gen  -array-streaming -instcombine -simplifycfg -dce    -function-uniquify -directive-preproc -mem2reg -dse -dce  -group-axi-access    -simplifycfg -dce -loop-delete  -norm-name  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.1.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.1.tmp.bc -f
+@I [XFORM-602] Inlining function 'rgb2y' into 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:74) automatically.
+@W [XFORM-124] Array 'rgb_data_out' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52): may have improper streaming access(es), possible reasons: (1) some entries are accessed more than once; (2) some entries are not used; (3) the entries are not accessed in sequential order.
+@W [XFORM-124] Array 'rgb_data_in' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52): may have improper streaming access(es), possible reasons: (1) some entries are accessed more than once; (2) some entries are not used; (3) the entries are not accessed in sequential order.
+@I [HLS-0] Presyn 1 time: 0 seconds per iteration
+@I [HLS-0] presyn 2: transform -hls -keep-callgraph -scalarrepl -mem2reg  -port-alignment -attach-range -dce  -pipe-mux-gen  -indvars -loop-bound  -inst-simplify -instcombine -dce  -merge-array-access -mem2reg -dce  -clean-region -mergereturn -if-conv  -instcombine -dce -constprop  -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn  -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce  -scalarrepl -mem2reg  -global-constprop -deadargelim -deadargelim  -instcombine -dce -simplifycfg    -ptrArgReplace -mem2reg -function-inline  -globaldce -mem2reg -instcombine -dce -expr-balance  -instcombine -dce  -bitwidthmin  -directive-preproc  -inst-rectify -instcombine -dce  -functionattrs  -constprop -instcombine -bit-constprop  -simplify-global-access  -globalopt -globaldce  -inst-simplify -instcombine -elimdeaddata -dce  -loop-delete -simplifycfg   -norm-name /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.1.tmp.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.2.bc -f  -phase presyn
+@I [XFORM-401] Performing if-conversion on hyperblock from (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:111:51) to (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:111:41) in function 'img_process'... converting 5 basic blocks.
+@I [XFORM-11] Balancing expressions in function 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52)...15 expression(s) balanced.
+@I [HLS-0] Presyn 2 time: 0 seconds per iteration
+@I [HLS-100] Command "is_encrypted /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.2.bc "
+@I [HLS-100] Command 'is_encrypted' returned 0; elapsed 0Total elapsed time: 9.288 sec.
+@I [HLS-0] build ssdm: transform -hls -function-uniquify -auto-function-inline -globaldce  -ptrArgReplace -mem2reg -instcombine -dce  -loop-simplify -indvars -licm -loop-dep  -loop-bound -licm -loop-simplify -flattenloopnest  -array-flatten -gvn -instcombine -dce  -array-map -dce -func-legal  -gvn -adce -instcombine -cfgopt -simplifycfg -loop-simplify   -array-burst -promote-global-argument -dce  -axi4-lower -array-seg-normalize  -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -gvn -gvn  -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -dse -adse -adce -licm  -inst-simplify -dce  -globaldce -array-streaming -instcombine  -dce   -deadargelim -doublePtrSimplify  -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer  -dce -scalarrepl -mem2reg -disaggr -norm-name -mem2reg  -instcombine  -dse -adse -adce -ptrLegalization -dce -auto-rom-infer -array-flatten -dce -instcombine  -loop-rot -constprop -cfgopt -simplifycfg -loop-simplify -indvars -pointer-simplify -dce -loop-bound  -loop-simplify -loop-preproc  -constprop -global-constprop -gvn -mem2reg -instcombine -dce  -loop-merge -dce  -bitwidthmin  -scalar-propagation -globaldce -mem2reg  -interface-preproc -interface-gen  -deadargelim -directive-preproc -inst-simplify -dce  -gvn -mem2reg -instcombine -dce -adse  -loop-bound  -instcombine -cfgopt -simplifycfg -loop-simplify  -clean-region -io-protocol  -find-region -mem2reg  -bitop-raise  -inst-simplify -inst-rectify -instcombine -adce -deadargelim  -loop-simplify -phi-opt -bitop-raise  -cfgopt -simplifycfg -strip-dead-prototypes  -interface-lower -bitop-lower -intrinsic-lower -auto-function-inline  -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa  -inst-simplify -simplifycfg   -mergereturn -inst-simplify -inst-rectify  -dce -bitop-lower  -loop-rewind -pointer-simplify -dce -cfgopt  -norm-name -legalize -read-loop-dep -dce -bitwidth   -cdfg-build  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.2.bc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.3.bc -f  -phase build-ssdm
+@W [XFORM-542] Cannot flatten a loop nest 'Loop-4' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:94:8) in function 'img_process' : 
+               more than one sub loop.
+@I [HLS-0] Build ssdm time: 0 seconds per iteration
+@I [HLS-100] Command "is_encrypted /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.o.3.bc "
+@I [HLS-100] Command 'is_encrypted' returned 0; elapsed 0Total elapsed time: 10.156 sec.
+@I [HLS-0] Finish building internal data model.
+@I [HLS-100] Command 'opt_and_import_c' returned 0; elapsed 1.76Total elapsed time: 10.191 sec.
+@I [HLS-111] Elapsed time: 2.71 seconds; current memory usage: 0.157 MB.
+@I [HLS-100] Command 'elaborate' returned 0; elapsed 1.98Total elapsed time: 10.191 sec.
+@I [HLS-100] Command "autosyn "
+@I [HLS-10] Starting hardware synthesis ...
+@0 [HLS-0] Starting hardware synthesis ...
+@I [HLS-0] Synthesizing C/C++ design ...
+@I [HLS-10] Synthesizing 'img_process' ...
+@0 [HLS-0] Synthesizing 'img_process' ...
+@I [HLS-100] Command "ap_set_top_model img_process "
+@I [HLS-100] Command 'ap_set_top_model' returned 0; elapsed 0Total elapsed time: 10.192 sec.
+@I [HLS-100] Command "get_model_list img_process -filter all-wo-channel -topdown "
+@I [HLS-100] Command 'get_model_list' returned 0; elapsed 0Total elapsed time: 10.192 sec.
+@I [HLS-100] Command "preproc_iomode -model img_process "
+@I [HLS-100] Command 'preproc_iomode' returned 0; elapsed 0Total elapsed time: 10.202 sec.
+@I [HLS-100] Command "get_model_list img_process -filter all-wo-channel "
+@I [HLS-100] Command 'get_model_list' returned 0; elapsed 0Total elapsed time: 10.202 sec.
+@I [HLS-0] Model list for configure: img_process
+@I [HLS-0] Configuring Module : img_process ...
+@I [HLS-100] Command "set_default_model img_process "
+@I [HLS-100] Command 'set_default_model' returned 0; elapsed 0Total elapsed time: 10.203 sec.
+@I [HLS-100] Command "apply_spec_resource_limit img_process "
+@I [HLS-100] Command 'apply_spec_resource_limit' returned 0; elapsed 0Total elapsed time: 10.203 sec.
+@I [HLS-0] Model list for preprocess: img_process
+@I [HLS-0] Preprocessing Module: img_process ...
+@I [HLS-100] Command "set_default_model img_process "
+@I [HLS-100] Command 'set_default_model' returned 0; elapsed 0Total elapsed time: 10.203 sec.
+@I [HLS-100] Command "cdfg_preprocess -model img_process "
+@I [HLS-100] Command 'cdfg_preprocess' returned 0; elapsed 0Total elapsed time: 10.206 sec.
+@I [HLS-100] Command "rtl_gen_preprocess img_process "
+@I [HLS-100] Command 'rtl_gen_preprocess' returned 0; elapsed 0.01Total elapsed time: 10.207 sec.
+@I [HLS-0] Model list for synthesis: img_process
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-10] -- Scheduling module 'img_process' 
+@0 [HLS-0] -- Scheduling module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-100] Command "set_default_model img_process "
+@I [HLS-100] Command 'set_default_model' returned 0; elapsed 0Total elapsed time: 10.208 sec.
+@I [HLS-100] Command "schedule -model img_process "
+@I [SCHED-11] Starting scheduling ...
+@I [SCHED-61] Pipelining loop 'Loop 1'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:73) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:73) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 2'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_5', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:82) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_5', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:82) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 3'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
+@I [SCHED-61] Pipelining loop 'Loop 4.1'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_8', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:102) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_8', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:102) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 4.2'.
+@W [SCHED-69] Unable to schedule 'load' operation ('line_buffer_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:117) on array 'line_buffer' due to limited memory ports.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 4, Depth: 11.
+@I [SCHED-61] Pipelining loop 'Loop 5'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
+@W [SCHED-71] Latency directive discarded for region img_process since it contains subloops.
+@I [SCHED-11] Finished scheduling.
+@I [HLS-100] Command 'schedule' returned 0; elapsed 0.46Total elapsed time: 10.764 sec.
+@I [HLS-111] Elapsed time: 0.47 seconds; current memory usage: 0.157 MB.
+@I [HLS-100] Command "report -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.verbose.sched.rpt -verbose -f "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.02Total elapsed time: 10.823 sec.
+@I [HLS-100] Command "db_write -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.sched.adb -f "
+@I [HLS-100] Command 'db_write' returned 0; elapsed 0.03Total elapsed time: 10.860 sec.
+@I [HLS-0] Finish scheduling img_process.
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-10] -- Exploring micro-architecture for module 'img_process' 
+@0 [HLS-0] -- Exploring micro-architecture for module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-100] Command "set_default_model img_process "
+@I [HLS-100] Command 'set_default_model' returned 0; elapsed 0Total elapsed time: 10.873 sec.
+@I [HLS-100] Command "bind -model img_process "
+@I [BIND-110] clear=
+@I [BIND-110] debug=
+@I [BIND-110] drf=
+@I [BIND-110] effort=
+@I [BIND-110] fast_refine=
+@I [BIND-110] fu_weight=[ 0.0 -- 1.0 ]
+@I [BIND-110] global_opt=
+@I [BIND-110] gsearch=
+@I [BIND-110] help=
+@I [BIND-110] help-hidden=
+@I [BIND-110] min_mem_port=
+@I [BIND-110] min_op=
+@I [BIND-110] minreg=
+@I [BIND-110] ml=
+@I [BIND-110] model=img_process
+@I [BIND-110] no_false_path=
+@I [BIND-110] no_min_op=
+@I [BIND-110] normalize=
+@I [BIND-110] quiet=
+@I [BIND-110] refine=
+@I [BIND-110] reg_weight=[ 0.0 -- 1.0 ]
+@I [BIND-110] search=
+@I [BIND-110] tight_delay=
+@I [BIND-110] verbose=
+@I [BIND-110] wFF=
+@I [BIND-110] wFU=
+@I [BIND-110] wMUX=
+@I [BIND-110] wNET=
+@I [BIND-100] Starting micro-architecture generation ...
+@I [BIND-101] Performing variable lifetime analysis.
+@I [BIND-101] Exploring resource sharing.
+@I [BIND-101] Binding ...
+@I [BIND-100] Finished micro-architecture generation.
+@I [HLS-100] Command 'bind' returned 0; elapsed 0.06Total elapsed time: 10.941 sec.
+@I [HLS-111] Elapsed time: 0.11 seconds; current memory usage: 0.157 MB.
+@I [HLS-100] Command "report -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.verbose.bind.rpt -verbose -f "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.09Total elapsed time: 11.29 sec.
+@I [HLS-100] Command "db_write -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.bind.adb -f "
+@I [HLS-100] Command 'db_write' returned 0; elapsed 0.03Total elapsed time: 11.80 sec.
+@I [HLS-0] Finish binding img_process.
+@I [HLS-100] Command "get_model_list img_process -filter all-wo-channel "
+@I [HLS-100] Command 'get_model_list' returned 0; elapsed 0Total elapsed time: 11.80 sec.
+@I [HLS-0] Preprocessing for RTLGen ...
+@I [HLS-100] Command "rtl_gen_preprocess img_process "
+@I [HLS-100] Command 'rtl_gen_preprocess' returned 0; elapsed 0Total elapsed time: 11.81 sec.
+@I [HLS-0] Model list for RTL generation: img_process
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-10] -- Generating RTL for module 'img_process' 
+@0 [HLS-0] -- Generating RTL for module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@0 [HLS-0] ----------------------------------------------------------------
+@I [HLS-100] Command "create_rtl_model img_process -vendor xilinx -mg_file /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [RTGEN-500] Setting interface mode on port 'img_process/rgb_data_in' to 'ap_fifo'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/rgb_data_out' to 'ap_fifo'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/isobelInvert' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/iminsobelSensitivity' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/imaxsobelSensitivity' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on function 'img_process' to 'ap_ctrl_hs'.
+@W [RTGEN-101] Global array 'line_buffer' will not be exposed as RTL port.
+@I [RTGEN-100] Generating core module 'img_process_mac_muladd_6ns_8ns_9ns_13_3': 3 instance(s).
+@I [RTGEN-100] Finished creating RTL model for 'img_process'.
+@I [HLS-100] Command 'create_rtl_model' returned 0; elapsed 0.12Total elapsed time: 11.223 sec.
+@I [HLS-111] Elapsed time: 0.24 seconds; current memory usage: 0.157 MB.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.224 sec.
+@I [HLS-100] Command "gen_rtl img_process -istop -style xilinx -tracefl mytrace -tracefmt vcd -traceopt all -f -lang sc -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/syn/systemc/img_process -synmodules img_process "
+@I [HLS-100] Command 'gen_rtl' returned 0; elapsed 0.01Total elapsed time: 11.240 sec.
+@I [HLS-100] Command "gen_rtl img_process -istop -style xilinx -f -lang vhdl -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/syn/vhdl/img_process "
+@I [HLS-100] Command 'gen_rtl' returned 0; elapsed 0.03Total elapsed time: 11.288 sec.
+@I [HLS-100] Command "gen_rtl img_process -istop -style xilinx -f -lang vlog -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/syn/verilog/img_process "
+@I [HLS-100] Command 'gen_rtl' returned 0; elapsed 0.04Total elapsed time: 11.331 sec.
+@I [HLS-100] Command "export_constraint_db -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl -f -tool general "
+@I [HLS-100] Command 'export_constraint_db' returned 0; elapsed 0Total elapsed time: 11.333 sec.
+@I [HLS-100] Command "report -model img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.design.xml -verbose -f -dv "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.05Total elapsed time: 11.388 sec.
+@I [HLS-100] Command "gen_tb_info img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process -p /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db "
+@I [HLS-100] Command 'gen_tb_info' returned 0; elapsed 0Total elapsed time: 11.398 sec.
+@I [HLS-100] Command "report -model img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/syn/report/img_process_csynth.rpt -f "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.04Total elapsed time: 11.436 sec.
+@I [HLS-100] Command "report -model img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/syn/report/img_process_csynth.xml -f -x "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.02Total elapsed time: 11.465 sec.
+@I [HLS-100] Command "report -model img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.verbose.rpt -verbose -f "
+@I [HLS-100] Command 'report' returned 0; elapsed 0.13Total elapsed time: 11.590 sec.
+@I [HLS-100] Command "db_write -model img_process -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.adb -f "
+@I [HLS-100] Command 'db_write' returned 0; elapsed 0.06Total elapsed time: 11.667 sec.
+@I [HLS-100] Command "sc_get_clocks img_process "
+@I [HLS-100] Command 'sc_get_clocks' returned 0; elapsed 0Total elapsed time: 11.799 sec.
+@I [HLS-100] Command "sc_get_portdomain img_process "
+@I [HLS-100] Command 'sc_get_portdomain' returned 0; elapsed 0Total elapsed time: 11.799 sec.
+@I [HLS-0] Model list for RTL component generation: img_process
+@I [HLS-0] Handling components in module [img_process] ... 
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-0] Found component img_process_mac_muladd_6ns_8ns_9ns_13_3.
+@I [HLS-0] Append model img_process_mac_muladd_6ns_8ns_9ns_13_3
+@I [HLS-0] Found component img_process_line_buffer.
+@I [HLS-0] Append model img_process_line_buffer
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.814 sec.
+@I [HLS-0] Append model img_process
+@I [HLS-0] Generating RTL model list ...
+@I [HLS-0] All models in this session: img_process_mac_muladd_6ns_8ns_9ns_13_3 img_process_line_buffer img_process
+@I [HLS-0] To file: write model img_process_mac_muladd_6ns_8ns_9ns_13_3
+@I [HLS-0] To file: write model img_process_line_buffer
+@I [HLS-0] To file: write model img_process
+@I [HLS-0] Finished generating RTL model list.
+
+
+@I [HLS-0] RTL Generation done.
+@I [HLS-0] CAS Generation done.
+@I [HLS-0] CBC Generation done.
+@I [HLS-100] Command "export_ssdm /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/a.export.ll "
+@I [HLS-100] Command 'export_ssdm' returned 0; elapsed 0Total elapsed time: 11.819 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.826 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.847 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.847 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.853 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.861 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.862 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.863 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.865 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.866 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.868 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 11.872 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 11.881 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 11.881 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 11.893 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 11.902 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 12.19 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 12.58 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.58 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.62 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.62 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.64 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.64 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.64 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.66 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.66 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.68 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.70 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.71 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.73 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [RTMG-278] Implementing memory 'img_process_line_buffer_ram' using block RAMs with power-on initialization.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.05Total elapsed time: 12.140 sec.
+@I [HLS-10] Finished generating all RTL models.
+@0 [HLS-0] Finished generating all RTL models.
+@I [WSYSC-301] Generating RTL SystemC for 'img_process'.
+@I [WVHDL-304] Generating RTL VHDL for 'img_process'.
+@I [WVLOG-307] Generating RTL Verilog for 'img_process'.
+@I [HLS-100] Command 'autosyn' returned 0; elapsed 1.6Total elapsed time: 12.232 sec.
+@I [HLS-100] Command 'csynth_design' returned 0; elapsed 3.58Total elapsed time: 12.232 sec.
+@I [HLS-100] Command "export_design -acc "
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.238 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.245 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.246 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.246 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.247 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.248 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.249 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.250 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.251 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.253 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.257 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.265 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.265 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.02Total elapsed time: 12.277 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.288 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 12.407 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 12.446 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.446 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.450 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.450 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.452 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.452 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.452 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.454 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.454 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.456 sec.
+@I [IMPL-8] Exporting RTL as an IP in IP-XACT.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.460 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.468 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.469 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.469 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.470 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.471 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.471 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.472 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.474 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.475 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.477 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.481 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.489 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.489 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.02Total elapsed time: 12.501 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.511 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.11Total elapsed time: 12.631 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 12.669 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.670 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.674 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.674 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.676 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.676 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 12.676 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.678 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.678 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.679 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.680 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.683 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.738 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.739 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.742 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 12.744 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.746 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.747 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.748 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.05Total elapsed time: 12.790 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.843 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.844 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 12.846 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.68 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.73 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.221 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.223 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.224 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.225 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.226 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.295 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.298 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.299 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.300 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.301 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.329 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.rtl_wrap.cfg.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.330 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.331 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.tbgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.333 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.430 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.472 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.477 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.479 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.538 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.539 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.540 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.541 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.541 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.542 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.544 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.544 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.547 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.551 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.559 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.559 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.571 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.581 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 13.702 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 13.740 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.741 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 13.745 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 13.745 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.747 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 13.747 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 13.747 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.749 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 13.749 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.15 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.23 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.24 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.24 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.25 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.26 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.27 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.29 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.29 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.32 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.36 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.44 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.44 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.57 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.68 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.13Total elapsed time: 45.190 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 45.231 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.231 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.236 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.236 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.238 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.238 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.238 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.240 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.240 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.241 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.246 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.253 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.261 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.261 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.262 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.263 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.263 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.264 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.266 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.267 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.269 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.273 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.281 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.281 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.292 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.302 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 45.422 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.05Total elapsed time: 45.461 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.462 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.466 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 45.466 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.468 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 45.468 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.2Total elapsed time: 45.468 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.470 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.470 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.472 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.473 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.476 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.566 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.571 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.583 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.583 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.584 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.585 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.585 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.586 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.588 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.588 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.591 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.594 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.602 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.602 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.614 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 45.624 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 45.745 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.05Total elapsed time: 45.786 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.786 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.790 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.790 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.792 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.792 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 45.792 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.794 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.794 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 45.814 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.174 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.183 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.183 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.184 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.185 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.186 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.187 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.189 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.189 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.192 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.196 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.204 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.204 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.02Total elapsed time: 58.217 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.228 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 58.349 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 58.388 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.389 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.393 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.393 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.395 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.395 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.395 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.397 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.397 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.399 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.403 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.413 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.421 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.422 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.422 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.424 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.424 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.425 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.427 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.427 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.430 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.433 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.441 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.441 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.02Total elapsed time: 58.454 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.464 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 58.584 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.03Total elapsed time: 58.623 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.624 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.628 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.628 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.630 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.630 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.630 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.632 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.632 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.634 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.635 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.compgen.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.637 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.732 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/img_process.constraint.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.736 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/common.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/APCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.748 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.749 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.749 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/op_simcore.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.750 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/generic/autopilot/interface.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.750 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.751 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/virtex.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/plb46.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.753 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/fsl.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.754 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/axi4.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.756 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/nativeAXI4.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/saxilite.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.760 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/maxi.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.768 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.768 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/scripts/xilinxcoregen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.780 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/interface/XilEDKCoreGen.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.01Total elapsed time: 58.790 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfft.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.12Total elapsed time: 58.912 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/xfir.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.04Total elapsed time: 58.951 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/util.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.952 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/ip/dds_compiler.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.956 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.19Total elapsed time: 58.956 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/dsp48.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.958 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.958 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0.21Total elapsed time: 58.958 sec.
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/zynq/zynq_fpv6.gen "
+@I [HLS-100] Command "source /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/common/technology/xilinx/common/xilinx_fpv6.gen "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.960 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.960 sec.
+@I [HLS-100] Command "source /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/.autopilot/db/global.setting.tcl "
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 0Total elapsed time: 58.979 sec.
+@I [HLS-100] Command 'export_design' returned 0; elapsed 2.45Total elapsed time: 70.515 sec.
+@I [HLS-100] Command 'ap_source' returned 0; elapsed 6.4Total elapsed time: 70.515 sec.
+@I [HLS-100] Command "cleanup_all "
+@I [HLS-100] Command 'cleanup_all' returned 0; elapsed 0.01Total elapsed time: 70.526 sec.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:repository xmlns:xd="http://www.xilinx.com/xd">
+    <xd:fcnMap xd:fcnName="pf_read" xd:componentRef="zc702_axis_io">
+        <xd:arg 
+	    xd:name="rbuf" 
+	    xd:direction="out" 
+	    xd:busInterfaceRef="io2axis_M_AXIS" 
+	    xd:portInterfaceType="axis" 
+	    xd:arraySize="128" 
+	    xd:dataWidth="32"
+	/>
+    </xd:fcnMap>
+    <xd:fcnMap xd:fcnName="pf_write" xd:componentRef="zc702_axis_io">
+        <xd:arg 
+	    xd:name="wbuf" 
+	    xd:direction="in" 
+	    xd:busInterfaceRef="axis2io_S_AXIS" 
+	    xd:portInterfaceType="axis" 
+	    xd:arraySize="128" 
+	    xd:dataWidth="32"
+	/>
+    </xd:fcnMap>
+</xd:repository>

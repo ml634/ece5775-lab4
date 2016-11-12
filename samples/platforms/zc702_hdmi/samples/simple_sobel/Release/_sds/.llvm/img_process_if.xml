@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:repository xmlns:xd="http://www.xilinx.com/xd">
+  <xd:component xd:vendor="xilinx.com" xd:library="xd" xd:name="img_process_if" xd:version="1.0" xd:componentRef="axis_accelerator_adapter" xd:adapteeCompRef="img_process" xd:type="accelerator">
+    <xd:busInterface xd:name="S_AXI" xd:busTypeRef="aximm" xd:mode="slave" xd:clockRef="s_axi_aclk" xd:resetRef="s_axi_aresetn" xd:dataWidth="32">
+       <xd:reg xd:name="ap_ctrl" xd:offset="0x28" xd:dataWidth="4"/>
+       <xd:reg xd:name="isobelInvert" xd:offset="0x80" xd:dataWidth="32"/>
+       <xd:reg xd:name="iminsobelSensitivity" xd:offset="0x84" xd:dataWidth="32"/>
+       <xd:reg xd:name="imaxsobelSensitivity" xd:offset="0x88" xd:dataWidth="32"/>
+    </xd:busInterface>
+    <xd:busInterface xd:name="S_AXIS_0" xd:busTypeRef="axis" xd:portInterfaceType="fifo" xd:direction="in" xd:mode="master" xd:hasTlast="true" xd:clockRef="s_axis_0_aclk" xd:resetRef="s_axis_0_aresetn" xd:dataWidth="32" xd:hlsname="rgb_data_in"/>
+    <xd:busInterface xd:name="M_AXIS_0" xd:busTypeRef="axis" xd:portInterfaceType="fifo" xd:direction="out" xd:mode="master" xd:hasTlast="true" xd:clockRef="m_axis_0_aclk" xd:resetRef="m_axis_0_aresetn" xd:dataWidth="32" xd:hlsname="rgb_data_out"/>
+  </xd:component>
+</xd:repository>

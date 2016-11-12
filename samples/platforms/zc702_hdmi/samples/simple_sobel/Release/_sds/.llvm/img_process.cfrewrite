@@ -1,0 +1,32 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+void _p0_img_process_0(int rgb_data_in[2211840], int rgb_data_out[2211840], int isobelInvert, int iminsobelSensitivity, int imaxsobelSensitivity);
+#ifdef __cplusplus
+}
+#endif
+void _p0_img_process_0(int rgb_data_in[2211840], int rgb_data_out[2211840], int isobelInvert, int iminsobelSensitivity, int imaxsobelSensitivity)
+{
+  switch_to_next_partition(0);
+  int start_seq[3];
+  start_seq[0] = 0x00000700;
+  start_seq[1] = 0x00010000;
+  start_seq[2] = 0x00020000;
+  cf_request_handle_t _p0_swinst_img_process_0_cmd;
+  cf_send_i(&(_p0_swinst_img_process_0.cmd_img_process), start_seq, 3*sizeof(int), &_p0_swinst_img_process_0_cmd);
+  cf_wait(_p0_swinst_img_process_0_cmd);
+
+  cf_send_i(&(_p0_swinst_img_process_0.rgb_data_in), rgb_data_in, 2211840 * 4, &_p0_request_0);
+  cf_send_i(&(_p0_swinst_img_process_0.isobelInvert), &isobelInvert, 4, &_p0_request_2);
+  cf_send_i(&(_p0_swinst_img_process_0.iminsobelSensitivity), &iminsobelSensitivity, 4, &_p0_request_3);
+  cf_send_i(&(_p0_swinst_img_process_0.imaxsobelSensitivity), &imaxsobelSensitivity, 4, &_p0_request_4);
+
+  cf_receive_i(&(_p0_swinst_img_process_0.rgb_data_out), rgb_data_out, 2211840 * 4, &_p0_img_process_0_num_rgb_data_out, &_p0_request_1);
+
+  cf_wait(_p0_request_0);
+  cf_wait(_p0_request_1);
+  cf_wait(_p0_request_2);
+  cf_wait(_p0_request_3);
+  cf_wait(_p0_request_4);
+}
+

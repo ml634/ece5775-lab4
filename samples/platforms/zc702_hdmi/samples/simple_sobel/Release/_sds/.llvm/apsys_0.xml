@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<cf:model cf:partition="0" cf:prefix="_p0_" cf:name="top" xd:type="design" xmlns:xd="http://www.xilinx.com/xd" xmlns:cf="http://www.xilinx.com/connections">
+  <cf:block cf:name="hwblk_img_process">
+    <cf:port cf:name="cmd_img_process" cf:portType="stream" cf:direction="in"/>
+    <cf:port cf:name="rgb_data_in" cf:portType="stream" cf:direction="in"/>
+    <cf:port cf:name="rgb_data_out" cf:portType="stream" cf:direction="out"/>
+    <cf:port cf:name="isobelInvert" cf:portType="stream" cf:direction="in"/>
+    <cf:port cf:name="iminsobelSensitivity" cf:portType="stream" cf:direction="in"/>
+    <cf:port cf:name="imaxsobelSensitivity" cf:portType="stream" cf:direction="in"/>
+  </cf:block>
+  <cf:block cf:name="swblk_img_process">
+    <cf:port cf:name="cmd_img_process" cf:portType="stream" cf:direction="out"/>
+    <cf:port cf:name="rgb_data_in" cf:portType="stream" cf:direction="out"/>
+    <cf:port cf:name="rgb_data_out" cf:portType="stream" cf:direction="in"/>
+    <cf:port cf:name="isobelInvert" cf:portType="stream" cf:direction="out"/>
+    <cf:port cf:name="iminsobelSensitivity" cf:portType="stream" cf:direction="out"/>
+    <cf:port cf:name="imaxsobelSensitivity" cf:portType="stream" cf:direction="out"/>
+  </cf:block>
+  <cf:comp cf:name="datamover_0" xd:componentRef="axi_dma" xd:clockId="1"/>
+  <cf:comp cf:name="zc702_hdmi" xd:componentRef="zc702_hdmi" xd:clockId="1"/>
+  <cf:comp cf:name="img_process_0" xd:componentRef="img_process" xd:clockId="1"/>
+  <cf:instance cf:name="hwinst_img_process_0" cf:blockName="hwblk_img_process" cf:compName="img_process_0">
+    <cf:portMap cf:blockPort="cmd_img_process" cf:compPort="ap_ctrl" xd:register="0x28"/>
+    <cf:portMap cf:blockPort="rgb_data_in" cf:compPort="rgb_data_in"/>
+    <cf:portMap cf:blockPort="rgb_data_out" cf:compPort="rgb_data_out"/>
+    <cf:portMap cf:blockPort="isobelInvert" cf:compPort="isobelInvert" xd:register="0x80"/>
+    <cf:portMap cf:blockPort="iminsobelSensitivity" cf:compPort="iminsobelSensitivity" xd:register="0x84"/>
+    <cf:portMap cf:blockPort="imaxsobelSensitivity" cf:compPort="imaxsobelSensitivity" xd:register="0x88"/>
+  </cf:instance>
+  <cf:instance cf:name="swinst_img_process_0" cf:blockName="swblk_img_process" cf:compName="zc702_hdmi">
+    <cf:portMap cf:blockPort="cmd_img_process" cf:compPort="M_AXI_GP1"/>
+    <cf:portMap cf:blockPort="rgb_data_in" cf:compPort="S_AXI_HP1"/>
+    <cf:portMap cf:blockPort="rgb_data_out" cf:compPort="S_AXI_HP1"/>
+    <cf:portMap cf:blockPort="isobelInvert" cf:compPort="M_AXI_GP1"/>
+    <cf:portMap cf:blockPort="iminsobelSensitivity" cf:compPort="M_AXI_GP1"/>
+    <cf:portMap cf:blockPort="imaxsobelSensitivity" cf:compPort="M_AXI_GP1"/>
+  </cf:instance>
+  <cf:connection cf:srcInst="swinst_img_process_0" cf:srcPort="cmd_img_process" cf:dstInst="hwinst_img_process_0" cf:dstPort="cmd_img_process">
+    <cf:dataMover cf:compName="zc702_hdmi" cf:softwareLib="axi_lite"/>
+  </cf:connection>
+  <cf:connection cf:srcInst="swinst_img_process_0" cf:srcPort="rgb_data_in" cf:dstInst="hwinst_img_process_0" cf:dstPort="rgb_data_in">
+    <cf:dataMover cf:compName="datamover_0" cf:softwareLib="axi_dma_sg"/>
+  </cf:connection>
+  <cf:connection cf:srcInst="hwinst_img_process_0" cf:srcPort="rgb_data_out" cf:dstInst="swinst_img_process_0" cf:dstPort="rgb_data_out">
+    <cf:dataMover cf:compName="datamover_0" cf:softwareLib="axi_dma_sg"/>
+  </cf:connection>
+  <cf:connection cf:srcInst="swinst_img_process_0" cf:srcPort="isobelInvert" cf:dstInst="hwinst_img_process_0" cf:dstPort="isobelInvert">
+    <cf:dataMover cf:compName="zc702_hdmi" cf:softwareLib="axi_lite"/>
+  </cf:connection>
+  <cf:connection cf:srcInst="swinst_img_process_0" cf:srcPort="iminsobelSensitivity" cf:dstInst="hwinst_img_process_0" cf:dstPort="iminsobelSensitivity">
+    <cf:dataMover cf:compName="zc702_hdmi" cf:softwareLib="axi_lite"/>
+  </cf:connection>
+  <cf:connection cf:srcInst="swinst_img_process_0" cf:srcPort="imaxsobelSensitivity" cf:dstInst="hwinst_img_process_0" cf:dstPort="imaxsobelSensitivity">
+    <cf:dataMover cf:compName="zc702_hdmi" cf:softwareLib="axi_lite"/>
+  </cf:connection>
+</cf:model>

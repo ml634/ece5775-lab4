@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:data xmlns:xd="http://www.xilinx.com/xd">
+  <xd:source name="main_app.c" compiler="gcc" objfile="src/main_app.o" srcpath="/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src" flags="-I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/src -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__"/>
+</xd:data>

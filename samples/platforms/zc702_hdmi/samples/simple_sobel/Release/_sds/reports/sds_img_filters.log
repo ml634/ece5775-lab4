@@ -1,0 +1,143 @@
+(c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
+#-----------------------------------------------------------
+# Tool version  : sdscc 2015.2.1 20150925
+# Start time    : Tue Nov 08 14:18:15 EST 2016
+# Command line  : sdscc -Wall -O3 -c -fmessage-length=0 -MMD -MP -ohw/img_filters.o ../hw/img_filters.c -sds-pf /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi -sds-hw img_process img_filters.c -clkid 1 -sds-end -dmclkid 1
+# Log file      : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_img_filters.log
+# Journal file  : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_img_filters.jou
+# Report file   : /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_img_filters.rpt
+#-----------------------------------------------------------
+
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang_wrapper -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g    -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include  -Wall -fmessage-length=0 -MMD -MP -D __SDSCC__ -emit-llvm -S /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/hw/img_filters.s
+INFO: [SDSoC 0-0] Performing accelerator source linting for img_process
+sdslint -func img_process /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c -- -c -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g -w   -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include  -Wall -fmessage-length=0 -MMD -MP -D __SDSCC__
+arm-xilinx-linux-gnueabi-gcc -c /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.cpp -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdinfo=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o.xml /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+INFO: [SDSoC 0-0] Performing pragma generation
+clang_wrapper -E -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g -w   -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include -Wall -fmessage-length=0 -MMD -MP -D __SDSCC__ -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw -D __SDSVHLS__ /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_filters_pp.c
+pragma_gen  -func img_process   -tcl /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process.tcl  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_filters_pp.c  --  -c  -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g -w   -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include  -D __SDSVHLS__  -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__ -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include -I/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw
+INFO: [SDSoC 0-0] Successfully generated tcl script: /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process.tcl
+INFO: [SDSoC 0-0] Moving function img_process to Programmable Logic
+/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/bin/vivado_hls /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process_run.tcl
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2015.2_hlssdsoc
+  Build 1277861 on Thu Jul 09 19:00:49 PM 2015
+  Copyright (C) 2015 Xilinx Inc. All rights reserved.
+================================================================
+@I [LIC-101] Checked out feature [ap_sdsoc]
+@I [HLS-10] Running '/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/bin/unwrapped/lnx64.o/vivado_hls'
+            for user 'ml634' on host 'en-ec-zhang-01.coecis.cornell.edu' (Linux_x86_64 version 2.6.32-642.3.1.el6.x86_64) on Tue Nov 08 14:18:22 EST 2016
+            in directory '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls'
+@I [HLS-10] Creating and opening project '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process'.
+@I [HLS-10] Adding design file '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c' to the project
+@I [HLS-10] Creating and opening solution '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution'.
+@I [HLS-10] Cleaning up the solution database.
+@I [HLS-10] Setting target device to ' xc7z020clg484-1 '
+@I [SYN-201] Setting up clock 'default' with a period of 5.95ns.
+@I [HLS-10] Analyzing design file '/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c' ... 
+@I [HLS-10] Validating synthesis directives ...
+@I [HLS-10] Starting code transformations ...
+@I [HLS-10] Checking synthesizability ...
+@I [XFORM-602] Inlining function 'rgb2y' into 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:74) automatically.
+@I [XFORM-602] Inlining function 'rgb2y' into 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:74) automatically.
+@W [XFORM-124] Array 'rgb_data_out' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52): may have improper streaming access(es), possible reasons: (1) some entries are accessed more than once; (2) some entries are not used; (3) the entries are not accessed in sequential order.
+@W [XFORM-124] Array 'rgb_data_in' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52): may have improper streaming access(es), possible reasons: (1) some entries are accessed more than once; (2) some entries are not used; (3) the entries are not accessed in sequential order.
+@I [XFORM-401] Performing if-conversion on hyperblock from (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:111:51) to (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:111:41) in function 'img_process'... converting 5 basic blocks.
+@I [XFORM-11] Balancing expressions in function 'img_process' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:52)...15 expression(s) balanced.
+@W [XFORM-542] Cannot flatten a loop nest 'Loop-4' (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:94:8) in function 'img_process' : 
+               more than one sub loop.
+@I [HLS-111] Elapsed time: 2.71 seconds; current memory usage: 0.157 MB.
+@I [HLS-10] Starting hardware synthesis ...
+@I [HLS-10] Synthesizing 'img_process' ...
+@I [HLS-10] ----------------------------------------------------------------
+@I [HLS-10] -- Scheduling module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@I [SCHED-11] Starting scheduling ...
+@I [SCHED-61] Pipelining loop 'Loop 1'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:73) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:73) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:70 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 2'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_5', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:82) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_5', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:82) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:79 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 3'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
+@I [SCHED-61] Pipelining loop 'Loop 4.1'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 1, distance = 1)
+   between 'load' operation ('pixel_load_8', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:102) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99 on local variable 'pixel'.
+@W [SCHED-68] Unable to enforce a carried dependency constraint (II = 2, distance = 1)
+   between 'load' operation ('pixel_load_8', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:102) on local variable 'pixel' and 'store' operation (/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99) of variable 'pixel', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:99 on local variable 'pixel'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 3, Depth: 7.
+@I [SCHED-61] Pipelining loop 'Loop 4.2'.
+@W [SCHED-69] Unable to schedule 'load' operation ('line_buffer_load_2', /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c:117) on array 'line_buffer' due to limited memory ports.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 4, Depth: 11.
+@I [SCHED-61] Pipelining loop 'Loop 5'.
+@I [SCHED-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
+@W [SCHED-71] Latency directive discarded for region img_process since it contains subloops.
+@I [SCHED-11] Finished scheduling.
+@I [HLS-111] Elapsed time: 0.47 seconds; current memory usage: 0.157 MB.
+@I [HLS-10] ----------------------------------------------------------------
+@I [HLS-10] -- Exploring micro-architecture for module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@I [BIND-100] Starting micro-architecture generation ...
+@I [BIND-101] Performing variable lifetime analysis.
+@I [BIND-101] Exploring resource sharing.
+@I [BIND-101] Binding ...
+@I [BIND-100] Finished micro-architecture generation.
+@I [HLS-111] Elapsed time: 0.11 seconds; current memory usage: 0.157 MB.
+@I [HLS-10] ----------------------------------------------------------------
+@I [HLS-10] -- Generating RTL for module 'img_process' 
+@I [HLS-10] ----------------------------------------------------------------
+@I [RTGEN-500] Setting interface mode on port 'img_process/rgb_data_in' to 'ap_fifo'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/rgb_data_out' to 'ap_fifo'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/isobelInvert' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/iminsobelSensitivity' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on port 'img_process/imaxsobelSensitivity' to 'ap_none'.
+@I [RTGEN-500] Setting interface mode on function 'img_process' to 'ap_ctrl_hs'.
+@W [RTGEN-101] Global array 'line_buffer' will not be exposed as RTL port.
+@I [RTGEN-100] Generating core module 'img_process_mac_muladd_6ns_8ns_9ns_13_3': 3 instance(s).
+@I [RTGEN-100] Finished creating RTL model for 'img_process'.
+@I [HLS-111] Elapsed time: 0.24 seconds; current memory usage: 0.157 MB.
+@I [RTMG-278] Implementing memory 'img_process_line_buffer_ram' using block RAMs with power-on initialization.
+@I [HLS-10] Finished generating all RTL models.
+@I [WSYSC-301] Generating RTL SystemC for 'img_process'.
+@I [WVHDL-304] Generating RTL VHDL for 'img_process'.
+@I [WVLOG-307] Generating RTL Verilog for 'img_process'.
+@I [IMPL-8] Exporting RTL as an IP in IP-XACT.
+
+****** Vivado v2015.2 (64-bit)
+  **** SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+  **** IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado/2015.2/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  8 14:19:05 2016...
+@I [HLS-112] Total elapsed time: 70.530 seconds; peak memory usage: 0.157 MB.
+@I [LIC-101] Checked in feature [ap_sdsoc]
+xsltproc --output component.xml  /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/scripts/xsd/xdFixAximmAddrSpaceProperty.xsl  component.xml
+zip -u xilinx_com_hls_img_process_1_0.zip component.xml
+updating: component.xml (deflated 93%)
+sed -i -e {s/xilinx\.com\/xidane/xilinx\.com\/xd/g} /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/impl/ip/auxiliary.xml
+xsltproc  --output /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.hlsmap1.xml  --stringparam P_CLKID 1  --stringparam P_HLS_TYPE hls  /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/scripts/xsd/xdHlsmapRenameAttr.xsl  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process_auxiliary.xml
+xsltproc  --output /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.hlsmap.xml  /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/scripts/xsd/xdHlsmapAdapter.xsl  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.hlsmap1.xml
+xsltproc    --output /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.fcnmap.xml  /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/scripts/xsd/xdHlsmapAxi4.xsl  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.hlsmap.xml
+xsltproc  --output /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process_if.xml  /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/scripts/xsd/xdHlsAdapterComp.xsl  /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.fcnmap.xml
+arm-xilinx-linux-gnueabi-objcopy --add-section .xddata=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_process.xml /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdasm=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/hw/img_filters.s /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-gcc -E  -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__   -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/hw/img_filters.c -o /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.pp/img_filters.i
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdpp=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.pp/img_filters.i /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdfcnmap=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process.fcnmap.xml /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdhlscore=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/vhls/img_process/solution/impl/ip/xilinx_com_hls_img_process_1_0.zip /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdif=/home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/.llvm/img_process_if.xml /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/swstubs/img_filters.o
+sdscc log file saved as /home/student/ml634/2015/samples/platforms/zc702_hdmi/samples/simple_sobel/Release/_sds/reports/sds_img_filters.log
+sdscc completed at Tue Nov 08 14:19:32 EST 2016

@@ -1,0 +1,30 @@
+digraph dm_graph {
+v0 [label = "v0:sw_sobel_processing" ,style=filled];
+v1 [label = "v1:XFER(IN):rgb_data_in @84, ARRAY\nCPU\nAXIDMA_SG(mm2s) on AFI(PS to ACC)\n" ,style=filled,fillcolor = green];
+v2 [label = "v2:XFER(IN):isobelInvert @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\n" ,style=filled,fillcolor = green];
+v3 [label = "v3:XFER(IN):iminsobelSensitivity @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\n" ,style=filled,fillcolor = green];
+v4 [label = "v4:XFER(IN):imaxsobelSensitivity @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\n" ,style=filled,fillcolor = green];
+v5 [label = "v5:call 'img_process' in 'main_app.c' @84\nACC\n" ,style=filled,fillcolor = red];
+v6 [label = "v6:XFER(OUT):rgb_data_out @84, ARRAY\nCPU\nAXIDMA_SG(s2mm) on AFI(ACC to PS)\n" ,style=filled,fillcolor = yellow];
+v7 [label = "v7:cf_wait(): \nXFER(IN):rgb_data_in @84, ARRAY\nCPU\nAXIDMA_SG(mm2s) on AFI(PS to ACC)\nXFER(OUT):rgb_data_out @84, ARRAY\nCPU\nAXIDMA_SG(s2mm) on AFI(ACC to PS)\nXFER(IN):isobelInvert @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\nXFER(IN):iminsobelSensitivity @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\nXFER(IN):imaxsobelSensitivity @84, SCALAR\nAXILITE(mm2s) on GP(PS to ACC)\n\nCPU\nCPU\nCPU\nCPU\nCPU\n" ,style=filled,fillcolor = cyan];
+subgraph cluster0 {
+v1;
+v2;
+v3;
+v4;
+v5;
+v6;
+v7;
+label = "call 'img_process' in 'main_app.c' @84\nACC\n";
+}
+v1 -> v5 [label = "0"];
+v2 -> v5 [label = "0"];
+v3 -> v5 [label = "0"];
+v4 -> v5 [label = "0"];
+v5 -> v6 [label = "0"];
+v6 -> v7 [label = "", style = dotted];
+v0 -> v1 [label = "", style = dotted];
+v0 -> v2 [label = "", style = dotted];
+v0 -> v3 [label = "", style = dotted];
+v0 -> v4 [label = "", style = dotted];
+}

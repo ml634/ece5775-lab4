@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:repository xmlns:xd="http://www.xilinx.com/xd" xd:vendor="xilinx.com" xd:library="hls" xd:name="img_process" xd:version="1.0">
+    <xd:component xd:vendor="xilinx.com" xd:library="hls" xd:name="img_process" xd:version="1.0" xd:type="accelerator">
+        <xd:busInterface xd:name="ap_clk" xd:busTypeRef="clock" xd:mode="slave" xd:direction="in" xd:library="signal" xd:port="ap_clk"/>
+        <xd:busInterface xd:name="ap_rst_n" xd:busTypeRef="reset" xd:mode="slave" xd:direction="in" xd:library="signal" xd:port="ap_rst_n"/>
+        <xd:busInterface xd:name="ap_ctrl" xd:busTypeRef="acc_handshake" xd:mode="slave"/>
+        <xd:busInterface xd:name="rgb_data_in" xd:busTypeRef="acc_fifo_read" xd:mode="master"/>
+        <xd:busInterface xd:name="rgb_data_out" xd:busTypeRef="acc_fifo_write" xd:mode="master"/>
+        <xd:busInterface xd:name="isobelInvert" xd:busTypeRef="data" xd:mode="slave"/>
+        <xd:busInterface xd:name="iminsobelSensitivity" xd:busTypeRef="data" xd:mode="slave"/>
+        <xd:busInterface xd:name="imaxsobelSensitivity" xd:busTypeRef="data" xd:mode="slave"/>
+    </xd:component>
+</xd:repository>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:Manifest xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:manifest="http://www.xilinx.com/manifest">
+	<template location="colorflip" name="Color Flip" description="Color flip application">
+		<supports>
+			<and>
+				<os name="Linux"/>
+			</and>
+		</supports>
+		<includepaths>
+			<path location="src"/>
+			<path location="hw"/>
+		</includepaths>
+		<libraries>
+			<lib name="zc702hdmi"/>
+		</libraries>
+		<exclude>
+			<directory name="Release"/>
+			<directory name="DebugSw"/>
+			<directory name="sd_card_prebuilt"/>
+		</exclude>
+	</template>
+	<template location="manr_sobel" name="Manr Sobel" description="Manr and sobel application">
+		<supports>
+			<and>
+				<os name="Linux"/>
+			</and>
+		</supports>
+		<includepaths>
+			<path location="src"/>
+			<path location="hw"/>
+		</includepaths>
+		<libraries>
+			<lib name="zc702hdmi"/>
+		</libraries>
+		<exclude>
+			<directory name="Release"/>
+			<directory name="sd_card_prebuilt"/>
+		</exclude>
+	</template>
+	<template location="motion_demo" name="Motion Detection" description="Motion detection application">
+		<supports>
+			<and>
+				<os name="Linux"/>
+			</and>
+		</supports>
+		<includepaths>
+			<path location="src"/>
+			<path location="hw"/>
+		</includepaths>
+		<libraries>
+			<lib name="zc702hdmi"/>
+		</libraries>
+		<exclude>
+			<directory name="Release"/>
+			<directory name="sd_card_prebuilt"/>
+		</exclude>
+	</template>
+	<template location="simple_sobel" name="Sobel" description="Sobel application">
+		<supports>
+			<and>
+				<os name="Linux"/>
+			</and>
+		</supports>
+		<includepaths>
+			<path location="src"/>
+			<path location="hw"/>
+		</includepaths>
+		<libraries>
+			<lib name="zc702hdmi"/>
+		</libraries>
+		<exclude>
+			<directory name="DebugSw"/>
+			<directory name="Release"/>
+			<directory name="sd_card_prebuilt"/>
+		</exclude>
+	</template>
+</manifest:Manifest>

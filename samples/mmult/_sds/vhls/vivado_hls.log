@@ -1,0 +1,34 @@
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2016.1
+  Build 1538259 on Fri Apr 08 16:12:49 MDT 2016
+  Copyright (C) 1986-2016 Xilinx, Inc. All Rights Reserved.
+================================================================
+INFO: [HLS 200-10] Running '/work/zhang/common/tools/xilinx/SDSoC/2016.1/Vivado_HLS/2016.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'ml634' on host 'en-ec-zhang-01.coecis.cornell.edu' (Linux_x86_64 version 2.6.32-642.3.1.el6.x86_64) on Tue Nov 08 14:08:08 EST 2016
+INFO: [HLS 200-10] On os "CentOS release 6.8 (Final)"
+INFO: [HLS 200-10] In directory '/home/student/ml634/2015/samples/mmult/_sds/vhls'
+INFO: [HLS 200-10] Creating and opening project '/home/student/ml634/2015/samples/mmult/_sds/vhls/mmult'.
+INFO: [HLS 200-10] Adding design file '/home/student/ml634/2015/samples/mmult/mmult.cpp' to the project
+INFO: [HLS 200-10] Creating and opening solution '/home/student/ml634/2015/samples/mmult/_sds/vhls/mmult/solution'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-10] Setting target device to ' xc7z020clg484-1 '
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 8.5ns.
+INFO: [HLS 200-10] Analyzing design file '/home/student/ml634/2015/samples/mmult/mmult.cpp' ... 
+INFO: [HLS 200-10] Validating synthesis directives ...
+INFO: [HLS 200-10] Starting code transformations ...
+CRITICAL WARNING: [SYNCHK 200-79] Cannot find the top function 'mmult' in the design. Possible causes are: (1) the top function name is misspelled; (2) the top function is nonexistent or declared as static.
+CRITICAL WARNING: [HLS 200-70] Synthesizability check failed.
+INFO: [HLS 200-111] Elapsed time: 0.93 seconds; current memory usage: 0.19 MB.
+command 'ap_source' returned error code
+    while executing
+"source /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl"
+    invoked from within
+"hls::main /home/student/ml634/2015/samples/mmult/_sds/vhls/mmult_run.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
+INFO: [HLS 200-112] Total elapsed time: 2.833 seconds; peak memory usage: 0.19 MB.
