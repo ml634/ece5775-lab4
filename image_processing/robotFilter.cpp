@@ -170,6 +170,13 @@ cv::Point centerOfMass(cv::Mat src)
    unsigned int xBar, yBar; // Center of mass coordinates
    // Or just Point(xBar, yBar) when I find them later
 
+   // init values
+   m00 = 0;
+   m01 = 0;
+   m10 = 0;
+   xBar = 0;
+   yBar = 0;
+
    // iterate through all pixel values
    for (int j = 0; j < src.rows; j++) {
       for (int i = 0; i < src.cols; i++) {
@@ -179,9 +186,9 @@ cv::Point centerOfMass(cv::Mat src)
       }
    }
    
-   // std::cout << "Area: " << m00 << std::endl;
-   // std::cout << "M10: " << m10 << std::endl;
-   // std::cout << "M01: " << m01 << std::endl;
+   std::cout << "Area: " << m00 << std::endl;
+   std::cout << "M10: " << m10 << std::endl;
+   std::cout << "M01: " << m01 << std::endl;
 
    xBar = m10 / m00;
    yBar = m01 / m00;
