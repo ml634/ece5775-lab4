@@ -15,7 +15,7 @@ using namespace cv;
 using namespace std;
 
 // Global variables
-Mat src, src_gray;
+Mat src, src_gray, labeledResult;
 int thresh = 200;
 int max_thresh = 255;
 
@@ -23,8 +23,7 @@ char* source_window = "Source image";
 char* corners_window = "Corners detected";
 
 // Function header
-// harris demo from online
-void cornerHarris_demo( int, void* );
+cv::Point findRobotBody(cv::Mat src, int thresholdStep, int numComponents);
 
 // Median filter function
 cv::Mat medianFilter(cv::Mat src, int window);
@@ -73,8 +72,11 @@ int main( int argc, char** argv )
    // Center of Mass calculation
    centerOfMass(blackFilterResult);
 
-   // blob detection
-   connectedComponent(blackFilterResult);
+   // connected component labeling 
+   int numComponents = connectedComponent(blackFilterResult);
+
+   // find robot body center of mass
+   findRobotBody(labeledResult, 20, 13);
 
    waitKey(0);
    return(0);
@@ -185,44 +187,72 @@ std::vector<Point> gatherNeighbors(cv::Mat src, cv::Point pt, int connectivity)
    return neighbors;
 }
 
+void setLabel(cv::Mat src, cv::Mat result, int x, int y, int l) 
+{
+   // set output image pixel at x,y to be l
+   result.at<unsigned char>(y,x) = l;
+   
+   // check all neighbors of object pixel
+   // set labels recursively
+   if (src.at<unsigned char>(y+1, x) != 0 && result.at<unsigned char>(y+1, x) == 0) {
+      setLabel(src, result, x, y+1, l);
+   }
+   if (src.at<unsigned char>(y-1, x) != 0 && result.at<unsigned char>(y-1, x) == 0) {
+      setLabel(src, result, x, y-1, l);
+   }
+   if (src.at<unsigned char>(y, x+1) != 0 && result.at<unsigned char>(y, x+1) == 0) {
+      setLabel(src, result, x+1, y, l);
+   }
+   if (src.at<unsigned char>(y, x-1) != 0 && result.at<unsigned char>(y, x-1) == 0) {
+      setLabel(src, result, x-1, y, l);
+   }
+}
+
 int connectedComponent(cv::Mat src)
 {
    int numberOfComponents;
-   cv::Mat result;
+   // FINDME: Using labeledResult global var for output
+   // cv::Mat result;
    std::vector<Point> neighbors;
-   unsigned char label = 0;
+   unsigned char label = 20;
   
    // initialize empty image
-   // FINDME: Should I pad the image?
-   result = Mat::zeros(src.size(), CV_8UC1); 
+   labeledResult = Mat::zeros(src.size(), CV_8UC1); 
 
-   // First pass through image
    // indices starting at 1 to avoid nonexistent neighbor issue
    for (int j = 1; j < src.rows - 1; j++) {
       for (int i = 1; i < src.cols - 1; i++) {
          // Check if pixel is in background or not
-         if (src.at<unsigned char>(j,i) != 0) {
-            // Gather neighbors that are nonzero (8 connectivity)
-            neighbors = gatherNeighbors(src, Point(i,j), 8);
-             
-            // if no connected neighbors, new label
-            if (neighbors.size() == 0) {
-               label += 1;
-               result.at<unsigned char>(j,i) = label;
-            } else {
-               // use minimum label from neighbors
-               result.at<unsigned char>(j,i) = result.at<unsigned char>(neighbors[0].y, neighbors[0].x);
-            }
-
+         // Check if pixel is unlabled or not
+         if (src.at<unsigned char>(j,i) != 0 && (labeledResult.at<unsigned char>(j,i) == 0)) {
+            // recursive call...
+            setLabel(src, labeledResult, i, j, label);
+            label += 20; 
+            numberOfComponents++;
          }
       }
    }
 
    // Show labeled result
    namedWindow("labeled" , CV_WINDOW_AUTOSIZE );
-   imshow("labeled", result );
+   imshow("labeled", labeledResult );
+
+   std::cout << "Number of components: " << numberOfComponents << std::endl;
 
    return numberOfComponents;
+}
+
+unsigned int calculateArea(cv::Mat src) 
+{
+   unsigned int area;
+
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++ ) {
+         area += src.at<unsigned char>(j, i);
+      }
+   }
+
+   return area;
 }
 
 cv::Point centerOfMass(cv::Mat src)
@@ -260,6 +290,37 @@ cv::Point centerOfMass(cv::Mat src)
    // imshow( "Center of mass", src );
 
    return Point(xBar, yBar);
+}
+
+// Find robot body based on connected components
+cv::Point findRobotBody(cv::Mat src, int thresholdStep, int numComponents)
+{
+   cv::Mat result;
+   cv::Point COM;
+   char windowTitle[100];
+
+   for (int i = 0; i < numComponents; i++) {
+      // threshold each component
+      unsigned char currentThreshold = thresholdStep + (thresholdStep * i);
+      // threshold(src, result, currentThreshold, 255, THRESH_BINARY_INV);
+      inRange(src, currentThreshold, currentThreshold + 1, result);
+      // bitwise_not(result, result);
+      std::cout << "current threshold: " << thresholdStep + (thresholdStep * i) << std::endl;
+
+      sprintf(windowTitle, "%d", i);
+      namedWindow(windowTitle, CV_WINDOW_AUTOSIZE);
+      imshow(windowTitle, result);
+
+      // check to see if area of object is sufficiently large
+      if (calculateArea(result) > 100000) {
+
+         // it's a robot body so calculate center of mass
+         COM = centerOfMass(result);
+         std::cout << "Robot center of mass: " << COM << std::endl;
+      }
+   }
+
+   return COM;
 }
 
 // blob detection algorithm (not synthesizable)
