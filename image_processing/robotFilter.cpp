@@ -5,6 +5,8 @@
 
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/opencv.hpp"
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,6 +73,9 @@ int main( int argc, char** argv )
    // Center of Mass calculation
    centerOfMass(blackFilterResult);
 
+   // blob detection
+   connectedComponent(blackFilterResult);
+
    waitKey(0);
    return(0);
 }
@@ -95,6 +100,8 @@ cv::Mat blackFilter(cv::Mat src, int thresh)
 
    // input array is greyscale so just need to use threshold API
    threshold(src, blackOnly, thresh, 255, THRESH_BINARY_INV);
+   // FINDME: Changing treshold to make non inverting binary
+   // threshold(src, blackOnly, thresh, 255, THRESH_BINARY);
 
    // show black filtered image
    namedWindow("Black Filter", CV_WINDOW_AUTOSIZE);
@@ -142,33 +149,86 @@ std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold)
    return cornerPoints;
 }
 
+std::vector<Point> gatherNeighbors(cv::Mat src, cv::Point pt, int connectivity)
+{
+   std::vector<Point> neighbors;
+   
+   // 8 neighbor connectivity
+   if (connectivity == 8) {
+      // neighbors.push_back(Point(pt.x+1, pt.y));
+      // neighbors.push_back(Point(pt.x+1, pt.y+1));
+      // neighbors.push_back(Point(pt.x+1, pt.y-1));
+      // neighbors.push_back(Point(pt.x, pt.y+1));
+      // neighbors.push_back(Point(pt.x, pt.y-1));
+      // neighbors.push_back(Point(pt.x-1, pt.y+1));
+      // neighbors.push_back(Point(pt.x-1, pt.y));
+      // neighbors.push_back(Point(pt.x-1, pt.y-1));
+      for (int y = -1; y <= 1; y++) {
+         for (int x = -1; x <= 1; x++) {
+            // Only want neighbors that are part of the object and nonbackground pixels
+            if (src.at<unsigned char>(y,x) != 0) {
+               neighbors.push_back(Point(x, y));
+            } 
+         }
+      }
+   }
+   // 4 neighbor connectivity
+   else {
+      neighbors.push_back(Point(pt.x+1, pt.y));
+      neighbors.push_back(Point(pt.x, pt.y+1));
+      neighbors.push_back(Point(pt.x, pt.y-1));
+      neighbors.push_back(Point(pt.x-1, pt.y));
+   }
+
+   // std::cout << "neighbors: " << neighbors << std::endl;
+   // return vector of neighbor points
+   return neighbors;
+}
+
 int connectedComponent(cv::Mat src)
 {
    int numberOfComponents;
    cv::Mat result;
+   std::vector<Point> neighbors;
+   unsigned char label = 0;
   
    // initialize empty image
+   // FINDME: Should I pad the image?
    result = Mat::zeros(src.size(), CV_8UC1); 
 
    // First pass through image
-   for (int j = 0; j < src.rows; j++) {
-      for (int i = 0; i < src.cols; i++) {
+   // indices starting at 1 to avoid nonexistent neighbor issue
+   for (int j = 1; j < src.rows - 1; j++) {
+      for (int i = 1; i < src.cols - 1; i++) {
          // Check if pixel is in background or not
          if (src.at<unsigned char>(j,i) != 0) {
+            // Gather neighbors that are nonzero (8 connectivity)
+            neighbors = gatherNeighbors(src, Point(i,j), 8);
+             
+            // if no connected neighbors, new label
+            if (neighbors.size() == 0) {
+               label += 1;
+               result.at<unsigned char>(j,i) = label;
+            } else {
+               // use minimum label from neighbors
+               result.at<unsigned char>(j,i) = result.at<unsigned char>(neighbors[0].y, neighbors[0].x);
+            }
 
          }
       }
    }
+
+   // Show labeled result
+   namedWindow("labeled" , CV_WINDOW_AUTOSIZE );
+   imshow("labeled", result );
 
    return numberOfComponents;
 }
 
 cv::Point centerOfMass(cv::Mat src)
 {
-   // cv::Point COM;
    unsigned int m00, m01, m10; // Moment values
    unsigned int xBar, yBar; // Center of mass coordinates
-   // Or just Point(xBar, yBar) when I find them later
 
    // init values
    m00 = 0;
@@ -202,38 +262,35 @@ cv::Point centerOfMass(cv::Mat src)
    return Point(xBar, yBar);
 }
 
-/** @function cornerHarris_demo */
-void cornerHarris_demo( int, void* )
+// blob detection algorithm (not synthesizable)
+int blob(cv::Mat src)
 {
+   int numberOfComponents;
+   cv::Mat result;
+  
+   // initialize empty image
+   result = Mat::zeros(src.size(), CV_8UC1); 
 
-  Mat dst, dst_norm, dst_norm_scaled;
-  dst = Mat::zeros( src.size(), CV_32FC1 );
+   // simple blob detection
+   cv::SimpleBlobDetector::Params params;
+   // Filter by area
+   params.filterByArea = true;
+   params.minArea = 150;
+   params.filterByCircularity = false;
 
-  // Detector parameters
-  int blockSize = 2;
-  int apertureSize = 3;
-  double k = 0.04;
+   // init detector with above params
+   SimpleBlobDetector detector(params);
+   std::vector<KeyPoint> keypoints;
+   detector.detect(src, keypoints);
 
-  // Detecting corners
-  cornerHarris( src_gray, dst, blockSize, apertureSize, k, BORDER_DEFAULT );
+   // draw detected blobs as red circles
+   cv::Mat srcWithBlobs;
+   drawKeypoints(src, keypoints, srcWithBlobs, Scalar(0,0,255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+   namedWindow("Blobs", CV_WINDOW_AUTOSIZE);
+   imshow("Blobs", srcWithBlobs);
+   
+   // number of keypoints
+   std::cout << keypoints.size() << std::endl;
 
-  // Normalizing
-  normalize( dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat() );
-  convertScaleAbs( dst_norm, dst_norm_scaled );
-
-  // Drawing a circle around corners
-  for( int j = 0; j < dst_norm.rows ; j++ )
-     { for( int i = 0; i < dst_norm.cols; i++ )
-          {
-            if( (int) dst_norm.at<float>(j,i) > thresh )
-              {
-               circle( dst_norm_scaled, Point( i, j ), 5,  Scalar(0), 2, 8, 0 );
-              }
-          }
-     }
-  // Showing the result
-  namedWindow( corners_window, CV_WINDOW_AUTOSIZE );
-  imshow( corners_window, dst_norm_scaled );
-  // save image
-  // imwrite(
+   return numberOfComponents;
 }
