@@ -16,6 +16,7 @@ using namespace std;
 
 // Global variables
 Mat src, src_gray, labeledResult;
+std::vector<cv::Mat> robotBodies;
 int thresh = 200;
 int max_thresh = 255;
 
@@ -23,7 +24,11 @@ char* source_window = "Source image";
 char* corners_window = "Corners detected";
 
 // Function header
-cv::Point findRobotBody(cv::Mat src, int thresholdStep, int numComponents);
+std::vector<cv::Point> findRobotBody(cv::Mat src, int thresholdStep, int numComponents);
+
+double calculateAngleFromMoments(cv::Mat src);
+
+double calculateAngleFromPoints(cv::Mat src, std::vector<cv::Point> COMs, std::vector<cv::Point> corners);
 
 // Median filter function
 cv::Mat medianFilter(cv::Mat src, int window);
@@ -46,6 +51,7 @@ int main( int argc, char** argv )
    cv::Mat medianFilterResult;
    cv::Mat blackFilterResult;
    std::vector<cv::Point> cornerPoints;
+   std::vector<cv::Point> COMs;
 
    // Load source image from command line and convert it to gray
    src = imread( argv[1], 1 );
@@ -76,7 +82,19 @@ int main( int argc, char** argv )
    int numComponents = connectedComponent(blackFilterResult);
 
    // find robot body center of mass
-   findRobotBody(labeledResult, 20, 13);
+   // returns ONE center of mass but need to return both
+   // setting global robot bodies vector inside function
+   COMs = findRobotBody(labeledResult, 20, 13);
+
+   // Find robots' orientation
+   // testing with one robot body for now
+   // double angle = calculateAngleFromMoments(robotBodies[1]);
+   double angle = calculateAngleFromPoints(robotBodies[0], COMs, cornerPoints );
+
+   // Draw circle at center of mass
+   // circle(src, Point(xBar, yBar), 6, Scalar(255, 255, 255), 2, 8, 0);
+   // namedWindow( "Center of mass", CV_WINDOW_AUTOSIZE );
+   // imshow( "Center of mass", src );
 
    waitKey(0);
    return(0);
@@ -293,10 +311,10 @@ cv::Point centerOfMass(cv::Mat src)
 }
 
 // Find robot body based on connected components
-cv::Point findRobotBody(cv::Mat src, int thresholdStep, int numComponents)
+std::vector<cv::Point> findRobotBody(cv::Mat src, int thresholdStep, int numComponents)
 {
    cv::Mat result;
-   cv::Point COM;
+   std::vector<cv::Point> COM;
    char windowTitle[100];
 
    for (int i = 0; i < numComponents; i++) {
@@ -307,20 +325,108 @@ cv::Point findRobotBody(cv::Mat src, int thresholdStep, int numComponents)
       // bitwise_not(result, result);
       std::cout << "current threshold: " << thresholdStep + (thresholdStep * i) << std::endl;
 
-      sprintf(windowTitle, "%d", i);
-      namedWindow(windowTitle, CV_WINDOW_AUTOSIZE);
-      imshow(windowTitle, result);
 
       // check to see if area of object is sufficiently large
       if (calculateArea(result) > 100000) {
 
          // it's a robot body so calculate center of mass
-         COM = centerOfMass(result);
+         // COM = centerOfMass(result);
+         COM.push_back(centerOfMass(result));
          std::cout << "Robot center of mass: " << COM << std::endl;
+
+         sprintf(windowTitle, "%d", i);
+         namedWindow(windowTitle, CV_WINDOW_AUTOSIZE);
+         imshow(windowTitle, result);
+ 
+         robotBodies.push_back(result);
       }
    }
 
    return COM;
+}
+
+double calculateAngleFromMoments(cv::Mat src) 
+{
+   cv::Point COM;
+   unsigned int xBar, yBar;
+   unsigned int u11, u20, u02;
+   double theta;
+
+   // initialize central moments
+   u11 = 0; 
+   u20 = 0;
+   u02 = 0;
+
+   // calculate center of mass for object
+   COM = centerOfMass(src);
+   xBar = COM.x;
+   yBar = COM.y;
+
+   // calculate central momemts
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++) {
+         u11 += src.at<unsigned char>(j, i) * (j-yBar) * (i-xBar);
+         u20 += src.at<unsigned char>(j, i) * pow((i-xBar), 2.0);
+         u02 += src.at<unsigned char>(j, i) * pow((j-yBar), 2.0);
+      }
+   }
+   std::cout << "u11: " << u11 << std::endl;
+   std::cout << "u20: " << u20 << std::endl;
+   std::cout << "u02: " << u02 << std::endl;
+   
+   // calculate orientation using the central moments
+   // theta = 0.5 * atan((2 * u11) / (u20 - u02));
+   // // convert to degrees
+   // theta = theta * (180 / 3.141529);
+   // std::cout << "Theta: " << theta << std::endl;
+
+   return theta;
+}
+
+double calculateAngleFromPoints(cv::Mat src, std::vector<cv::Point> COMs, std::vector<cv::Point> corners) 
+{
+   double theta;
+   long long distance;
+   unsigned char found = 0;
+   char windowTitle[100];
+   cv::Mat result = Mat::zeros(src.size(), CV_8UC1);
+
+   // Check corner points and COM distance
+   for (int j = 0; j < COMs.size(); j++) {
+      for (int i = 0; i < corners.size(); i++) {
+         // calculate distance from COM to corner point (city block)
+         distance = abs(COMs[j].x - corners[i].x) + abs(COMs[j].y - corners[i].y);
+         std::cout << i << " Distance: " << distance << std::endl;
+
+         // COM and corner of individual robot will be close together
+         if (distance < 100 ) { // && found < 2) {
+            // draw test line
+            // line(result, COMs[i], corners[i], Scalar(0, 0, 0), 8, 8);
+            // circle(result, Point(236, 79), 3, Scalar(255, 255, 255), 2, 8, 0);
+            // circle(result, Point(211, 247), 3, Scalar(255, 255, 255), 2, 8, 0);
+
+            circle(result, corners[i], 3, Scalar(128, 128, 128), 2, 8, 0);
+            // circle(result, , 3, Scalar(255, 255, 255), 2, 8, 0);
+            line(result, COMs[j], corners[i], Scalar(255, 255, 255), 2, 8, 0);
+
+            sprintf(windowTitle, "orientation %d", i);
+            namedWindow(windowTitle, CV_WINDOW_AUTOSIZE);
+            imshow(windowTitle, result);
+
+            // calculate angle
+            theta = atan(abs(COMs[j].y - corners[i].y) / (abs(COMs[j].x - corners[i].x)));          
+            // convert to degrees
+            theta = theta * (180 / 3.141529);
+            std::cout << "Theta: " << theta << std::endl;
+ 
+            // reinit resulting window
+            result = Mat::zeros(src.size(), CV_8UC1);
+            found++; 
+            break;
+         }
+      }
+   }
+   return theta;
 }
 
 // blob detection algorithm (not synthesizable)
