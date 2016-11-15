@@ -15,16 +15,20 @@ using namespace cv;
 using namespace std;
 
 // Global variables
-Mat src, src_gray, labeledResult;
+Mat src, src_gray, labeledResult, labeledResultSeq;
 std::vector<cv::Mat> robotBodies;
 int thresh = 200;
 int max_thresh = 255;
+int numComponents;
 
 char* source_window = "Source image";
 char* corners_window = "Corners detected";
 
 // Function header
 std::vector<cv::Point> findRobotBody(cv::Mat src, int thresholdStep, int numComponents);
+
+// perform morphological opening (erode, then dilate)
+cv::Mat morphologicalOpening(cv::Mat src);
 
 double calculateAngleFromMoments(cv::Mat src);
 
@@ -44,6 +48,9 @@ cv::Point centerOfMass(cv::Mat src);
 
 // Connected component labeling
 int connectedComponent(cv::Mat src);
+
+// sequential connected component labeling
+int connectedComponentSequential(cv::Mat src);
 
 /** @function main */
 int main( int argc, char** argv )
@@ -91,10 +98,20 @@ int main( int argc, char** argv )
    // double angle = calculateAngleFromMoments(robotBodies[1]);
    double angle = calculateAngleFromPoints(robotBodies[0], COMs, cornerPoints );
 
-   // Draw circle at center of mass
-   // circle(src, Point(xBar, yBar), 6, Scalar(255, 255, 255), 2, 8, 0);
-   // namedWindow( "Center of mass", CV_WINDOW_AUTOSIZE );
-   // imshow( "Center of mass", src );
+   // find robot bodies using sequential cclabel
+   numComponents = connectedComponentSequential(blackFilterResult);
+   // COMs = findRobotBody(labeledResultSeq, 20, numComponents);
+   namedWindow("labeled result seq", CV_WINDOW_AUTOSIZE);
+   imshow("labeled result seq", labeledResultSeq);
+
+   // try morophological opening operation on binary image
+   cv::Mat openingFilter = morphologicalOpening(blackFilterResult);
+   numComponents = connectedComponentSequential(openingFilter);
+   namedWindow("labeled result seq open", CV_WINDOW_AUTOSIZE);
+   imshow("labeled result seq open", labeledResultSeq);
+
+   // find robots' COMs
+   COMs = findRobotBody(labeledResultSeq, 30, 2);
 
    waitKey(0);
    return(0);
@@ -167,42 +184,6 @@ std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold)
    // return corner points found in image
    // std::cout << "Corner Point: " << cornerPoint << std::endl;
    return cornerPoints;
-}
-
-std::vector<Point> gatherNeighbors(cv::Mat src, cv::Point pt, int connectivity)
-{
-   std::vector<Point> neighbors;
-   
-   // 8 neighbor connectivity
-   if (connectivity == 8) {
-      // neighbors.push_back(Point(pt.x+1, pt.y));
-      // neighbors.push_back(Point(pt.x+1, pt.y+1));
-      // neighbors.push_back(Point(pt.x+1, pt.y-1));
-      // neighbors.push_back(Point(pt.x, pt.y+1));
-      // neighbors.push_back(Point(pt.x, pt.y-1));
-      // neighbors.push_back(Point(pt.x-1, pt.y+1));
-      // neighbors.push_back(Point(pt.x-1, pt.y));
-      // neighbors.push_back(Point(pt.x-1, pt.y-1));
-      for (int y = -1; y <= 1; y++) {
-         for (int x = -1; x <= 1; x++) {
-            // Only want neighbors that are part of the object and nonbackground pixels
-            if (src.at<unsigned char>(y,x) != 0) {
-               neighbors.push_back(Point(x, y));
-            } 
-         }
-      }
-   }
-   // 4 neighbor connectivity
-   else {
-      neighbors.push_back(Point(pt.x+1, pt.y));
-      neighbors.push_back(Point(pt.x, pt.y+1));
-      neighbors.push_back(Point(pt.x, pt.y-1));
-      neighbors.push_back(Point(pt.x-1, pt.y));
-   }
-
-   // std::cout << "neighbors: " << neighbors << std::endl;
-   // return vector of neighbor points
-   return neighbors;
 }
 
 void setLabel(cv::Mat src, cv::Mat result, int x, int y, int l) 
@@ -324,10 +305,12 @@ std::vector<cv::Point> findRobotBody(cv::Mat src, int thresholdStep, int numComp
       inRange(src, currentThreshold, currentThreshold + 1, result);
       // bitwise_not(result, result);
       std::cout << "current threshold: " << thresholdStep + (thresholdStep * i) << std::endl;
+      std::cout << "area: " << calculateArea(result) << std::endl;
 
 
       // check to see if area of object is sufficiently large
-      if (calculateArea(result) > 100000) {
+      // FINDME: Might need to change this area requirement based on morphological filtering
+      if (calculateArea(result) > 50000) {
 
          // it's a robot body so calculate center of mass
          // COM = centerOfMass(result);
@@ -414,7 +397,18 @@ double calculateAngleFromPoints(cv::Mat src, std::vector<cv::Point> COMs, std::v
             imshow(windowTitle, result);
 
             // calculate angle
-            theta = atan(abs(COMs[j].y - corners[i].y) / (abs(COMs[j].x - corners[i].x)));          
+            // Angle calculation depends on location of COM either using x or y for oppositive / adjacent
+            if (COMs[j].y > corners[i].y) { 
+               // opp/adjacent will be y/x
+               theta = atan(abs(COMs[j].y - corners[i].y) / (abs(COMs[j].x - corners[i].x)));          
+            std::cout << "Theta: " << theta << std::endl;
+              
+            }
+            else {
+               theta = atan(abs(COMs[j].x - corners[i].x) / abs(COMs[j].y - corners[i].y) );          
+            std::cout << "Theta: " << theta << std::endl;
+            }
+               
             // convert to degrees
             theta = theta * (180 / 3.141529);
             std::cout << "Theta: " << theta << std::endl;
@@ -429,35 +423,84 @@ double calculateAngleFromPoints(cv::Mat src, std::vector<cv::Point> COMs, std::v
    return theta;
 }
 
-// blob detection algorithm (not synthesizable)
-int blob(cv::Mat src)
+// check neighbor label values for sequential cclabel
+int checkNeighborLabels(cv::Mat src, cv::Point pt, int label)
 {
-   int numberOfComponents;
-   cv::Mat result;
-  
-   // initialize empty image
-   result = Mat::zeros(src.size(), CV_8UC1); 
-
-   // simple blob detection
-   cv::SimpleBlobDetector::Params params;
-   // Filter by area
-   params.filterByArea = true;
-   params.minArea = 150;
-   params.filterByCircularity = false;
-
-   // init detector with above params
-   SimpleBlobDetector detector(params);
-   std::vector<KeyPoint> keypoints;
-   detector.detect(src, keypoints);
-
-   // draw detected blobs as red circles
-   cv::Mat srcWithBlobs;
-   drawKeypoints(src, keypoints, srcWithBlobs, Scalar(0,0,255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
-   namedWindow("Blobs", CV_WINDOW_AUTOSIZE);
-   imshow("Blobs", srcWithBlobs);
+   int resultLabel = 0;
    
-   // number of keypoints
-   std::cout << keypoints.size() << std::endl;
+   // cordinates: top left corner is 0,0 in openCV
+   // check if any neighbors are nonbackground and non zero
+   if (src.at<unsigned char>(pt.y+1, pt.x) != 0 && labeledResultSeq.at<unsigned char>(pt.y+1, pt.x) != 0) {
+      // south neighbor
+      resultLabel = labeledResultSeq.at<unsigned char>(pt.y+1, pt.x);
+   }
+   if (src.at<unsigned char>(pt.y-1, pt.x) != 0 && labeledResultSeq.at<unsigned char>(pt.y-1, pt.x) != 0) {
+      // north neighbor
+      resultLabel = labeledResultSeq.at<unsigned char>(pt.y-1, pt.x);
+   }
+   if (src.at<unsigned char>(pt.y, pt.x+1) != 0 && labeledResultSeq.at<unsigned char>(pt.y, pt.x+1) != 0) {
+      // east neighbor
+      resultLabel = labeledResultSeq.at<unsigned char>(pt.y, pt.x+1);
+   }
+   if (src.at<unsigned char>(pt.y, pt.x-1) != 0 && labeledResultSeq.at<unsigned char>(pt.y, pt.x-1) != 0) {
+      // west neighbor
+      resultLabel = labeledResultSeq.at<unsigned char>(pt.y, pt.x-1);
+   }
 
-   return numberOfComponents;
+   // if resultLabel never changed from 0, no previously labeled neighbor
+   if (!resultLabel) {
+      label += 30;
+      numComponents++;
+      return label;
+   }
+   else {
+      return resultLabel;
+   }
 }
+
+int connectedComponentSequential(cv::Mat src)
+{
+   int label = 30;
+   numComponents = 0;
+
+   // zero out labeled result matrix
+   labeledResultSeq = Mat::zeros(src.size(), CV_8UC1); 
+
+   /*** First Pass ***/
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++) {
+         // Check if pixel is not in background
+         if (src.at<unsigned char>(j, i) != 0) {
+            // check neighbors (4 connected)
+            label = checkNeighborLabels(src, Point(i,j), label);
+            labeledResultSeq.at<unsigned char>(j, i) = label;
+            // numComponents++;
+         }
+      }
+   }
+   
+   std::cout << "Num components cclabel seq: " << numComponents << std::endl;
+   return numComponents;
+}
+
+cv::Mat morphologicalOpening(cv::Mat src)
+{
+   cv::Mat resultErode;   
+   cv::Mat resultOpen;
+
+   // generate opening kernel
+   Mat kernel(33, 33, CV_8UC1, Scalar(255, 255, 255));
+   
+   // Apply erosion
+   erode(src, resultErode, kernel);
+   // now dilate to finish opening
+   dilate(resultErode, resultOpen, kernel);
+   // show result
+   namedWindow("open", CV_WINDOW_AUTOSIZE);
+   imshow("open", resultOpen);
+ 
+   return resultOpen;
+}
+
+
+
