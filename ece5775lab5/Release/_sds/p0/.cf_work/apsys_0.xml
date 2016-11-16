@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<cf:model cf:partition="0" cf:prefix="_p0_" cf:name="top" xmlns:cf="http://www.xilinx.com/connections" xd:type="design" xmlns:xd="http://www.xilinx.com/xd">
+  <cf:comp cf:name="zc702_hdmi" xd:componentRef="zc702_hdmi" xd:clockId="2"/>
+</cf:model>
