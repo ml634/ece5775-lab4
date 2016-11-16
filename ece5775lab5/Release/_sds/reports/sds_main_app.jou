@@ -1,0 +1,16 @@
+(c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
+#-----------------------------------------------------------
+# Tool version  : sdscc 2015.2.1 20150925
+# Start time    : Tue Nov 15 13:11:10 EST 2016
+# Command line  : sdscc -Wall -O3 -I../hw -sds-pf /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi -c -fmessage-length=0 -MMD -MP -MFsrc/main_app.d -MTsrc/main_app.d -osrc/main_app.o ../src/main_app.c
+# Log file      : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_main_app.log
+# Journal file  : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_main_app.jou
+# Report file   : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_main_app.rpt
+#-----------------------------------------------------------
+
+# INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang_wrapper -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g    -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include   -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.1/include-fixed  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/include  -I/work/zhang/common/tools/xilinx/SDSoC/2015.2.1/SDK/2015.2/gnu/arm/lin/arm-xilinx-linux-gnueabi/libc/usr/include -I../hw -Wall -fmessage-length=0 -MMD -MP -D __SDSCC__ -emit-llvm -S /home/student/ml634/ece5775lab5/src/main_app.c -o /home/student/ml634/ece5775lab5/Release/_sds/.llvm/src/main_app.s
+# INFO: [SDSoC 0-0] Compiling /home/student/ml634/ece5775lab5/src/main_app.c
+arm-xilinx-linux-gnueabi-gcc -c -I../hw -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__ -MF/home/student/ml634/ece5775lab5/Release/src/main_app.d -MT/home/student/ml634/ece5775lab5/Release/src/main_app.d  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include /home/student/ml634/ece5775lab5/src/main_app.c -o src/main_app.o
+arm-xilinx-linux-gnueabi-objcopy --add-section .xdsdata=/home/student/ml634/ece5775lab5/Release/_sds/swstubs/main_app.o.xml src/main_app.o
+# sdscc completed at Tue Nov 15 13:11:10 EST 2016

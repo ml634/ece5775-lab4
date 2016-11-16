@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xd:data xmlns:xd="http://www.xilinx.com/xd">
+  <xd:source name="img_filters.c" compiler="gcc" objfile="hw/img_filters.o" srcpath="/home/student/ml634/ece5775lab5/hw" flags="-I/home/student/ml634/ece5775lab5/hw  -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__"/>
+</xd:data>
