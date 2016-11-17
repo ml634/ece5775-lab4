@@ -14,15 +14,204 @@
 using namespace cv;
 using namespace std;
 
-// Global variables
-Mat src, src_gray, labeledResult, labeledResultSeq;
-std::vector<cv::Mat> robotBodies;
-int thresh = 200;
-int max_thresh = 255;
-int numComponents;
+// Global Variables
+cv::Mat blueRobot, redRobot, greenGoal;
+unsigned int blueCOM[2], redCOM[2], greenCOM[2];
 
-char* source_window = "Source image";
-char* corners_window = "Corners detected";
+
+// Function headers 
+// FINDME: use header file for this eventually
+cv::Mat thresholdRGB(cv::Mat src, Scalar color);
+void centerOfMass(cv::Mat src, char color);
+
+// Main function
+int main(int argc, char ** argv) 
+{
+   // COM points for objects
+   // unsigned char blueCOM[2], redCOM[2], greenCOM[2];
+
+   // read input image from command line
+   cv::Mat src = imread(argv[1], 1);
+
+   // threshold by color to detect robots and goal
+   redRobot = thresholdRGB(src, Scalar(0, 0, 255));
+   blueRobot = thresholdRGB(src, Scalar(255, 0, 0));
+   
+   // calculate center of mass points for each object
+   centerOfMass(redRobot, 'r');
+   centerOfMass(blueRobot, 'b');
+
+   // draw circles at each COM
+   circle(redRobot, Point(redCOM[0], redCOM[1]), 3, Scalar(80, 80, 80), 2, 8, 0);
+   circle(blueRobot, Point(blueCOM[0], blueCOM[1]), 3, Scalar(80, 80, 80), 2, 8, 0);
+   cv::Point testPoint = Point(blueCOM[0], blueCOM[1]);
+   std::cout << "Point: " << testPoint << std::endl;
+
+   namedWindow("red robot", CV_WINDOW_AUTOSIZE);
+   imshow("red robot", redRobot);
+
+   namedWindow("blue robot", CV_WINDOW_AUTOSIZE);
+   imshow("blue robot", blueRobot);
+
+   waitKey(0);
+   return(0);
+}
+
+// Threshold image based on color
+cv::Mat thresholdRGB(cv::Mat src, Scalar color)
+{
+   cv::Mat thresholdResult; // greyscale, binary result image
+   cv::Vec3b pixelIntensity; // 3 channel RGB pixel value vector
+   unsigned char pixelBlue, pixelRed, pixelGreen;
+   
+   // initialize result image
+   thresholdResult = Mat::zeros(src.size(), CV_8UC1); 
+
+   // iterate through source pixels and threshold based on input color
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++) {
+         pixelIntensity = src.at<cv::Vec3b>(j, i);
+         pixelBlue = pixelIntensity.val[0];
+         pixelGreen = pixelIntensity.val[1];
+         pixelRed = pixelIntensity.val[2];
+
+         if (color == Scalar(0, 0, 255)) {
+            // threshold with red
+            if (pixelRed > 160 && pixelGreen < 70 && pixelBlue < 90) {
+               thresholdResult.at<unsigned char>(j, i) = 255;
+            }
+         }
+         else if (color == Scalar(0, 255, 0)) {
+            // threshold with green
+            if (pixelIntensity.val[1] > 180) { 
+               thresholdResult.at<unsigned char>(j, i) = 255;
+            }
+         }
+         else if (color == Scalar(255, 0, 0)) {
+            // threshold with blue 
+            if (pixelRed < 50 && pixelGreen < 90 && pixelBlue > 135) { 
+               thresholdResult.at<unsigned char>(j, i) = 255;
+            }
+         }
+      }
+   }
+
+   return thresholdResult;
+}
+
+void centerOfMass(cv::Mat src, char color)
+{
+   unsigned int m00, m01, m10; // Moment values
+   unsigned int xBar, yBar; // Center of mass coordinates
+   unsigned int point[2]; // array to hold COM point
+
+   // init values
+   m00 = 0;
+   m01 = 0;
+   m10 = 0;
+   xBar = 0;
+   yBar = 0;
+
+   // iterate through all pixel values
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++) {
+         m00 += src.at<unsigned char>(j, i);
+         m01 += src.at<unsigned char>(j, i) * j;
+         m10 += src.at<unsigned char>(j, i) * i;
+      }
+   }
+   
+   // std::cout << "Area: " << m00 << std::endl;
+   // std::cout << "M10: " << m10 << std::endl;
+   // std::cout << "M01: " << m01 << std::endl;
+
+   xBar = m10 / m00;
+   yBar = m01 / m00;
+  
+   // Save COM to appropriate robot COM array
+   switch(color) {
+      case('b'):
+         std::cout << "blue" << std::endl;
+         blueCOM[0] = xBar;
+         blueCOM[1] = yBar;
+         std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
+         break;
+
+      case('r'):
+         std::cout << "red" << std::endl;
+         redCOM[0] = xBar;
+         redCOM[1] = yBar;
+         std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
+         break;
+
+      case('g'):
+         greenCOM[0] = xBar;
+         greenCOM[1] = yBar;
+         break;
+   }
+
+   // point[0] = xBar;
+   // point[1] = yBar;
+   // std::cout << "Point: " << Point(xBar, yBar) << std::endl;
+
+   // Draw circle at center of mass
+   // circle(src, Point(xBar, yBar), 6, Scalar(255, 255, 255), 2, 8, 0);
+   // namedWindow( "Center of mass", CV_WINDOW_AUTOSIZE );
+   // imshow( "Center of mass", src );
+
+   // return point;
+}
+
+std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold)
+{
+   cv::Mat result;
+   cv::Mat normalizedResult;
+   cv::Mat normalizedScaledResult;
+   std::vector<cv::Point> cornerPoints;
+   
+   // detection parameters
+   int blockSize = 2;
+   int apertureSize = 3;
+   double k = 0.04;
+
+   // Detect corners
+   cornerHarris(src, result, blockSize, apertureSize, k, BORDER_DEFAULT);
+
+   // Normalizing
+   normalize(result, normalizedResult, 0, 255, NORM_MINMAX, CV_32FC1, Mat() );
+   convertScaleAbs( normalizedResult, normalizedScaledResult);
+
+   // Drawing a circle around corners
+   for (int j = 0; j < normalizedResult.rows ; j++ ) {
+       for (int i = 0; i < normalizedResult.cols; i++ ) {
+          if ((int) normalizedResult.at<float>(j,i) > threshold ) {
+             cornerPoints.push_back(Point(i,j));
+             // std::cout << "Corner at " << normalizedResult.at<float>(j,i) << std::endl;
+             circle( normalizedScaledResult, Point( i, j ), 5,  Scalar(0), 2, 8, 0 );
+          }
+       }
+   }
+
+   // show normalized result with circles drawn
+   namedWindow("Harris corner", CV_WINDOW_AUTOSIZE);
+   imshow("Harris corner", normalizedScaledResult);
+
+   // return corner points found in image
+   // std::cout << "Corner Point: " << cornerPoint << std::endl;
+   return cornerPoints;
+}
+
+// FINDME: Deprecated code below
+/*
+// Global variables
+// Mat src, src_gray, labeledResult, labeledResultSeq;
+// std::vector<cv::Mat> robotBodies;
+// int thresh = 200;
+// int max_thresh = 255;
+// int numComponents;
+
+// char* source_window = "Source image";
+// char* corners_window = "Corners detected";
 
 // Function header
 std::vector<cv::Point> findRobotBody(cv::Mat src, int thresholdStep, int numComponents);
@@ -52,7 +241,6 @@ int connectedComponent(cv::Mat src);
 // sequential connected component labeling
 int connectedComponentSequential(cv::Mat src);
 
-/** @function main */
 int main( int argc, char** argv )
 {
    cv::Mat medianFilterResult;
@@ -466,7 +654,7 @@ int connectedComponentSequential(cv::Mat src)
    // zero out labeled result matrix
    labeledResultSeq = Mat::zeros(src.size(), CV_8UC1); 
 
-   /*** First Pass ***/
+   //First Pass 
    for (int j = 0; j < src.rows; j++) {
       for (int i = 0; i < src.cols; i++) {
          // Check if pixel is not in background
@@ -501,5 +689,5 @@ cv::Mat morphologicalOpening(cv::Mat src)
  
    return resultOpen;
 }
-
+*/
 
