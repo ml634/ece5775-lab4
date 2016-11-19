@@ -3,6 +3,17 @@
 // Andrew Palmer (ajp294)
 // 10 November 2016
 
+/*
+ * Image processing pipeline:
+ * 1. Color thresholding for each color
+ * 2. Morphological closing to improve threshold results
+ 
+ * Other operations:
+ * 1. Corner detection using Harris or FAST 
+ * 2. Calculate Centroid for each thresholded color (red robot, blue robot, green goal)
+ * 3. Match corner point to appropriate object
+*/
+
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/opencv.hpp"
@@ -11,47 +22,99 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ARRAY_SIZE 8
+
 using namespace cv;
 using namespace std;
 
 // Global Variables
 cv::Mat blueRobot, redRobot, greenGoal;
 unsigned int blueCOM[2], redCOM[2], greenCOM[2];
+// unsigned int keypoints[10];
+// FINDME: vectors of points not synthesizable
+std::vector<cv::KeyPoint> keypoints;
+unsigned int cornerPoints[ARRAY_SIZE][2];
+cv::Point cornerPointsCV[ARRAY_SIZE];
+unsigned int redRobotCoords[4]; // 2 Points (each point has x and y value)
+unsigned int blueRobotCoords[4]; // 2 Points (each point has x and y value)
+unsigned int greenGoalCoords[4]; // 2 Points (each point has x and y value)
 
 
 // Function headers 
 // FINDME: use header file for this eventually
 cv::Mat thresholdRGB(cv::Mat src, Scalar color);
 void centerOfMass(cv::Mat src, char color);
+cv::Mat morphologicalClosing(cv::Mat src);
+std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold);
+void fastXCornerDetect(cv::Mat src, int threshold);
+double calculateAngleFromMoments(cv::Mat src, int comX, int comY);
+// void matchCornerToCOM(int comX, int comY,  unsigned int * cornerPoints);
+void matchCornerToCOM(int comX, int comY, char color); // int comX, int comY,  unsigned int * cornerPoints);
+
 
 // Main function
 int main(int argc, char ** argv) 
 {
-   // COM points for objects
-   // unsigned char blueCOM[2], redCOM[2], greenCOM[2];
+   // FINDME: test greyscale 
+   cv::Mat src_grey;
 
    // read input image from command line
    cv::Mat src = imread(argv[1], 1);
+
+   cvtColor(src, src_grey, CV_BGR2GRAY );
+
+   // Other operations
+   // 1. Detect corners
+   // fastXCornerDetect(src_grey, 200);
+   FAST(src_grey, keypoints, 120); // 120 as a threshold seems to work for greyscale, unprocessed original 
+   for (size_t i = 0; i < keypoints.size(); i++) {
+      const KeyPoint& kp = keypoints[i];
+      circle(src_grey, kp.pt, 3, Scalar(80, 80, 80), 2, 8, 0);
+      // add keypoint point to array
+      cornerPoints[i][0] = kp.pt.x;
+      cornerPoints[i][1] = kp.pt.y;
+      cornerPointsCV[i] = kp.pt; // Corner points in cv::Point type
+   }
+   namedWindow("corners", CV_WINDOW_AUTOSIZE);
+   imshow("corners", src_grey);
+   
+   // std::cout << "corners: " << keypoints << std::endl;
 
    // threshold by color to detect robots and goal
    redRobot = thresholdRGB(src, Scalar(0, 0, 255));
    blueRobot = thresholdRGB(src, Scalar(255, 0, 0));
    
-   // calculate center of mass points for each object
+   // Morphological closing on robot
+   redRobot = morphologicalClosing(redRobot);
+   blueRobot = morphologicalClosing(blueRobot);
+
+   // 2. Calculate Centroid for each thresholded color (red robot, blue robot, green goal)
    centerOfMass(redRobot, 'r');
    centerOfMass(blueRobot, 'b');
 
    // draw circles at each COM
    circle(redRobot, Point(redCOM[0], redCOM[1]), 3, Scalar(80, 80, 80), 2, 8, 0);
    circle(blueRobot, Point(blueCOM[0], blueCOM[1]), 3, Scalar(80, 80, 80), 2, 8, 0);
-   cv::Point testPoint = Point(blueCOM[0], blueCOM[1]);
-   std::cout << "Point: " << testPoint << std::endl;
+
+   // 3. Match corner point to appropriate object
+   matchCornerToCOM(redCOM[0], redCOM[1], 'r');
+   matchCornerToCOM(blueCOM[0], blueCOM[1], 'b');
 
    namedWindow("red robot", CV_WINDOW_AUTOSIZE);
    imshow("red robot", redRobot);
 
    namedWindow("blue robot", CV_WINDOW_AUTOSIZE);
    imshow("blue robot", blueRobot);
+
+   // namedWindow("red robot morph", CV_WINDOW_AUTOSIZE);
+   // imshow("red robot morph", redRobot);
+
+   // namedWindow("blue robot morph", CV_WINDOW_AUTOSIZE);
+   // imshow("blue robot morph", blueRobot);
+
+   // harris corner
+   // harrisCornerDetect(redRobot, 220);
+   // harrisCornerDetect(blueRobot, 220);
 
    waitKey(0);
    return(0);
@@ -131,17 +194,17 @@ void centerOfMass(cv::Mat src, char color)
    // Save COM to appropriate robot COM array
    switch(color) {
       case('b'):
-         std::cout << "blue" << std::endl;
+         // std::cout << "blue" << std::endl;
          blueCOM[0] = xBar;
          blueCOM[1] = yBar;
-         std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
+         // std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
          break;
 
       case('r'):
-         std::cout << "red" << std::endl;
+         // std::cout << "red" << std::endl;
          redCOM[0] = xBar;
          redCOM[1] = yBar;
-         std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
+         // std::cout << "blue: " << blueCOM[0] << ", " << blueCOM[1] << std::endl;
          break;
 
       case('g'):
@@ -199,6 +262,100 @@ std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold)
    // return corner points found in image
    // std::cout << "Corner Point: " << cornerPoint << std::endl;
    return cornerPoints;
+}
+
+cv::Mat morphologicalClosing(cv::Mat src) 
+{
+   cv::Mat resultDilate, resultClose;
+
+   // generate closing kernel
+   Mat kernel(4, 4, CV_8UC1, Scalar(255, 255, 255));
+
+   // apply dilation
+   dilate(src, resultDilate, kernel);
+
+   // apply erosion
+   erode(resultDilate, resultClose, kernel);
+
+   // return filtered image
+   return resultClose;
+}
+
+void fastXCornerDetect(cv::Mat src, int threshold)
+{
+   cv::Mat src_grey;
+
+   // convert to greyscale
+   cvtColor(src, src_grey, CV_BGR2GRAY );
+
+   // perform FAST corner detect
+   FAST(src_grey, keypoints, threshold, true);
+}
+
+double calculateAngleFromMoments(cv::Mat src, int comX, int comY) 
+{
+   // cv::Point COM;
+   unsigned int xBar, yBar;
+   unsigned int u11, u20, u02;
+   int theta;
+
+   // initialize central moments
+   u11 = 0; 
+   u20 = 0;
+   u02 = 0;
+
+   // calculate center of mass for object
+   // COM = centerOfMass(src);
+   xBar = comX;
+   yBar = comY;
+
+   // calculate central momemts
+   for (int j = 0; j < src.rows; j++) {
+      for (int i = 0; i < src.cols; i++) {
+         u11 += (src.at<unsigned char>(j, i) / 255) * (j-yBar) * (i-xBar); // normalizing with / 255
+         u20 += (src.at<unsigned char>(j, i) / 255) * (i-xBar) * (i-xBar); 
+         u02 += (src.at<unsigned char>(j, i) / 255) * (j-yBar) * (j-yBar);
+      }
+   }
+   std::cout << "u11: " << u11 << std::endl;
+   std::cout << "u20: " << u20 << std::endl;
+   std::cout << "u02: " << u02 << std::endl;
+   
+   // calculate orientation using the central moments
+   theta = 0.5 * atan((2 * u11) / (u20 - u02));
+   // convert to degrees
+   theta = theta * (180 / 3.141529);
+   std::cout << "Theta: " << theta << std::endl;
+
+   return theta;
+}
+
+void matchCornerToCOM(int comX, int comY, char color) 
+{
+   int distance;
+   bool cornerFound = false;
+
+   // Iterate through array of corner points
+   for (int i = 0; i < ARRAY_SIZE; i++) {
+      distance = abs(comY - cornerPointsCV[i].y) + abs(comX - cornerPointsCV[i].x);
+
+      // if distance is less than threshold then it's a COM/corner pair for a single robot
+      std::cout << "distance : " << distance << std::endl;
+      if (distance < 100 && !cornerFound) {
+         if (color == 'r') {
+            std::cout << "red color corners: " << cornerPointsCV[i].x << ", " << cornerPointsCV[i].y << std::endl;
+            redRobotCoords[2] = cornerPointsCV[i].x;
+            redRobotCoords[3] = cornerPointsCV[i].y;  
+            cornerFound = true;
+         }
+         else if (color == 'b' && !cornerFound) {
+            std::cout << "blue color corners: " << cornerPointsCV[i].x << ", " << cornerPointsCV[i].y << std::endl;
+            blueRobotCoords[2] = cornerPointsCV[i].x;
+            blueRobotCoords[3] = cornerPointsCV[i].y;  
+            cornerFound = true;
+         }
+      }
+   }
 }
 
 // FINDME: Deprecated code below
