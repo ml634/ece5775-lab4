@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ARRAY_SIZE 8
+#define ARRAY_SIZE 32
 
 using namespace cv;
 using namespace std;
@@ -144,7 +144,7 @@ cv::Mat thresholdRGB(cv::Mat src, Scalar color)
 
          if (color == Scalar(0, 0, 255)) {
             // threshold with red
-            if (pixelRed > 160 && pixelGreen < 70 && pixelBlue < 90) {
+            if (pixelRed > 160 && pixelGreen < 110/*70*/ && pixelBlue < 135/*90*/) {
                thresholdResult.at<unsigned char>(j, i) = 255;
             }
          }
@@ -156,7 +156,7 @@ cv::Mat thresholdRGB(cv::Mat src, Scalar color)
          }
          else if (color == Scalar(255, 0, 0)) {
             // threshold with blue 
-            if (pixelRed < 50 && pixelGreen < 90 && pixelBlue > 135) { 
+            if (pixelRed < 70 && pixelGreen < 100 && pixelBlue > 95/*135*/) { 
                thresholdResult.at<unsigned char>(j, i) = 255;
             }
          }
@@ -279,7 +279,7 @@ cv::Mat morphologicalClosing(cv::Mat src)
    cv::Mat resultDilate, resultClose;
 
    // generate closing kernel
-   Mat kernel(4, 4, CV_8UC1, Scalar(255, 255, 255));
+   Mat kernel(3, 3, CV_8UC1, Scalar(255, 255, 255));
 
    // apply dilation
    dilate(src, resultDilate, kernel);
@@ -350,8 +350,8 @@ void matchCornerToCOM(int comX, int comY, char color)
       distance = abs(comY - cornerPointsCV[i].y) + abs(comX - cornerPointsCV[i].x);
 
       // if distance is less than threshold then it's a COM/corner pair for a single robot
-      // std::cout << "distance : " << distance << std::endl;
-      if (distance < 100 && !cornerFound) {
+      std::cout << "distance : " << distance << std::endl;
+      if (distance < 50 && !cornerFound) {
          if (color == 'r') {
             // std::cout << "red color corners: " << cornerPointsCV[i].x << ", " << cornerPointsCV[i].y << std::endl;
             redRobotCoords[2] = cornerPointsCV[i].x;
