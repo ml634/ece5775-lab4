@@ -53,18 +53,21 @@ unsigned int redCorners[8];
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
 {
     
-  	int i =0;
+   int i =0;
 
-    rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
-    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
+   // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
+   rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
+   rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
 
-    //centerOfMass('b', yc_data_blue, blueCOM[0], blueCOM[1]);
+   centerOfMass(yc_data_blue, blueCOM[0], blueCOM[1]);
+   centerOfMass(yc_data_red, redCOM[0], redCOM[1]);
 
-	for (i = 0; i < NUMROWS*NUMCOLS; i++) {
-		yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
-	}
- 
-    ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
+   // OR separate thresholded images into one image for output to screen
+   for (i = 0; i < NUMROWS*NUMCOLS; i++) {
+      yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
+   }
+    
+   ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
 
 }
 

@@ -170,7 +170,6 @@ void centerOfMass(cv::Mat src, char color)
 {
    unsigned int m00, m01, m10; // Moment values
    unsigned int xBar, yBar; // Center of mass coordinates
-   unsigned int point[2]; // array to hold COM point
 
    // init values
    m00 = 0;
@@ -223,8 +222,6 @@ void centerOfMass(cv::Mat src, char color)
          break;
    }
 
-   // point[0] = xBar;
-   // point[1] = yBar;
    // std::cout << "Point: " << Point(xBar, yBar) << std::endl;
 
    // Draw circle at center of mass
@@ -232,7 +229,6 @@ void centerOfMass(cv::Mat src, char color)
    // namedWindow( "Center of mass", CV_WINDOW_AUTOSIZE );
    // imshow( "Center of mass", src );
 
-   // return point;
 }
 
 std::vector<cv::Point> harrisCornerDetect(cv::Mat src, int threshold)
