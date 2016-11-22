@@ -350,7 +350,7 @@ void matchCornerToCOM(int comX, int comY, char color)
       distance = abs(comY - cornerPointsCV[i].y) + abs(comX - cornerPointsCV[i].x);
 
       // if distance is less than threshold then it's a COM/corner pair for a single robot
-      std::cout << "distance : " << distance << std::endl;
+      // std::cout << "distance : " << distance << std::endl;
       if (distance < 50 && !cornerFound) {
          if (color == 'r') {
             // std::cout << "red color corners: " << cornerPointsCV[i].x << ", " << cornerPointsCV[i].y << std::endl;
