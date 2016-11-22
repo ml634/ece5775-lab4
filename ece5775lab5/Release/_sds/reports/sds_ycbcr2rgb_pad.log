@@ -1,7 +1,7 @@
 (c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
 #-----------------------------------------------------------
 # Tool version  : sdscc 2015.2.1 20150925
-# Start time    : Tue Nov 15 13:11:17 EST 2016
+# Start time    : Mon Nov 21 23:00:43 EST 2016
 # Command line  : sdscc -c -ohw/ycbcr2rgb_pad.o ../hw/ycbcr2rgb_pad.c
 # Log file      : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_ycbcr2rgb_pad.log
 # Journal file  : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_ycbcr2rgb_pad.jou
@@ -14,4 +14,4 @@ INFO: [SDSoC 0-0] Compiling /home/student/ml634/ece5775lab5/hw/ycbcr2rgb_pad.c
 arm-xilinx-linux-gnueabi-gcc -c  -D __SDSCC__    -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include /home/student/ml634/ece5775lab5/hw/ycbcr2rgb_pad.c -o hw/ycbcr2rgb_pad.o
 arm-xilinx-linux-gnueabi-objcopy --add-section .xdsdata=/home/student/ml634/ece5775lab5/Release/_sds/swstubs/ycbcr2rgb_pad.o.xml hw/ycbcr2rgb_pad.o
 sdscc log file saved as /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_ycbcr2rgb_pad.log
-sdscc completed at Tue Nov 15 13:11:18 EST 2016
+sdscc completed at Mon Nov 21 23:00:44 EST 2016

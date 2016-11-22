@@ -1,8 +1,8 @@
 (c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
 #-----------------------------------------------------------
 # Tool version  : sds++ 2015.2.1 20150925
-# Start time    : Tue Nov 15 13:11:18 EST 2016
-# Command line  : sds++ -omotion_demo.elf ./src/main_app.o ./hw/sobel_filter_pass.o ./hw/sobel_filter.o ./hw/diff_image.o ./hw/combo_image.o ./hw/median_char_filter_pass.o ./hw/rgb_pad2ycbcr.o ./hw/ycbcr2rgb_pad.o ./hw/img_filters.o -sds-pf /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi -sds-hw sobel_filter sobel_filter.cpp -clkid 1 -sds-end -sds-hw sobel_filter_pass sobel_filter_pass.cpp -clkid 1 -sds-end -sds-hw diff_image diff_image.c -clkid 1 -sds-end -sds-hw combo_image combo_image.c -clkid 1 -sds-end -sds-hw median_char_filter_pass median_char_filter_pass.cpp -clkid 1 -sds-end -sds-hw rgb_pad2ycbcr rgb_pad2ycbcr.c -clkid 1 -sds-end -sds-hw ycbcr2rgb_pad ycbcr2rgb_pad.c -clkid 1 -sds-end -dmclkid 1 -lpthread -lzc702hdmi
+# Start time    : Mon Nov 21 23:00:44 EST 2016
+# Command line  : sds++ -omotion_demo.elf ./src/main_app.o ./hw/sobel_filter_pass.o ./hw/sobel_filter.o ./hw/diff_image.o ./hw/combo_image.o ./hw/median_char_filter_pass.o ./hw/rgb_pad2ycbcr.o ./hw/ycbcr2rgb_pad.o ./hw/ycbcrThresh.o ./hw/img_filters.o -sds-pf /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/bin/../samples/platforms/zc702_hdmi -sds-hw sobel_filter sobel_filter.cpp -clkid 1 -sds-end -sds-hw sobel_filter_pass sobel_filter_pass.cpp -clkid 1 -sds-end -sds-hw diff_image diff_image.c -clkid 1 -sds-end -sds-hw combo_image combo_image.c -clkid 1 -sds-end -sds-hw median_char_filter_pass median_char_filter_pass.cpp -clkid 1 -sds-end -sds-hw rgb_pad2ycbcr rgb_pad2ycbcr.c -clkid 1 -sds-end -sds-hw ycbcr2rgb_pad ycbcr2rgb_pad.c -clkid 1 -sds-end -sds-hw ycbcrThresh ycbcrThresh.c -clkid 1 -sds-end -dmclkid 1 -lpthread -lzc702hdmi
 # Log file      : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds.log
 # Journal file  : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds.jou
 # Report file   : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds.rpt

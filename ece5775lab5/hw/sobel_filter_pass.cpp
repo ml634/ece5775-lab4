@@ -34,6 +34,8 @@
  */
 
 #include <stdio.h>
+#include <math.h>
+
 #include "frame_size.h"
 #include "image_cores.h"
 #include "image_demo.h"
@@ -59,6 +61,9 @@ unsigned char sobel2_operator(WINDOW *window)
   const char y_op[3][3] = { {1,2,1},
 			    {0,0,0},
 			    {-1,-2,-1}};
+
+  //hls::LineBuffer<4, 1920, unsigned char> lineBuffer;
+
 
   //Compute approximation of the gradients in the X-Y direction
   for(i=0; i < 3; i++){

@@ -34,27 +34,38 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
-unsigned short yc_data_prev[NUMROWS*NUMCOLS], yc_data_in[NUMROWS*NUMCOLS], 
-		yc_out_tmp1[NUMROWS*NUMCOLS], yc_out_tmp2[NUMROWS*NUMCOLS], 
-		yc_out_tmp3[NUMROWS*NUMCOLS], yc_out_tmp4[NUMROWS*NUMCOLS];
-unsigned char sobel_curr[NUMROWS*NUMCOLS], sobel_prev[NUMROWS*NUMCOLS], 
-              motion_image_tmp1[NUMROWS*NUMCOLS], motion_image_tmp2[NUMROWS*NUMCOLS];
-void img_process(unsigned int *rgb_data_prev, unsigned int *rgb_data_in, unsigned int *rgb_data_out, int param0, int param1, int param2)
+
+unsigned short yc_data_blue[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_red[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_green[NUMROWS*NUMCOLS];
+
+unsigned short yc_data_combined[NUMROWS*NUMCOLS];
+
+// local arrays to hold blue and red robot center of mass points
+unsigned int blueCOM[2];
+unsigned int redCOM[2];
+
+// local arrays for red and blue robot corner points
+unsigned int blueCorners[8];
+unsigned int redCorners[8];
+
+// add more parameters here to pass center of masses, points, etc to main
+void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
 {
-    unsigned char pass_through;
-    unsigned char threshold = 100;
-    pass_through = 0; // always force combo
-    rgb_pad2ycbcr(rgb_data_prev, yc_data_prev);
-    rgb_pad2ycbcr(rgb_data_in, yc_data_in);
+    
+  	int i =0;
 
-    sobel_filter_pass(yc_data_in, sobel_curr, yc_out_tmp1);
-    sobel_filter(yc_data_prev, sobel_prev);
+    rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
+    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
 
-    diff_image(sobel_curr, sobel_prev,yc_out_tmp1, yc_out_tmp2, motion_image_tmp1);
+    //centerOfMass('b', yc_data_blue, blueCOM[0], blueCOM[1]);
 
-    median_char_filter_pass(threshold, motion_image_tmp1, yc_out_tmp2, motion_image_tmp2, yc_out_tmp3);
-    combo_image(pass_through, motion_image_tmp2, yc_out_tmp3, yc_out_tmp4); 
-    ycbcr2rgb_pad(yc_out_tmp4, rgb_data_out);
+	for (i = 0; i < NUMROWS*NUMCOLS; i++) {
+		yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
+	}
+ 
+    ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
+
 }
 
 
