@@ -33,6 +33,7 @@ ELFSIZE += \
 motion_demo.elf.size \
 
 
+
 # All Target
 all: motion_demo.elf secondary-outputs
 
@@ -73,6 +74,11 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 ./hw/ycbcr2rgb_pad.o: ../hw/ycbcr2rgb_pad.c
 	sdscc -c -o"$@" "$<" 
 	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
+
+./hw/ycbcrThresh.o: ../hw/ycbcrThresh.c
+	sdscc -c -o"$@" "$<" 
+	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
+
 
 motion_demo.elf.size: motion_demo.elf
 	@echo 'Invoking: ARM Linux Print Size'

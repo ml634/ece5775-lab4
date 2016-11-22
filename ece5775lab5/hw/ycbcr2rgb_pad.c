@@ -25,6 +25,17 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
       unsigned short tmp_uv;
       
       input_data = yc_in[row*NUMCOLS+col];
+
+r = input_data;
+g = input_data;
+b = input_data;
+
+pixval = 0xff;
+pixval = (pixval << 8) | r;
+pixval = (pixval << 8) | g;
+pixval = (pixval << 8) | b;
+
+/*
       y = input_data >> 8 ;
       tmp_uv = input_data  & 0x00ff;
       uv = (unsigned char ) tmp_uv;
@@ -47,6 +58,8 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
       pixval = (pixval << 8) | r;
       pixval = (pixval << 8) | g;
       pixval = (pixval << 8) | b;
+*/
+
       rgb_out[row*NUMPADCOLS+col] = pixval;
     }
     for (col = NUMCOLS; col < NUMPADCOLS; col++) {

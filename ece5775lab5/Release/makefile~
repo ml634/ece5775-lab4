@@ -33,6 +33,7 @@ ELFSIZE += \
 motion_demo.elf.size \
 
 
+
 # All Target
 all: motion_demo.elf secondary-outputs
 

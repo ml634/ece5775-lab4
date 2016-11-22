@@ -1,7 +1,7 @@
 (c) Copyright 2012-2015 Xilinx, Inc. All Rights Reserved.
 #-----------------------------------------------------------
 # Tool version  : sds++ 2015.2.1 20150925
-# Start time    : Tue Nov 15 13:11:10 EST 2016
+# Start time    : Mon Nov 21 23:00:36 EST 2016
 # Command line  : sds++ -c -ohw/sobel_filter_pass.o ../hw/sobel_filter_pass.cpp
 # Log file      : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_sobel_filter_pass.log
 # Journal file  : /home/student/ml634/ece5775lab5/Release/_sds/reports/sds_sobel_filter_pass.jou
@@ -13,4 +13,4 @@ clang_wrapper -target arm-xilinx-linux-gnueabi -mcpu=cortex-a9 -mfpu=vfp -O0 -g 
 # INFO: [SDSoC 0-0] Compiling /home/student/ml634/ece5775lab5/hw/sobel_filter_pass.cpp
 arm-xilinx-linux-gnueabi-g++ -c  -D __SDSCC__    -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/arm-xilinx-linux-gnueabi/include  -I /work/zhang/common/tools/xilinx/SDSoC/2015.2.1/Vivado_HLS/2015.2/include /home/student/ml634/ece5775lab5/hw/sobel_filter_pass.cpp -o hw/sobel_filter_pass.o
 arm-xilinx-linux-gnueabi-objcopy --add-section .xdsdata=/home/student/ml634/ece5775lab5/Release/_sds/swstubs/sobel_filter_pass.o.xml hw/sobel_filter_pass.o
-# sds++ completed at Tue Nov 15 13:11:12 EST 2016
+# sds++ completed at Mon Nov 21 23:00:38 EST 2016

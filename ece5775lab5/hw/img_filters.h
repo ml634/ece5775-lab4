@@ -72,7 +72,7 @@
 extern "C" {
 #endif
 /* Sobel Modules declarations */
-void img_process(unsigned int *rgb_prev_strm, unsigned int *rgb_in_strm, unsigned int *rgb_out_strm, int param0, int param1, int param2);
+void img_process( unsigned int *rgb_in_strm, unsigned int *rgb_out_strm);
 
 #ifdef __cplusplus
 };
