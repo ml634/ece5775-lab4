@@ -34,7 +34,7 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    for(row = 0; row < NUMROWS; row++){
       for(col = 0; col < NUMCOLS; col++){
          #pragma AP PIPELINE II = 1
-         pixel = yc_data_in[row*NUMCOLS + col];
+         pixel = yc_data_in[row*NUMCOLS + col] / 255;
          m00 += pixel;
          m10 += pixel * col;
          m01 += pixel * row;
