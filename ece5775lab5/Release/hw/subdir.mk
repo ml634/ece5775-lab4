@@ -31,7 +31,6 @@ SDSFLAGS += -sds-pf $(PLATFORM) \
 	-sds-hw median_char_filter_pass median_char_filter_pass.cpp -clkid 1 -sds-end \
 	-sds-hw rgb_pad2ycbcr rgb_pad2ycbcr.c -clkid 1 -sds-end \
 	-sds-hw ycbcr2rgb_pad ycbcr2rgb_pad.c -clkid 1 -sds-end \
-    -sds-hw ycbcrThresh ycbcrThresh.c -clkid 1 -sds-end \
 	-dmclkid 1
 
 hw/%.o: ../hw/%.c
