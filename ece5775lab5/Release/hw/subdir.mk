@@ -8,7 +8,6 @@ C_SRCS += ../hw/sobel_filter_pass.cpp \
  ../hw/median_char_filter_pass.cpp \
  ../hw/rgb_pad2ycbcr.c \
  ../hw/ycbcr2rgb_pad.c \
- ../hw/ycbcrThresh.c \
  ../hw/img_filters.c
 
 OBJS += ./hw/sobel_filter_pass.o \
@@ -18,7 +17,6 @@ OBJS += ./hw/sobel_filter_pass.o \
  ./hw/median_char_filter_pass.o \
  ./hw/rgb_pad2ycbcr.o \
  ./hw/ycbcr2rgb_pad.o \
- ./hw/ycbcrThresh.o \
  ./hw/img_filters.o
 
 C_DEPS += ./hw/img_filters.d
