@@ -44,6 +44,7 @@ unsigned short yc_data_blue_out[NUMROWS*NUMCOLS];
 unsigned short yc_data_red_out[NUMROWS*NUMCOLS]; 
 
 unsigned short yc_data_combined[NUMROWS*NUMCOLS];
+unsigned short yc_data_combined_filter[NUMROWS*NUMCOLS];
 
 // local arrays to hold blue and red robot center of mass points
 unsigned int blueCOM[2];
@@ -71,8 +72,10 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
       // yc_data_combined[i] = yc_data_red_out[i] | yc_data_blue_out[i];
       yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
    }
-    
-   ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
+   
+   median_char_filter_pass(yc_data_combined,yc_data_combined_filter );
+ 
+   ycbcr2rgb_pad(yc_data_combined_filter,rgb_data_out);
 
 }
 
