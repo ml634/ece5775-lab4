@@ -39,6 +39,10 @@ unsigned short yc_data_blue[NUMROWS*NUMCOLS];
 unsigned short yc_data_red[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_green[NUMROWS*NUMCOLS];
 
+
+unsigned short yc_data_blue_out[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_red_out[NUMROWS*NUMCOLS]; 
+
 unsigned short yc_data_combined[NUMROWS*NUMCOLS];
 
 // local arrays to hold blue and red robot center of mass points
@@ -59,11 +63,12 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
    rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
 
-   centerOfMass(yc_data_blue, blueCOM[0], blueCOM[1]);
-   centerOfMass(yc_data_red, redCOM[0], redCOM[1]);
+   centerOfMass(yc_data_blue, yc_data_blue_out, blueCOM[0], blueCOM[1]);
+   centerOfMass(yc_data_red, yc_data_red_out, redCOM[0], redCOM[1]);
 
    // OR separate thresholded images into one image for output to screen
    for (i = 0; i < NUMROWS*NUMCOLS; i++) {
+      // yc_data_combined[i] = yc_data_red_out[i] | yc_data_blue_out[i];
       yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
    }
     

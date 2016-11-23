@@ -8,7 +8,8 @@ C_SRCS += ../hw/sobel_filter_pass.cpp \
  ../hw/median_char_filter_pass.cpp \
  ../hw/rgb_pad2ycbcr.c \
  ../hw/ycbcr2rgb_pad.c \
- ../hw/img_filters.c
+ ../hw/img_filters.c \
+ ../hw/centerOfMass.c
 
 OBJS += ./hw/sobel_filter_pass.o \
  ./hw/sobel_filter.o \
@@ -17,6 +18,7 @@ OBJS += ./hw/sobel_filter_pass.o \
  ./hw/median_char_filter_pass.o \
  ./hw/rgb_pad2ycbcr.o \
  ./hw/ycbcr2rgb_pad.o \
+ ./hw/centerOfMass.o \
  ./hw/img_filters.o
 
 C_DEPS += ./hw/img_filters.d
@@ -31,6 +33,7 @@ SDSFLAGS += -sds-pf $(PLATFORM) \
 	-sds-hw median_char_filter_pass median_char_filter_pass.cpp -clkid 1 -sds-end \
 	-sds-hw rgb_pad2ycbcr rgb_pad2ycbcr.c -clkid 1 -sds-end \
 	-sds-hw ycbcr2rgb_pad ycbcr2rgb_pad.c -clkid 1 -sds-end \
+	-sds-hw centerOfMass centerOfMass.c -clkid 1 -sds-end \
     -sds-hw ycbcrThresh ycbcrThresh.c -clkid 1 -sds-end \
 	-dmclkid 1
 
