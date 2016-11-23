@@ -75,10 +75,6 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 	sdscc -c -o"$@" "$<" 
 	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
 
-./hw/ycbcrThresh.o: ../hw/ycbcrThresh.c
-	sdscc -c -o"$@" "$<" 
-	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
-
 
 motion_demo.elf.size: motion_demo.elf
 	@echo 'Invoking: ARM Linux Print Size'
