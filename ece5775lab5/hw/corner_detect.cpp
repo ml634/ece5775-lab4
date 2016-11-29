@@ -6,7 +6,7 @@
 
 //Main function for Corner Detection
 //This function includes corner detection of extreme points
-void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS], char color)
+void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS], unsigned char color)
 {
 #pragma AP INTERFACE ap_fifo port=median_out
 #pragma AP INTERFACE ap_fifo port=corner_data_out
