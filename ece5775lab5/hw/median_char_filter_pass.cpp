@@ -33,114 +33,112 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
+
+
+
 #include "image_demo.h"
 
-#define MF_SIZE 5
-#define MF_SIZE_MINUS1 4
-#define MF_SIZE_MINUS2 3
+#define MF_SIZE 9
+#define MF_SIZE_MINUS1 8
+#define MF_SIZE_MINUS2 7
 // MF_MID is index of mid that is 0 based
-#define MF_MID 2
-#define MF_MID_MINUS1 1
-#define X_MF_OFFSET 5
+#define MF_MID 5
+#define MF_MID_MINUS1 4
 
-typedef ap_window<unsigned char,MF_SIZE,MF_SIZE> X_MEDIAN_WINDOW;
-typedef ap_linebuffer<unsigned short,MF_SIZE_MINUS1, NUMCOLS> X_MEDIAN_YUV_BUFFER;
-typedef ap_linebuffer<unsigned char, MF_SIZE, NUMCOLS> X_MEDIAN_Y_BUFFER;
+typedef ap_window<unsigned char,MF_SIZE,MF_SIZE> MF_WINDOW;
+typedef ap_linebuffer<unsigned short,MF_SIZE_MINUS1, NUMCOLS> MEDIAN_LINE_BUFFER;
 
-unsigned char median_operator2(X_MEDIAN_WINDOW window)
-{
-  int i;
-  int j;
-  unsigned char mid = 0;
-  unsigned short border = 0;
-
-  unsigned int approx_median = 0;
-  for(i=MF_SIZE_MINUS1; i >= 0; i--){
-    for(j=MF_SIZE_MINUS1; j >= 0; j--){
-	unsigned char tmp = window.getval(i,j);
-	approx_median += tmp;
-		if(i==MF_MID && j==MF_MID) {
-			mid = tmp;
-		}
-		else if(i==0 || i==(MF_SIZE_MINUS1) || j==0 || j==(MF_SIZE_MINUS1)) {
-			border += tmp;
-		}
-    }
-  }
-
-  approx_median = approx_median >> 5;
-	unsigned char ret = (mid != 0) ? ((border > 509) ? (unsigned char) approx_median : 0) : 0;
-	return ret;
-
-}
+ap_uint<1> lineBuff0;
+ap_uint<1> lineBuff1;
+ap_uint<1> lineBuff2;
+ap_uint<1> lineBuff3;  
+ap_uint<1> lineBuff4;
+ap_uint<1> lineBuff5;
+ap_uint<1> lineBuff6;
+ap_uint<1> lineBuff7;  
 
 
 ////Median Filter with a passthrough of the current color pixel
-void median_char_filter_pass(char threshold, unsigned char input_edge[NUMROWS*NUMCOLS], unsigned short input_pix[NUMROWS*NUMCOLS],unsigned char median_pix[NUMROWS*NUMCOLS], unsigned short original_pix[NUMROWS*NUMCOLS])
+void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned short median_pix[NUMROWS*NUMCOLS])
 {
-  int row;
-  int col;
+	#pragma AP INTERFACE ap_fifo port=input_pix
+	#pragma AP INTERFACE ap_fifo port=median_pix
 
-  X_MEDIAN_Y_BUFFER buff_A;
-  X_MEDIAN_YUV_BUFFER buff_BO;
-  X_MEDIAN_WINDOW buff_C;
-  unsigned char shiftA0, shiftA1, shiftA2;
-	for(row = 0; row < NUMROWS+MF_MID; row++){
-		for(col = 0; col < NUMCOLS+MF_MID; col++){
-			#pragma AP PIPELINE II = 1
-      // Temp values are used to reduce the number of memory reads
-   		   	unsigned char temp[5];
-   		   	unsigned char tempx;
-      
-      //Line Buffer fill
-				buff_A.shift_up(col);
-				buff_BO.shift_up(col);
-				temp[0] = buff_A.getval(1,col);
-				temp[1] = buff_A.getval(2,col);
-				temp[2] = buff_A.getval(3,col);
-				temp[3] = buff_A.getval(4,col);
-                                shiftA2 = shiftA1;
-                                shiftA1 = shiftA0;
-                                shiftA0 = temp[1];
-      //There is an offset to accomodate the active pixel region
-      //There are only NUMCOLS and NUMROWS valid pixels in the image
-      		if((col < NUMCOLS) & (row < NUMROWS)){
-				unsigned char new_edge;
-				unsigned short new_pix;
-				new_pix = input_pix[row*NUMCOLS+col];
-				new_edge = input_edge[row*NUMCOLS+col];
-				buff_BO.insert_bottom(new_pix,col);
-				buff_A.insert_bottom(new_edge,col);
-				tempx = new_edge;
-      		}
+	MEDIAN_LINE_BUFFER lineBuffer;
+	MF_WINDOW window;
 
-      //Shift the processing window to make room for the new column
-      		buff_C.shift_right();
 
-      		if(col < NUMCOLS){
-				buff_C.insert(temp[3],MF_SIZE_MINUS1,MF_SIZE_MINUS1);
-				buff_C.insert(temp[2],3,MF_SIZE_MINUS1);
-				buff_C.insert(temp[1],2,MF_SIZE_MINUS1);
-				buff_C.insert(temp[0],1,MF_SIZE_MINUS1);
-				buff_C.insert(tempx,0,MF_SIZE_MINUS1);
-      		}
-      		unsigned char edge;
+	int row, col, windowRow, windowCol;
+	unsigned short pixel_in;
 
-			edge = median_operator2(buff_C);
+	//range of NUMROWS + half of window to filter entire frame
+	for (row = 0 ; row < NUMROWS + MF_MID; row ++) {
+		for (col = 0; col < NUMCOLS + MF_MID; col ++) {
 
-			if(row > MF_MID_MINUS1 && col > MF_MID_MINUS1) {
-   	   			if(row > MF_SIZE_MINUS2 && col > MF_SIZE_MINUS2 && row < NUMROWS && col < NUMCOLS){
-					median_pix[(row-MF_MID)*NUMCOLS+(col-MF_MID)]   = (threshold==0) ? shiftA2 : ((edge < threshold) ? 0 : 255);
-					original_pix[(row-MF_MID)*NUMCOLS+(col-MF_MID)] = buff_BO.getval(MF_MID,col-MF_MID);
-				} else { // top and left sides before calculations are done, and also bot and right sides
-					median_pix[(row-MF_MID)*NUMCOLS+(col-MF_MID)]    = 0;
-					original_pix[(row-MF_MID)*NUMCOLS+(col-MF_MID)]  = buff_BO.getval(MF_MID,col-MF_MID);
-				}
+	#pragma AP PIPELINE II = 1
+			//read pixel value only within frame 			
+			if(row < NUMROWS && col < NUMCOLS)  { pixel_in = input_pix[row*NUMCOLS + col];} 			
+			
+			//change [0,255] to [0,1] for easy counting			
+			if (pixel_in == 255) {pixel_in = 1;}
+			else 				 {pixel_in = 0;}
+
+//update lineBuffer
+			if ( col < NUMCOLS) {
+				//store bottom 4 values to use in window
+				lineBuff0 = lineBuffer.getval(0, col);
+				lineBuff1 = lineBuffer.getval(1, col);
+				lineBuff2 = lineBuffer.getval(2, col);
+				lineBuff3 = lineBuffer.getval(3, col);
+                lineBuff4 = lineBuffer.getval(4, col);
+				lineBuff5 = lineBuffer.getval(5, col);
+				lineBuff6 = lineBuffer.getval(6, col);
+				lineBuff7 = lineBuffer.getval(7, col);
+				//update linebuffer by shifting 1 column by 1 up (0 being bottom of buffer) 
+				lineBuffer.shift_up(col);
+
 			}
+
+			//insert new pixel into bottom (0th row) linebuffer
+			if ( row < NUMROWS && col < NUMCOLS ) { lineBuffer.insert_bottom( pixel_in ,col ); }
+
+//update window
+			//shift window left and fill new value into 0th col 
+			window.shift_left();
+
+			if ( col < NUMCOLS ) {       
+				window.insert( lineBuff0, 1, 0);
+				window.insert( lineBuff1, 2, 0);
+				window.insert( lineBuff2, 3, 0);
+				window.insert( lineBuff3, 4, 0);
+                window.insert( lineBuff4, 5, 0);
+				window.insert( lineBuff5, 6, 0);
+				window.insert( lineBuff6, 7, 0);
+				window.insert( lineBuff7, 8, 0);
+				window.insert( pixel_in, 0, 0);
+			}
+//count window and assign value out
+	
+			unsigned int countOnes = 0;
+			
+			for (windowRow = 0; windowRow < MF_SIZE; windowRow ++) {
+				for (windowCol = 0; windowCol < MF_SIZE; windowCol ++) {
+					countOnes += window.getval(windowRow,windowCol);
+
+				}
+		
+			}
+
+			if ( row < NUMROWS && col < NUMCOLS ) {  median_pix[row*NUMCOLS + col] = (countOnes > 50) ? 255:0; }
+
 		}
+
 	}
+
+
+
+	
+
 }
-
-
 
 

@@ -42,12 +42,15 @@ unsigned short yc_data_green[NUMROWS*NUMCOLS];
 
 unsigned short yc_data_blue_out[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_red_out[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_green_out[NUMROWS*NUMCOLS]; 
 
 unsigned short yc_data_combined[NUMROWS*NUMCOLS];
+unsigned short yc_data_combined_filter[NUMROWS*NUMCOLS];
 
 // local arrays to hold blue and red robot center of mass points
 unsigned int blueCOM[2];
 unsigned int redCOM[2];
+unsigned int greenCOM[2];
 
 // local arrays for red and blue robot corner points
 unsigned int blueCorners[8];
@@ -62,16 +65,20 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
    rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
+   rgb_pad2ycbcr(rgb_data_in, yc_data_green, 'g');
 
    centerOfMass(yc_data_blue, yc_data_blue_out, blueCOM[0], blueCOM[1]);
    centerOfMass(yc_data_red, yc_data_red_out, redCOM[0], redCOM[1]);
+   centerOfMass(yc_data_green, yc_data_green_out, greenCOM[0], greenCOM[1]);
 
    // OR separate thresholded images into one image for output to screen
    for (i = 0; i < NUMROWS*NUMCOLS; i++) {
       // yc_data_combined[i] = yc_data_red_out[i] | yc_data_blue_out[i];
-      yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i];
+      yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i] |  yc_data_green[i];
    }
-    
+   
+   //median_char_filter_pass(yc_data_combined,yc_data_combined_filter );
+ 
    ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
 
 }

@@ -78,11 +78,11 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
 		 // calculate COM for blue
          break;
       case('g'):
-         yc_data_out[row*NUMCOLS+col] = ( v > 160) ? 255:0;
+		 //printf("yuv: %d, %d, %d \n",y ,u ,v);
+         yc_data_out[row*NUMCOLS+col] = ( ( 200 > y ) && ( y > 100) && (u < 110) && (v < 110) ) ? 255:0;
          break;
    }
 
-    // yc_data_out[row*NUMCOLS+col] = ( v > 160) ? 255:0;
 
 
     }

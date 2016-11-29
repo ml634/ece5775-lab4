@@ -14,7 +14,7 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
 
    // Do i need these? not using a FIFO from the HW?
    // it is "other operation" class that isn't in image processing pipeline
-   #pragma AP INTERFACE ap_fifo port= rgb_data_in
+   #pragma AP INTERFACE ap_fifo port= yc_data_in
    #pragma AP INTERFACE ap_fifo port= yc_data_out
 
    unsigned short pixel;
@@ -26,7 +26,7 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    unsigned int xBar, yBar; // center of mass coords
 
    // initialize moment values
-   m00 = 0;
+   m00 = 1;
    m01 = 0;
    m10 = 0;
    
