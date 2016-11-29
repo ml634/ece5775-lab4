@@ -11,7 +11,7 @@
 
 #define COM_COUNT 6
 
-void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
+void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT], unsigned char color)
 {
 
    // Do i need these? not using a FIFO from the HW?
@@ -48,13 +48,17 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    xBar = m10 / m00;
    yBar = m01 / m00;
 
-   // assign center of mass coords to output 
-   //comX = xBar;
-   //comY = yBar;
-
-   //printf("Coord : %d, %d\n", comX, comY);
-	frame_com[0] = xBar;
-	frame_com[1] = yBar;
-	
+   // assign center of mass coordinates to appropriate position in frame_com
+   switch(color) {
+      case('r'):
+         frame_com[0] = xBar;
+         frame_com[1] = yBar;
+      case('b'):
+         frame_com[2] = xBar;
+         frame_com[3] = yBar;
+      case('g'):
+         frame_com[4] = xBar;
+         frame_com[5] = yBar;
+   }
 
 }

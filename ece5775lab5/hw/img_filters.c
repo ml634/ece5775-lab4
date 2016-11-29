@@ -67,9 +67,9 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
    rgb_pad2ycbcr(rgb_data_in, yc_data_green, 'g');
 
-   centerOfMass(yc_data_blue, yc_data_blue_out, frame_com);
-   centerOfMass(yc_data_red, yc_data_red_out, frame_com);
-   centerOfMass(yc_data_green, yc_data_green_out, frame_com);
+   centerOfMass(yc_data_red, yc_data_red_out, frame_com, 'r');
+   centerOfMass(yc_data_blue, yc_data_blue_out, frame_com, 'b');
+   centerOfMass(yc_data_green, yc_data_green_out, frame_com, 'g');
 
 	//update frame_com with calculated local values    
 	//frame_com[0] = blueCOM[0];
