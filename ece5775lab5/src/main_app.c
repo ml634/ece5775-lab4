@@ -51,31 +51,9 @@ char serialDataOverNetwork[1];
 //3 objects COM and x,y
 #define COM_COUNT 6
 
-// FINDME: add local memory values here for center of mass, corners, etc to calculate orientation and robot commands
+#define arrivedTolerance    100
+#define robotDriveTolerance 50
 
-
-void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer) // add the parameters here from main execution loop
-{
-	
-
-	//unsigned int testCOM[6];
-
-TIME_STAMP_INIT
-	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer); // more parameters here for values passed from img_process
-TIME_STAMP
-
-
-	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
-
-	//call robot command function with COM (and later corner)
-	robotCommand(com_buffer);
-
-}
-
-void robotCommand(unsigned int frame_com_array) {
-
-	unsigned int r1[2], r2[2], C[2], D[2];
-}
 
 char init_network()
 {
@@ -120,6 +98,7 @@ char init_network()
 	return 1;
 }
 
+
 void sendCommand(char *serialDataOverNetwork, int socket)
 {
 	if ( isNetworkAlive &&  ( send ( socket, serialDataOverNetwork, strlen(serialDataOverNetwork), 0) < 0 ) ) {
@@ -132,6 +111,76 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 
 	return;
 }
+
+
+//frame_com_[0,1] = redCOM
+//frame_com_[2,3] = blueCOM
+//frame_com_[4,5] = greenCOM
+
+//robot1 = red; robot2 = blue
+void robotCommand(unsigned int frame_com_array) {
+
+	unsigned int robot1COM[2], robot2COM[2], goalCOM[2];
+	signed int deltaXrobot1 = 0;
+	signed int deltaYrobot1 = 0;
+
+
+	//update local values from the passed param 
+	robot1COM[0] = *(unsigned int *)(frame_com_array + 0 );
+	robot1COM[1] = *(unsigned int *)(frame_com_array + 4 );
+	robot2COM[0] = *(unsigned int *)(frame_com_array + 8 );
+	robot2COM[1] = *(unsigned int *)(frame_com_array + 12 );
+	  goalCOM[0] = *(unsigned int *)(frame_com_array + 16 );
+	  goalCOM[1] = *(unsigned int *)(frame_com_array + 20 );
+
+	//hardcode goalCOM to be right middle of screen (1500,500)
+	goalCOM[0] = 1500;
+	goalCOM[1] = 500;
+
+	//calculate distance deltaX,deltaY
+	deltaXrobot1 =    ( goalCOM[0] - robot1COM[0] );
+	deltaYrobot1 =    ( goalCOM[1] - robot1COM[1] );
+
+	//determine L,R,Straight,Stop commands based on deltaX,Y
+	if(deltaXrobot1 > arrivedTolerance) {
+
+	
+		if(deltaYrobot1 > robotDriveTolerance) {printf("goRight"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
+		if(deltaYrobot1 < -1*robotDriveTolerance) {printf("goLeft"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
+		else {printf("goStraight"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
+	} 
+
+	
+	else {printf("STOP"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
+
+	return;
+}
+
+
+// FINDME: add local memory values here for center of mass, corners, etc to calculate orientation and robot commands
+
+void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer) // add the parameters here from main execution loop
+{
+	
+
+	//unsigned int testCOM[6];
+
+TIME_STAMP_INIT
+	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer); // more parameters here for values passed from img_process
+TIME_STAMP
+
+
+	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
+
+	//call robot command function with COM (and later corner)
+	robotCommand(com_buffer);
+
+}
+
+
+
+
+
 
 void *thread_sw_sync()
 {
@@ -217,9 +266,11 @@ int main(int argc, char **argv)
 {
 	printf("\n START CODE \n");
 	init_all();
+	//initialize the server -> will be blocking until both robots connected	
+	isNetworkAlive = init_network();
 	thread_sw_sync(); // Sample code - loop forever, exit with Ctrl-C
 
-	//isNetworkAlive = init_network();
+	
     //serialDataOverNetwork[0] = (char)3;
 
     /*    while(1) 
