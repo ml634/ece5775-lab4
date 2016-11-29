@@ -9,7 +9,9 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_data_out[NUMROWS*NUMCOLS], unsigned int comX, unsigned int comY)
+#define COM_COUNT 6
+
+void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
 {
 
    // Do i need these? not using a FIFO from the HW?
@@ -25,7 +27,7 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    unsigned int m00, m01, m10; // moment variables
    unsigned int xBar, yBar; // center of mass coords
 
-   // initialize moment values
+   // initialize moment values m00 != 0 to prevent floating pt error
    m00 = 1;
    m01 = 0;
    m10 = 0;
@@ -47,9 +49,12 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    yBar = m01 / m00;
 
    // assign center of mass coords to output 
-   comX = xBar;
-   comY = yBar;
+   //comX = xBar;
+   //comY = yBar;
 
-   printf("Coord : %d, %d\n", comX, comY);
-   printf("moment values: %d, %d, %d\n",  m00, m10, m01);
+   //printf("Coord : %d, %d\n", comX, comY);
+	frame_com[0] = xBar;
+	frame_com[1] = yBar;
+	
+
 }
