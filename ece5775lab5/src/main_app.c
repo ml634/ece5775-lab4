@@ -50,29 +50,29 @@ char serialDataOverNetwork[1];
 
 //3 objects COM and x,y
 #define COM_COUNT 6
+#define COM_COUNT 16
 
-// FINDME: add local memory values here for center of mass, corners, etc to calculate orientation and robot commands
-
-
-void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer) // add the parameters here from main execution loop
+void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer, unsigned int corner_buffer) // add the parameters here from main execution loop
 {
 	
 
 	//unsigned int testCOM[6];
 
 TIME_STAMP_INIT
-	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer); // more parameters here for values passed from img_process
+	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer, (unsigned int *) corner_buffer); // more parameters here for values passed from img_process
 TIME_STAMP
 
 
 	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
 
+	printf("corners= %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(corner_buffer + 0), *(unsigned int *)(corner_buffer + 4),*(unsigned int *)(corner_buffer + 8), *(unsigned int *)(corner_buffer + 12), *(unsigned int *)(corner_buffer + 16), *(unsigned int *)(corner_buffer + 20) , *(unsigned int *)(corner_buffer + 24), *(unsigned int *)(corner_buffer + 28), *(unsigned int *)(corner_buffer + 32), *(unsigned int *)(corner_buffer + 36), *(unsigned int *)(corner_buffer + 40), *(unsigned int *)(corner_buffer + 44), *(unsigned int *)(corner_buffer + 48), *(unsigned int *)(corner_buffer + 52), *(unsigned int *)(corner_buffer + 56), *(unsigned int *)(corner_buffer + 60)); 
+
 	//call robot command function with COM (and later corner)
-	robotCommand(com_buffer);
+	robotCommand(com_buffer, corner_buffer);
 
 }
 
-void robotCommand(unsigned int frame_com_array) {
+void robotCommand(unsigned int * frame_com_array, unsigned int * frame_corner_array) {
 
 	unsigned int r1[2], r2[2], C[2], D[2];
 }
@@ -140,12 +140,14 @@ void *thread_sw_sync()
 	unsigned int virt_output_frame[MAX_BUFFER];
 	unsigned int virt_input_frame[MAX_BUFFER];
 	//COM per frame
-    unsigned int virt_frame_COM[MAX_BUFFER];
+    	unsigned int virt_frame_COM[MAX_BUFFER];
+    	unsigned int virt_frame_corners[MAX_BUFFER];
 
 	int i = 0;
 	int offset = 0;
-	//size needed to be allocated for COM	
+	//size needed to be allocated for COM and corners
 	unsigned int com_len = COM_COUNT * sizeof(int);
+        unsigned int corner_len = CORNER_COUNT * sizeof(int);
 
 	// starting indices
 	unsigned int map_len = NUMPADCOLS * NUMROWS * sizeof(int);
@@ -156,9 +158,11 @@ void *thread_sw_sync()
 
 	//pointer to received COM
 	unsigned int* com_out; // (0, 1) = (ax, ay); (2, 3) = (bx, by) ; (4, 5) = (cx, cy)
+	//pointer to received corner
+	unsigned int* corner_out; 
 	
 
-	int infrm_index = 2 ,outfrm_index = 0, accel_prev_index=0, accel_in_index = 1, accel_out_index = 1, com_index = 1;
+	int infrm_index = 2 ,outfrm_index = 0, accel_prev_index=0, accel_in_index = 1, accel_out_index = 1, com_index = 1, corner_index = 1;
 
 	for (i = 0; i<MAX_BUFFER; i++)
 	{
@@ -170,11 +174,15 @@ void *thread_sw_sync()
 
 		//for each circular buffer of the frame, allocate dedicated mem space for COM
 		com_out = (unsigned int *)apf_alloc(com_len); // 6 location for 2 coordinates of all 3 COM
+      
+                // allocate memory for corners
+		corner_out = (unsigned int *)apf_alloc(corner_len); // 16 locations, 8 corners, 2 robots (4 corners each)
 
 		virt_input_frame[i] = (unsigned int)virtual_addr_in;
-        virt_output_frame[i] = (unsigned int)virtual_addr_out;
+        	virt_output_frame[i] = (unsigned int)virtual_addr_out;
 		//sync address of com_out with mem stored in virt_frame_COM
 		virt_frame_COM[i] = (unsigned int)com_out;
+		virt_frame_corner[i] = (unsigned int)corner_out;
 		
 
 #ifndef SDS_NOMMAP
@@ -184,7 +192,7 @@ void *thread_sw_sync()
 	}
 	close (fd);
 	setCVC_TPGBuffer(outfrm_index,infrm_index);
-	motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index]);
+	motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index], virt_frame_corners[corner_index]);
 	while(1)
 	{
 		outfrm_index++;
@@ -206,7 +214,10 @@ void *thread_sw_sync()
 		com_index++;
 		com_index   %= MAX_BUFFER;
 
-		motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index]);
+                corner_index++; 
+                corner_index %= MAX_BUFFER;
+
+		motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index], virt_frame_corners[corner_index]);
 
 	} 
 

@@ -57,7 +57,7 @@ unsigned int blueCorners[8];
 unsigned int redCorners[8];
 
 // add more parameters here to pass center of masses, points, etc to main
-void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com)
+void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com, unsigned int * frame_corners)
 {
     
    int i =0;
@@ -67,19 +67,13 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
    rgb_pad2ycbcr(rgb_data_in, yc_data_green, 'g');
 
-
+   // calculate the center of mass for red robot, blue robot, and green goal
    centerOfMass(yc_data_red, yc_data_red_out, frame_com, 'r');
    centerOfMass(yc_data_blue, yc_data_blue_out, frame_com, 'b');
    centerOfMass(yc_data_green, yc_data_green_out, frame_com, 'g');
 
+   // Process image to capture corners for both robots
 
-	//update frame_com with calculated local values    
-	//frame_com[0] = blueCOM[0];
-	//frame_com[1] = blueCOM[1];
-	//frame_com[2] = redCOM[0];
-	//frame_com[3] = redCOM[1];
-	//frame_com[4] = greenCOM[0];
-	//frame_com[5] = greenCOM[1];
 
    // OR separate thresholded images into one image for output to screen
    for (i = 0; i < NUMROWS*NUMCOLS; i++) {
