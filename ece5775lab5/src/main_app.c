@@ -67,6 +67,14 @@ TIME_STAMP
 
 	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
 
+	//call robot command function with COM (and later corner)
+	robotCommand(com_buffer);
+
+}
+
+void robotCommand(unsigned int frame_com_array) {
+
+	unsigned int r1[2], r2[2], C[2], D[2];
 }
 
 char init_network()
