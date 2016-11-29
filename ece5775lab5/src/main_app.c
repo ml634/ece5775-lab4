@@ -33,6 +33,7 @@
 
 #include "img_filters.h"
 #include "sds_lib.h"
+#include "apf_lib.h"
 #define TIME_STAMP_INIT  unsigned long long clock_start, clock_end;  clock_start = sds_clock_counter();  
 #define TIME_STAMP  { clock_end = sds_clock_counter(); printf("elapsed time %llu \n", clock_end-clock_start); clock_start = sds_clock_counter();  }
 
@@ -47,16 +48,24 @@ char serialDataOverNetwork[1];
 #define SERVER_IP "192.168.137.123"
 #define PORT 8888
 
+//3 objects COM and x,y
+#define COM_COUNT 6
+
 // FINDME: add local memory values here for center of mass, corners, etc to calculate orientation and robot commands
 
 
-void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer) // add the parameters here as well to pass to main execution loop
+void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer) // add the parameters here from main execution loop
 {
 	
 
+	//unsigned int testCOM[6];
+
 TIME_STAMP_INIT
-	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer); // more parameters here for values passed from img_process
+	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer); // more parameters here for values passed from img_process
 TIME_STAMP
+
+
+	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
 
 }
 
@@ -122,8 +131,13 @@ void *thread_sw_sync()
 	unsigned int input_frame[MAX_BUFFER];
 	unsigned int virt_output_frame[MAX_BUFFER];
 	unsigned int virt_input_frame[MAX_BUFFER];
+	//COM per frame
+    unsigned int virt_frame_COM[MAX_BUFFER];
+
 	int i = 0;
 	int offset = 0;
+	//size needed to be allocated for COM	
+	unsigned int com_len = COM_COUNT * sizeof(int);
 
 	// starting indices
 	unsigned int map_len = NUMPADCOLS * NUMROWS * sizeof(int);
@@ -132,7 +146,11 @@ void *thread_sw_sync()
 	unsigned char* virtual_addr_in;
 	unsigned char* virtual_addr_out;
 
-	int infrm_index = 2 ,outfrm_index = 0, accel_prev_index=0, accel_in_index = 1, accel_out_index = 1;
+	//pointer to received COM
+	unsigned int* com_out; // (0, 1) = (ax, ay); (2, 3) = (bx, by) ; (4, 5) = (cx, cy)
+	
+
+	int infrm_index = 2 ,outfrm_index = 0, accel_prev_index=0, accel_in_index = 1, accel_out_index = 1, com_index = 1;
 
 	for (i = 0; i<MAX_BUFFER; i++)
 	{
@@ -141,8 +159,16 @@ void *thread_sw_sync()
 		offset += ibufferoffset;
 		virtual_addr_in = (unsigned char*)mmap(NULL, map_len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, (off_t)input_frame[i]);
 		virtual_addr_out = (unsigned char*)mmap(NULL, map_len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, (off_t)output_frame[i]);
+
+		//for each circular buffer of the frame, allocate dedicated mem space for COM
+		com_out = (unsigned int *)apf_alloc(com_len); // 6 location for 2 coordinates of all 3 COM
+
 		virt_input_frame[i] = (unsigned int)virtual_addr_in;
-                virt_output_frame[i] = (unsigned int)virtual_addr_out;
+        virt_output_frame[i] = (unsigned int)virtual_addr_out;
+		//sync address of com_out with mem stored in virt_frame_COM
+		virt_frame_COM[i] = (unsigned int)com_out;
+		
+
 #ifndef SDS_NOMMAP
                 sds_mmap((void *)input_frame[i], map_len, virtual_addr_in);
                 sds_mmap((void *)output_frame[i], map_len, virtual_addr_out);
@@ -150,7 +176,7 @@ void *thread_sw_sync()
 	}
 	close (fd);
 	setCVC_TPGBuffer(outfrm_index,infrm_index);
-	motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index]);
+	motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index]);
 	while(1)
 	{
 		outfrm_index++;
@@ -168,14 +194,14 @@ void *thread_sw_sync()
 		accel_out_index++;
 		accel_out_index  %= MAX_BUFFER;
 
-		motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index]);
+		//update com index for circular buffer storing
+		com_index++;
+		com_index   %= MAX_BUFFER;
+
+		motion_demo_processing(virt_input_frame[accel_in_index], virt_output_frame[accel_out_index], virt_frame_COM[com_index]);
 
 	} 
-	// do the following on exit
-        // sds_munmap(virtual_addr_in);
-        // sds_munmap(virtual_addr_out);
-	// munmap((void *)virtual_addr_out, map_len);
-	// munmap((void *)virtual_addr_in, map_len);
+
 }
 
 
