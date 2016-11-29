@@ -49,8 +49,8 @@ char serialDataOverNetwork[1];
 #define PORT 8888
 
 //3 objects COM and x,y
-#define COM_COUNT 6
-#define COM_COUNT 16
+// #define COM_COUNT 6
+#define CORNER_COUNT 2 * CORNER_ELEMENTS // should be 16 total values
 
 void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, unsigned int com_buffer, unsigned int corner_buffer) // add the parameters here from main execution loop
 {
