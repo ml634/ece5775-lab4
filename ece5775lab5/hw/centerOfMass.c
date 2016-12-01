@@ -15,7 +15,6 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
 {
 
    // Do i need these? not using a FIFO from the HW?
-   // it is "other operation" class that isn't in image processing pipeline
    #pragma AP INTERFACE ap_fifo port= yc_data_in
    #pragma AP INTERFACE ap_fifo port= yc_data_out
 
@@ -24,41 +23,85 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    int row;
    int col;
    
-   unsigned int m00, m01, m10; // moment variables
-   unsigned int xBar, yBar; // center of mass coords
+   unsigned int red_m00, red_m01, red_m10; // moment variables for red
+   unsigned int blue_m00, blue_m01, blue_m10; // moment variables for blue
+   unsigned int green_m00, green_m01, green_m10; // moment variables for green
+
+   unsigned int red_xBar, red_yBar; // center of mass coords for red
+   unsigned int blue_xBar, blue_yBar; // center of mass coords for blue
+   unsigned int green_xBar, green_yBar; // center of mass coords for green
 
    // initialize moment values m00 != 0 to prevent floating pt error
-   m00 = 1;
-   m01 = 0;
-   m10 = 0;
+   red_m00 = 1;
+   red_m01 = 0;
+   red_m10 = 0;
    
+   blue_m00 = 1;
+   blue_m01 = 0;
+   blue_m10 = 0;
+
+   green_m00 = 1;
+   green_m01 = 0;
+   green_m10 = 0;
+
    for(row = 0; row < NUMROWS; row++){
       for(col = 0; col < NUMCOLS; col++){
          #pragma AP PIPELINE II = 1
          pixel = yc_data_in[row*NUMCOLS + col] / 255;
-         m00 += pixel;
-         m10 += pixel * col;
-         m01 += pixel * row;
+
+         if (pixel == 80) {
+            // red
+            red_m00 += pixel;
+            red_m10 += pixel * col;
+            red_m01 += pixel * row;
+         }
+         else if (pixel == 180) {
+            // blue
+            blue_m00 += pixel;
+            blue_m10 += pixel * col;
+            blue_m01 += pixel * row;
+         }
+         else if (pixel == 240) {
+            // green
+            green_m00 += pixel;
+            green_m10 += pixel * col;
+            green_m01 += pixel * row;
+         }
+
 
          // output pixel
          yc_data_out[row*NUMCOLS +col] = yc_data_in[row*NUMCOLS + col];
       }
    }
 
-   xBar = m10 / m00;
-   yBar = m01 / m00;
+   // calculate COM points from each color's moment values
+   red_xBar = red_m10 / red_m00;
+   red_yBar = red_m01 / red_m00;
+
+   blue_xBar = blue_m10 / blue_m00;
+   blue_yBar = blue_m01 / blue_m00;
+
+   green_xBar = green_m10 / green_m00;
+   green_yBar = green_m01 / green_m00;
 
    // assign center of mass coordinates to appropriate position in frame_com
-   switch(color) {
-      case('r'):
-         frame_com[0] = xBar;
-         frame_com[1] = yBar;
-      case('b'):
-         frame_com[2] = xBar;
-         frame_com[3] = yBar;
-      case('g'):
-         frame_com[4] = xBar;
-         frame_com[5] = yBar;
-   }
+   frame_com[0] = red_xBar;
+   frame_com[1] = red_yBar;
+   frame_com[2] = blue_xBar;
+   frame_com[3] = blue_yBar;
+   frame_com[4] = green_xBar;
+   frame_com[5] = green_yBar;
+
+   // switch(color) {
+   //    case('r'):
+   //       frame_com[0] = xBar;
+   //       frame_com[1] = yBar;
+   //    case('b'):
+   //       frame_com[2] = xBar;
+   //       frame_com[3] = yBar;
+   //    case('g'):
+   //       frame_com[4] = xBar;
+   //       frame_com[5] = yBar;
+   // }
 
 }
