@@ -110,7 +110,7 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 	}
 	else if ( !isNetworkAlive ) {
 		// if network somehow failed, then initiate again
-		isNetworkAlive = init_network();
+		//isNetworkAlive = init_network();
 	}
 
 	return;
@@ -280,7 +280,7 @@ int main(int argc, char **argv)
 	printf("\n START CODE \n");
 	init_all();
 	//initialize the server -> will be blocking until both robots connected	
-	isNetworkAlive = init_network();
+	//isNetworkAlive = init_network();
 	thread_sw_sync(); // Sample code - loop forever, exit with Ctrl-C
 
 

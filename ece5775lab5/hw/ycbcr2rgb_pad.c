@@ -26,14 +26,25 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
       
       input_data = yc_in[row*NUMCOLS+col];
 
-r = input_data;
-g = input_data;
-b = input_data;
+	if (input_data == 80) {
 
-pixval = 0xff;
-pixval = (pixval << 8) | r;
-pixval = (pixval << 8) | g;
-pixval = (pixval << 8) | b;
+			pixval = 0x00ff0000;
+		}
+
+	else if ( input_data == 240) { //segmented as green
+
+			pixval = 0x0000ff00;
+		}
+
+	else if ( input_data == 160 ) { //segmented as blue
+
+			pixval = 0x000000ff;
+		}
+
+	else {
+			pixval = 0x00000000;
+
+	}
 
 /*
       y = input_data >> 8 ;

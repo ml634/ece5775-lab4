@@ -67,13 +67,11 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
    rgb_pad2ycbcr(rgb_data_in, yc_data_red, 'r');
-   rgb_pad2ycbcr(rgb_data_in, yc_data_blue, 'b');
-   rgb_pad2ycbcr(rgb_data_in, yc_data_green, 'g');
+
 
    // calculate the center of mass for red robot, blue robot, and green goal
-   centerOfMass(yc_data_red, yc_data_red_out, frame_com, 'r');
-   centerOfMass(yc_data_blue, yc_data_blue_out, frame_com, 'b');
-   centerOfMass(yc_data_green, yc_data_green_out, frame_com, 'g');
+   //centerOfMass(yc_data_red, yc_data_red_out, frame_com, 'r');
+
 
    // Process image to capture corners for both robots
    //call median filter for each RBG --> and corner detect for each filtered output RBG
@@ -82,7 +80,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    //median_char_filter_pass(yc_data_blue_out,yc_data_blue_out_filtered );
    //median_char_filter_pass(yc_data_green_out,yc_data_green_out_filtered );
 
-   corner_detect(yc_data_red_out, yc_data_combined, frame_corners, 'r' );
+   //corner_detect(yc_data_red_out, yc_data_combined, frame_corners, 'r' );
    
    // OR separate thresholded images into one image for output to screen
    //for (i = 0; i < NUMROWS*NUMCOLS; i++) {
@@ -91,7 +89,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    //}
    
    
-   ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
+   ycbcr2rgb_pad(yc_data_red,rgb_data_out);
 
 }
 
