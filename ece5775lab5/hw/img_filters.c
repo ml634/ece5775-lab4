@@ -35,14 +35,17 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-unsigned short yc_data_blue[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_red[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_blue[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_green[NUMROWS*NUMCOLS];
 
-
-unsigned short yc_data_blue_out[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_red_out[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_blue_out[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_green_out[NUMROWS*NUMCOLS]; 
+
+unsigned short yc_data_red_out_filtered[NUMROWS*NUMCOLS];
+unsigned short yc_data_blue_out_filtered[NUMROWS*NUMCOLS];  
+unsigned short yc_data_green_out_filtered[NUMROWS*NUMCOLS];
 
 unsigned short yc_data_combined[NUMROWS*NUMCOLS];
 unsigned short yc_data_combined_filter[NUMROWS*NUMCOLS];
@@ -73,16 +76,21 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    centerOfMass(yc_data_green, yc_data_green_out, frame_com, 'g');
 
    // Process image to capture corners for both robots
-
-
-   // OR separate thresholded images into one image for output to screen
-   for (i = 0; i < NUMROWS*NUMCOLS; i++) {
-      // yc_data_combined[i] = yc_data_red_out[i] | yc_data_blue_out[i];
-      yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i] |  yc_data_green[i];
-   }
-   
-   //median_char_filter_pass(yc_data_combined,yc_data_combined_filter );
+   //call median filter for each RBG --> and corner detect for each filtered output RBG
  
+   //median_char_filter_pass(yc_data_red_out,yc_data_red_out_filtered );
+   //median_char_filter_pass(yc_data_blue_out,yc_data_blue_out_filtered );
+   //median_char_filter_pass(yc_data_green_out,yc_data_green_out_filtered );
+
+   corner_detect(yc_data_red_out, yc_data_combined, frame_corners, 'r' );
+   
+   // OR separate thresholded images into one image for output to screen
+   //for (i = 0; i < NUMROWS*NUMCOLS; i++) {
+      // yc_data_combined[i] = yc_data_red_out[i] | yc_data_blue_out[i];
+      //yc_data_combined[i] = yc_data_red[i] | yc_data_blue[i] |  yc_data_green[i];
+   //}
+   
+   
    ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
 
 }
