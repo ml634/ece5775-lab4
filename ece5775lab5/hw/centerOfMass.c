@@ -41,7 +41,7 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
          m01 += pixel * row;
 
          // output pixel
-         yc_data_out[row*NUMCOLS +col] = pixel;
+         yc_data_out[row*NUMCOLS +col] = yc_data_in[row*NUMCOLS + col];
       }
    }
 
