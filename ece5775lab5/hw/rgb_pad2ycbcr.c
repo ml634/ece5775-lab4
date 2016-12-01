@@ -53,7 +53,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
         unsigned short  u = 0;
         unsigned short  v = 0;
         unsigned short  y = 0;
-	    unsigned short  pixel_out0, pixel_out1; 
+	unsigned short  pixel_out0, pixel_out1; 
         unsigned int    pixel;
 
 
@@ -62,26 +62,42 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
 	in_G = (((pixel) >>8 )& 0x000000FF);
 	in_R = (((pixel) >>16)& 0x000000FF);
 
-	y = ((66 * in_R + 129 * in_G + 25 * in_B + 128) >> 8) + 16;
-    u =  ((112*in_B - 74*in_G -38*in_R) >> 8) +128; // u
-    v = ((112*in_R - 94*in_G -18*in_B) >> 8) +128; // v
+        y = ((66 * in_R + 129 * in_G + 25 * in_B + 128) >> 8) + 16;
+        u =  ((112*in_B - 74*in_G -38*in_R) >> 8) +128; // u
+        v = ((112*in_R - 94*in_G -18*in_B) >> 8) +128; // v
 
-   // printf("yuv: %d, %d, %d \n",y ,u ,v);
+        // printf("yuv: %d, %d, %d \n",y ,u ,v);
 
-   switch(color) {
-      case('r'):
-         yc_data_out[row*NUMCOLS+col] = ( v > 160) ? 255:0;
-         // calculate COM for red
-         break;
-      case('b'):
-         yc_data_out[row*NUMCOLS+col] = ( u > 150) ? 255:0;
-		 // calculate COM for blue
-         break;
-      case('g'):
-		 //printf("yuv: %d, %d, %d \n",y ,u ,v);
-         yc_data_out[row*NUMCOLS+col] = ( ( 200 > y ) && ( y > 100) && (u < 110) && (v < 110) ) ? 255:0;
-         break;
-   }
+         // assign different colored pixels to different greyscale values to distinguish them from each other
+         if (v > 160) {
+            // red object
+            yc_data_out[row*NUMCOLS+col] = 80; // red objects will have pixel value of 80
+         }
+         else if (u > 150) {
+            // blue object
+            yc_data_out[row*NUMCOLS+col] = 160; // blue objects will have pixel value of 160
+         else if ( (200 > y) && (y > 100) && (u < 110) && (v < 110) ) {
+            // green object
+            yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
+         }
+
+
+   // switch(color) {
+   //    case('r'):
+   //       // Set pixels to be 1 for red
+   //       yc_data_out[row*NUMCOLS+col] = ( v > 160) ? 255:0;
+   //       // calculate COM for red
+   //       break;
+   //    case('b'):
+   //       // set pixels to be 2 for blue
+   //       yc_data_out[row*NUMCOLS+col] = ( u > 150) ? 255:0;
+   //      	 // calculate COM for blue
+   //       break;
+   //    case('g'):
+   //       // set pixels to be 3 for green
+   //       yc_data_out[row*NUMCOLS+col] = ( ( 200 > y ) && ( y > 100) && (u < 110) && (v < 110) ) ? 255:0;
+   //       break;
+   // }
 
 
 
