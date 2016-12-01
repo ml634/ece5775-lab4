@@ -48,7 +48,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 
 	static unsigned int corner_frame_counter_red = 0;
 	static unsigned int corner_frame_counter_blue = 0;
-	unsigned int *corner_frame_counter;
+	//unsigned int *corner_frame_counter;
 	
 	char color;
 		
@@ -208,7 +208,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
   for ( corner_id = 0; corner_id < CORNER_ELEMENTS; corner_id++) {
 #pragma AP UNROLL
 #pragma AP PIPELINE II=1
-    sorted_corners_red[*corner_frame_counter][corner_id] = prevCorner_red[corner_id];
+    sorted_corners_red[corner_frame_counter_red][corner_id] = prevCorner_red[corner_id];
 
     // after copying data, we can sort it using sorted_corners history
     for (i = 0; i <= num_length; i++) {
@@ -229,7 +229,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
   for ( corner_id = 0; corner_id < CORNER_ELEMENTS; corner_id++) {
 #pragma AP UNROLL
 #pragma AP PIPELINE II=1
-    sorted_corners_blue[*corner_frame_counter][corner_id] = prevCorner_blue[corner_id];
+    sorted_corners_blue[corner_frame_counter_blue][corner_id] = prevCorner_blue[corner_id];
 
     // after copying data, we can sort it using sorted_corners history
     for (i = 0; i <= num_length; i++) {
@@ -246,11 +246,23 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
     }
   }
 
-	*corner_frame_counter++;
+	/**corner_frame_counter++;
 	if (*corner_frame_counter >= CORNER_HISTORY_FRAME_NUMBER )
 		*corner_frame_counter = 0;
 	else if (*corner_frame_counter == 5)
-	  *corner_frame_counter = 6;
+	  *corner_frame_counter = 6;*/
+	  
+	corner_frame_counter_red++;
+	if (corner_frame_counter_red >= CORNER_HISTORY_FRAME_NUMBER )
+		corner_frame_counter_red = 0;
+	else if (corner_frame_counter_red == 5)
+	  corner_frame_counter_red = 6;
+	
+	corner_frame_counter_blue++;
+	if (corner_frame_counter_blue >= CORNER_HISTORY_FRAME_NUMBER )
+		corner_frame_counter_blue = 0;
+	else if (corner_frame_counter_blue == 5)
+	  corner_frame_counter_blue = 6;
 
   frame_corners[0] = sorted_corners_red[5][0]; //  A(X) = A[0]	
   frame_corners[1] = sorted_corners_red[5][1]; //  A(y) = A[1]	
