@@ -47,25 +47,25 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    for(row = 0; row < NUMROWS; row++){
       for(col = 0; col < NUMCOLS; col++){
          #pragma AP PIPELINE II = 1
-         pixel = yc_data_in[row*NUMCOLS + col] / 255;
+         pixel = yc_data_in[row*NUMCOLS + col]; // / 255;
 
          if (pixel == 80) {
-            // red
-            red_m00 += pixel;
-            red_m10 += pixel * col;
-            red_m01 += pixel * row;
+            // red: need to normalize pixel values for moment calculation
+            red_m00 += pixel / 80;
+            red_m10 += (pixel / 80) * col;
+            red_m01 += (pixel / 80) * row;
          }
          else if (pixel == 180) {
-            // blue
-            blue_m00 += pixel;
-            blue_m10 += pixel * col;
-            blue_m01 += pixel * row;
+            // blue: Normalize by 180
+            blue_m00 += pixel / 180;
+            blue_m10 += (pixel / 180) * col;
+            blue_m01 += (pixel / 180) * row;
          }
          else if (pixel == 240) {
-            // green
-            green_m00 += pixel;
-            green_m10 += pixel * col;
-            green_m01 += pixel * row;
+            // green: normalize by 240
+            green_m00 += pixel / 240;
+            green_m10 += (pixel / 240) * col;
+            green_m01 += (pixel / 240) * row;
          }
 
 
