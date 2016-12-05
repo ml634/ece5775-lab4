@@ -84,12 +84,14 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
   
   // Draw COMs in 31*31 (bigger) cyan squares
   for (i = 0; i < 5; i = i + 2){
-    for (j = -15; j < 16; j++){
-      temp_x = frame_com[i] + j;
-      if (temp_x >= 0){
-        for (k = -15; k < 16; k++){
-          temp_y = frame_com[i+1] + k;
-          if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0x00FFFF;
+    if ((frame_com[i] > 0) && (frame_com[i+1] > 0)){
+      for (j = -15; j < 16; j++){
+        temp_x = frame_com[i] + j;
+        if (temp_x >= 0){
+          for (k = -15; k < 16; k++){
+            temp_y = frame_com[i+1] + k;
+            if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0x00FFFF;
+          }
         }
       }
     }
@@ -97,12 +99,14 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
   
   // Draw corners in 15*15 (smaller) yellow squares
   for (i = 0; i < 15; i = i + 2){
-    for (j = -6; j < 7; j++){
-      temp_x = frame_corners[i] + j;
-      if (temp_x >= 0){
-        for (k = -6; k < 7; k++){
-          temp_y = frame_corners[i+1] + k;
-          if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0xFFFF00;
+    if ((frame_corners[i] > 0) && (frame_corners[i+1] > 0)){
+      for (j = -6; j < 7; j++){
+        temp_x = frame_corners[i] + j;
+        if (temp_x >= 0){
+          for (k = -6; k < 7; k++){
+            temp_y = frame_corners[i+1] + k;
+            if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0xFFFF00;
+          }
         }
       }
     }
