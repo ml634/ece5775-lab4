@@ -7,10 +7,11 @@
 #include "image_cores.h"
 
 //Main function for ycbcr2rgb with padding to 2048 pixel line
-void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS])
+void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], frame_corners[16])
 {
   int row;
   int col;
+  int i, j, k;
   //#pragma AP DATAFLOW
   for(row = 0; row < NUMROWS; row++){
     for(col = 0; col < NUMCOLS; col++){
@@ -26,26 +27,26 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
       
       input_data = yc_in[row*NUMCOLS+col];
 
-	if (input_data == 80) {
+	    if (input_data == 80) {
 
-			pixval = 0x00ff0000;
-		}
+			    pixval = 0x00ff0000;
+		    }
 
-	else if ( input_data == 240) { //segmented as green
+	    else if ( input_data == 240) { //segmented as green
 
-			pixval = 0x0000ff00;
-		}
+			    pixval = 0x0000ff00;
+		    }
 
-	else if ( input_data == 160 ) { //segmented as blue
+	    else if ( input_data == 160 ) { //segmented as blue
 
-			pixval = 0x000000ff;
-		}
+			    pixval = 0x000000ff;
+		    }
 
-	else {
-			pixval = 0x00000000;
+	    else {
+			    pixval = 0x00000000;
 
-	}
-
+	    }
+	    
 /*
       y = input_data >> 8 ;
       tmp_uv = input_data  & 0x00ff;
@@ -76,6 +77,24 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
     for (col = NUMCOLS; col < NUMPADCOLS; col++) {
 #pragma AP PIPELINE II = 1
       rgb_out[row*NUMPADCOLS+col] = 0;
+    }
+  }
+  
+  // Draw COMs in 31*31 (bigger) cyan squares
+  for (i = 0; i < 6; i = i + 2){
+    for (j = -15; j < 16; j++){
+      for (j = -15; j < 16; j++){
+        rgb_out[frame_com[i+j]*NUMPADCOLS+frame_com[i+j+1]] = 0x00FFFF;
+      }
+    }
+  }
+  
+  // Draw corners in 15*15 (smaller) yellow squares
+  for (i = 0; i < 16; i = i + 2){
+    for (j = -6; j < 7; j++){
+      for (j = -6; j < 7; j++){
+        rgb_out[frame_com[i+j]*NUMPADCOLS+frame_com[i+j+1]] = 0xFFFF00;
+      }
     }
   }
 }

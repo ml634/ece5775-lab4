@@ -48,16 +48,6 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 
 	static unsigned int corner_frame_counter_red = 0;
 	static unsigned int corner_frame_counter_blue = 0;
-	//unsigned int *corner_frame_counter;
-	
-		
-	if (color == 'r'){
-	  //corner_frame_counter = &corner_frame_counter_red;
-	}
-	else if (color == 'b'){
-	  //corner_frame_counter = &corner_frame_counter_blue;
-	}
-	else return;
 
 	int i,j;
 	ap_uint<2> isPoint;
@@ -100,7 +90,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 			          temp_corners_red[6] = col;
 			          temp_corners_red[7] = row;
 		          }
-            case(240):
+            case(160):
               if ( col < xmin_blue ) {
 				          xmin_blue = col;
 				          temp_corners_blue[0] = col;
@@ -198,6 +188,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
   prevCorner_blue[7] = (temp_corner0_blue > 0) ? ((unsigned int)temp_corner7_blue) : 0;
 	// frame_corners[0 -> 7] = assign calculated corners
 	
+	
 	// bubble sort - naive
 	unsigned int corner_id;
 	unsigned int temp_num;
@@ -244,12 +235,6 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 	    }
     }
   }
-
-	/**corner_frame_counter++;
-	if (*corner_frame_counter >= CORNER_HISTORY_FRAME_NUMBER )
-		*corner_frame_counter = 0;
-	else if (*corner_frame_counter == 5)
-	  *corner_frame_counter = 6;*/
 	  
 	corner_frame_counter_red++;
 	if (corner_frame_counter_red >= CORNER_HISTORY_FRAME_NUMBER )
