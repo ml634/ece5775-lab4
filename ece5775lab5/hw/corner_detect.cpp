@@ -48,16 +48,6 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 
 	static unsigned int corner_frame_counter_red = 0;
 	static unsigned int corner_frame_counter_blue = 0;
-	//unsigned int *corner_frame_counter;
-	
-		
-	if (color == 'r'){
-	  //corner_frame_counter = &corner_frame_counter_red;
-	}
-	else if (color == 'b'){
-	  //corner_frame_counter = &corner_frame_counter_blue;
-	}
-	else return;
 
 	int i,j;
 	ap_uint<2> isPoint;
@@ -69,14 +59,12 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 #pragma HLS DEPENDENCE array inter false      
 
 	    if ( ( (row & 3) == 0 ) && ( ( (col & 3) == 0) ) ) {
-		    //pixel_in = median_out[ ( (row * NUMCOLS)>>SCALE_DOWN_FACTOR) + (col>>SCALE_DOWN_FACTOR_SHIFT) ];
 		    pixel_in = median_out[ row * NUMCOLS + col ];
 		    isValid = (pixel_in > 0);
 		    // calculate corners
         if(isValid) 
 		    {
-          switch(pixel_in){
-            case(80):
+          if (pixel_in == 80){
 		          if ( col < xmin_red ) {
 			          xmin_red = col;
 			          temp_corners_red[0] = col;
@@ -100,7 +88,8 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 			          temp_corners_red[6] = col;
 			          temp_corners_red[7] = row;
 		          }
-            case(240):
+		        }
+		        else if (pixel_in == 160){
               if ( col < xmin_blue ) {
 				          xmin_blue = col;
 				          temp_corners_blue[0] = col;
@@ -198,6 +187,7 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
   prevCorner_blue[7] = (temp_corner0_blue > 0) ? ((unsigned int)temp_corner7_blue) : 0;
 	// frame_corners[0 -> 7] = assign calculated corners
 	
+	
 	// bubble sort - naive
 	unsigned int corner_id;
 	unsigned int temp_num;
@@ -244,12 +234,6 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 	    }
     }
   }
-
-	/**corner_frame_counter++;
-	if (*corner_frame_counter >= CORNER_HISTORY_FRAME_NUMBER )
-		*corner_frame_counter = 0;
-	else if (*corner_frame_counter == 5)
-	  *corner_frame_counter = 6;*/
 	  
 	corner_frame_counter_red++;
 	if (corner_frame_counter_red >= CORNER_HISTORY_FRAME_NUMBER )
