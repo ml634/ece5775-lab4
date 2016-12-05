@@ -55,11 +55,11 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
             red_m10 += (pixel / 80) * col;
             red_m01 += (pixel / 80) * row;
          }
-         else if (pixel == 180) {
-            // blue: Normalize by 180
-            blue_m00 += pixel / 180;
-            blue_m10 += (pixel / 180) * col;
-            blue_m01 += (pixel / 180) * row;
+         else if (pixel == 160) {
+            // blue: Normalize by 160
+            blue_m00 += pixel / 160;
+            blue_m10 += (pixel / 160) * col;
+            blue_m01 += (pixel / 160) * row;
          }
          else if (pixel == 240) {
             // green: normalize by 240
