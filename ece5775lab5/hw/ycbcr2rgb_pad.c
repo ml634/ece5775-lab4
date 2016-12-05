@@ -84,7 +84,6 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
   
   // Draw COMs in 31*31 (bigger) cyan squares
   for (i = 0; i < 5; i = i + 2){
-    printf("x = %u, y = %u\n", frame_com[i], frame_com[i+1]);
     for (j = -15; j < 16; j++){
       temp_x = frame_com[i] + j;
       if (temp_x >= 0){
@@ -98,7 +97,6 @@ void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[N
   
   // Draw corners in 15*15 (smaller) yellow squares
   for (i = 0; i < 15; i = i + 2){
-    printf("x = %u, y = %u\n", frame_corners[i], frame_corners[i+1]);
     for (j = -6; j < 7; j++){
       temp_x = frame_corners[i] + j;
       if (temp_x >= 0){
