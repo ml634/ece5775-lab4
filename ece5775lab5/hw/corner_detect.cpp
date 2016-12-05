@@ -59,14 +59,12 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 #pragma HLS DEPENDENCE array inter false      
 
 	    if ( ( (row & 3) == 0 ) && ( ( (col & 3) == 0) ) ) {
-		    //pixel_in = median_out[ ( (row * NUMCOLS)>>SCALE_DOWN_FACTOR) + (col>>SCALE_DOWN_FACTOR_SHIFT) ];
 		    pixel_in = median_out[ row * NUMCOLS + col ];
 		    isValid = (pixel_in > 0);
 		    // calculate corners
         if(isValid) 
 		    {
-          switch(pixel_in){
-            case(80):
+          if (pixel_in == 80){
 		          if ( col < xmin_red ) {
 			          xmin_red = col;
 			          temp_corners_red[0] = col;
@@ -90,7 +88,8 @@ void corner_detect(unsigned short median_out[NUMROWS*NUMCOLS], unsigned short co
 			          temp_corners_red[6] = col;
 			          temp_corners_red[7] = row;
 		          }
-            case(160):
+		        }
+		        else if (pixel_in == 160){
               if ( col < xmin_blue ) {
 				          xmin_blue = col;
 				          temp_corners_blue[0] = col;
