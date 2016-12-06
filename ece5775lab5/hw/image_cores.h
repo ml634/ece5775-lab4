@@ -39,7 +39,7 @@ void median_char_filter_pass(unsigned short input_pix[NUMROWS*NUMCOLS],unsigned 
 #pragma SDS data mem_attribute(rgb_out:PHYSICAL_CONTIGUOUS|NON_CACHEABLE)
 #pragma SDS data access_pattern(yc_in:SEQUENTIAL)
 #pragma SDS data access_pattern(rgb_out:SEQUENTIAL)
-void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS]);
+void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS]);
 
 #ifdef __cplusplus
 };

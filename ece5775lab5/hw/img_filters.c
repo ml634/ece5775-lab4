@@ -77,7 +77,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    corner_detect(yc_data_segmented_out, yc_data_combined, frame_corners, 'r');
       
-   ycbcr2rgb_pad(yc_data_combined,rgb_data_out);
+   ycbcr2rgb_pad(yc_data_combined,rgb_data_out, frame_com ,frame_corners );
 
 }
 

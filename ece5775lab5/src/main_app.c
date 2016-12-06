@@ -122,12 +122,24 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 //frame_com_[4,5] = greenCOM
 
 //robot1 = red; robot2 = blue
-void robotCommand(unsigned int frame_com_array) {
+void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array) {
 
 	unsigned int robot1COM[2], robot2COM[2], goalCOM[2];
+	unsigned int robot1CornerA[2], robot1CornerB[2],robot1CornerC[2],robot1CornerD[2];
+	
 	signed int deltaXrobot1 = 0;
 	signed int deltaYrobot1 = 0;
 
+	unsigned int deltaXCornerAB = 0;
+	unsigned int deltaYCornerAB = 0;
+	unsigned int deltaXCornerAD = 0;
+	unsigned int deltaYCornerAD = 0;
+
+	unsigned int widthAB, widthAD, area;
+	double divisionCornerAD;
+
+	unsigned int robotAngle1 = 0;
+	unsigned int robotAngle2 = 0;
 
 	//update local values from the passed param 
 	robot1COM[0] = *(unsigned int *)(frame_com_array + 0 );
@@ -145,19 +157,64 @@ void robotCommand(unsigned int frame_com_array) {
 	deltaXrobot1 =    ( goalCOM[0] - robot1COM[0] );
 	deltaYrobot1 =    ( goalCOM[1] - robot1COM[1] );
 
-	//determine L,R,Straight,Stop commands based on deltaX,Y
-	if(deltaXrobot1 > arrivedTolerance) {
+	//calculate area of red, blue box from 4 corners each
+	//corners stored order: A (xmin) C(xmax) B (ymin) D(ymax)
+	robot1CornerA[0] = *(unsigned int *)(frame_corner_array + 0 );
+	robot1CornerA[1] = *(unsigned int *)(frame_corner_array + 4 );
+	robot1CornerC[0] = *(unsigned int *)(frame_corner_array + 8 );
+	robot1CornerC[1] = *(unsigned int *)(frame_corner_array + 12 );
+	robot1CornerB[0] = *(unsigned int *)(frame_corner_array + 16 );
+	robot1CornerB[1] = *(unsigned int *)(frame_corner_array + 20 );
+	robot1CornerD[0] = *(unsigned int *)(frame_corner_array + 24 );
+	robot1CornerD[1] = *(unsigned int *)(frame_corner_array + 28 );
+
+	//get area from width of AB and AD 
+	deltaXCornerAB = (robot1CornerA[0]-robot1CornerB[0]);
+	deltaYCornerAB = (robot1CornerA[1]-robot1CornerB[1]);
+	widthAB = (deltaXCornerAB*deltaXCornerAB) + (deltaYCornerAB*deltaYCornerAB); 
+
+	deltaXCornerAD = (robot1CornerA[0]-robot1CornerD[0]);
+	deltaYCornerAD = (robot1CornerA[1]-robot1CornerD[1]);
+	widthAD = (deltaXCornerAD*deltaXCornerAD) + (deltaYCornerAD*deltaYCornerAD); 
+
+	area = widthAB * widthAD;
+
+	printf("area = %u \n", area);
+
+	//get angle from the 4 corners
+	//to prevent divide by 0
+	if (robot1CornerD[0] != robot1CornerA[0] ) {
+		
+		//deltaY / deltaX
+		divisionCornerAD = ((double)(robot1CornerD[1] - robot1CornerA[1])) / (robot1CornerD[0] - robot1CornerA[0]);
+		
+		robotAngle1 = (int)(atan(divisionCornerAD)* 180 / 3.14 );
+		robotAngle1 = 90 - robotAngle1;
+		printf("angle = %u \n", robotAngle1);
+	}
+
+	//get angle from COMs
+	
+
+
+
+	// area is big enough and not noise
+	if( area > 10000 ) {
+
+		//determine L,R,Straight,Stop commands based on deltaX,Y
+		if(deltaXrobot1 > arrivedTolerance) {
 
 	
-		if(deltaYrobot1 > robotDriveTolerance) {printf("goRight"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
-		if(deltaYrobot1 < -1*robotDriveTolerance) {printf("goLeft"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
-		else {printf("goStraight"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
-	} 
+			if(deltaYrobot1 > robotDriveTolerance) {printf("goRight"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
+			if(deltaYrobot1 < -1*robotDriveTolerance) {printf("goLeft"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
+			else {printf("goStraight"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
+		} 
 
 	
-	else {printf("STOP"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
+		else {printf("STOP"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
 
-	return;
+		return;
+	}
 }
 
 
@@ -178,7 +235,7 @@ TIME_STAMP
 	printf("corners= %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(corner_buffer + 0), *(unsigned int *)(corner_buffer + 4),*(unsigned int *)(corner_buffer + 8), *(unsigned int *)(corner_buffer + 12), *(unsigned int *)(corner_buffer + 16), *(unsigned int *)(corner_buffer + 20) , *(unsigned int *)(corner_buffer + 24), *(unsigned int *)(corner_buffer + 28), *(unsigned int *)(corner_buffer + 32), *(unsigned int *)(corner_buffer + 36), *(unsigned int *)(corner_buffer + 40), *(unsigned int *)(corner_buffer + 44), *(unsigned int *)(corner_buffer + 48), *(unsigned int *)(corner_buffer + 52), *(unsigned int *)(corner_buffer + 56), *(unsigned int *)(corner_buffer + 60)); 
 
 	//call robot command function with COM (and later corner)
-	robotCommand(com_buffer);
+	robotCommand(com_buffer, corner_buffer );
 
 }
 
