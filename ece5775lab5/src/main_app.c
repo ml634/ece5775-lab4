@@ -55,7 +55,7 @@ char serialDataOverNetwork[1];
 #define CORNER_COUNT 2 * CORNER_ELEMENTS // should be 16 total values
 
 #define arrivedTolerance    100
-#define robotToleranceAngle 10
+#define robotToleranceAngle 1
 
 
 
@@ -190,24 +190,23 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 	if (robot1CornerD[0] != robot1CornerA[0] ) {
 		
 		//deltaY / deltaX
-		divisionCornerDC = (( double)(robot1CornerD[1] - robot1CornerC[1] )) / (robot1CornerC[0] - robot1CornerD[0]);//y is flipped order bc pixel y coordinate
-		
+		divisionCornerDC = (double) (( signed int)robot1CornerD[1] - ( signed int)robot1CornerC[1] ) / (( signed int)robot1CornerC[0] - (signed int)robot1CornerD[0]); //y is flipped order bc pixel y coordinate
+
 		robotAngle1 = (signed int)(atan(divisionCornerDC)* 180 / 3.14 );
-		robotAngle1 = 90 - robotAngle1;
-		//printf("robot1 angle = %d \n", robotAngle1);
+		//robotAngle1 = 90 - robotAngle1;
+		printf("robot1 angle = %d \n", robotAngle1);
 	}
 
 	//get angle from COMs
 	if ( robot1COM[0] != goalCOM[0] ) {
 
 		//deltaY / deltaX
-		divisionRobot1Goal =  (( double)( robot1COM[1] - goalCOM[1] )) / (goalCOM[0] - robot1COM[0]); //y is flipped order bc pixel y coordinate
-		printf("divisionRobot1Goal: = %f \n", divisionRobot1Goal);		
+		divisionRobot1Goal = (double) (( signed int)robot1COM[1] - ( signed int)goalCOM[1] ) / (( signed int)goalCOM[0] - (signed int)robot1COM[0]); //y is flipped order bc pixel y coordinate
 
 		robot1Angle2Goal = (signed int)(atan(divisionRobot1Goal)* 180 / 3.14 );
 		printf("angle2Goal: = %d \n", robot1Angle2Goal);
-		robot1Angle2Goal = 90 -robot1Angle2Goal;
-		printf("angle2Goal: = %d \n", robot1Angle2Goal);
+		//robot1Angle2Goal = 90 -robot1Angle2Goal;
+		// printf("angle2Goal: = %d \n", robot1Angle2Goal);
 
 	}
 
@@ -224,6 +223,7 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 
 		//get difference in theta
 		robot1AngleDifference = robot1Angle2Goal - robotAngle1 ;
+		printf("differenceAngle: = %d \n", robot1AngleDifference);
 		
 
 		//determine L,R,Straight,Stop commands based on robot angle until reach tolerance radius to goal
