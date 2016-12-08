@@ -70,7 +70,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
 
          // assign different colored pixels to different greyscale values to distinguish them from each other
          // if (v > 160) {
-         if (v > 170 && u > 70) {
+         if (v > 160 && u > 70) {
             // red object
             yc_data_out[row*NUMCOLS+col] = 80; // red objects will have pixel value of 80
          }
@@ -82,7 +82,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
          //    // green object
          //    yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
          // }
-         else if (v > 150 && v < 160) {
+         else if (v > 150 && v < 160 && u < 63) {
             // orange object
             yc_data_out[row*NUMCOLS+col] = 240;
          }
