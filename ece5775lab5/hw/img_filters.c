@@ -74,11 +74,12 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
  
    //median_char_filter_pass(yc_data_red_out,yc_data_red_out_filtered );
    //median_char_filter_pass(yc_data_blue_out,yc_data_blue_out_filtered );
-   median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
+
+   // median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
 
    // FINDME: Bypassing median filter
    corner_detect( yc_data_segmented_out , yc_data_combined, frame_corners);
       
-   ycbcr2rgb_pad(yc_data_combined,rgb_data_out, frame_com ,frame_corners );
+   ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );
 
 }
