@@ -59,7 +59,7 @@ ap_uint<1> lineBuff7;
 
 
 ////Median Filter with a passthrough of the current color pixel
-void median_char_filter_pass( ap_uint<2> input_pix[NUMROWS*NUMCOLS], ap_uint<2> median_pix[NUMROWS*NUMCOLS])
+void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[NUMROWS*NUMCOLS])
 {
 	#pragma AP INTERFACE ap_fifo port=input_pix
 	#pragma AP INTERFACE ap_fifo port=median_pix
