@@ -40,34 +40,34 @@ unsigned short yc_data_segmented_out[NUMROWS*NUMCOLS];
 unsigned short yc_data_segmented_out_filter[NUMROWS*NUMCOLS]; 
 
 
-unsigned short yc_data_red_out_filtered[NUMROWS*NUMCOLS];
-unsigned short yc_data_blue_out_filtered[NUMROWS*NUMCOLS];  
-unsigned short yc_data_green_out_filtered[NUMROWS*NUMCOLS];
+// unsigned short yc_data_red_out_filtered[NUMROWS*NUMCOLS];
+// unsigned short yc_data_blue_out_filtered[NUMROWS*NUMCOLS];  
+// unsigned short yc_data_green_out_filtered[NUMROWS*NUMCOLS];
 
 unsigned short yc_data_combined[NUMROWS*NUMCOLS];
 unsigned short yc_data_combined_filter[NUMROWS*NUMCOLS];
 
 // local arrays to hold blue and red robot center of mass points
-unsigned int blueCOM[2];
-unsigned int redCOM[2];
-unsigned int greenCOM[2];
-
-// local arrays for red and blue robot corner points
-unsigned int blueCorners[8];
-unsigned int redCorners[8];
+// unsigned int blueCOM[2];
+// unsigned int redCOM[2];
+// unsigned int greenCOM[2];
+// 
+// // local arrays for red and blue robot corner points
+// unsigned int blueCorners[8];
+// unsigned int redCorners[8];
 
 // add more parameters here to pass center of masses, points, etc to main
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com, unsigned int * frame_corners)
 {
     
-   int i =0;
+   // int i =0;
 
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
    rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
 
 
    // calculate the center of mass for red robot, blue robot, and green goal
-   centerOfMass(yc_data_segmented, yc_data_segmented_out, frame_com, 'r');
+   centerOfMass(yc_data_segmented, yc_data_segmented_out, frame_com);
 
    // Process image to capture corners for both robots
    //call median filter for each RBG --> and corner detect for each filtered output RBG
@@ -76,10 +76,9 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    //median_char_filter_pass(yc_data_blue_out,yc_data_blue_out_filtered );
    median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
 
-   corner_detect( yc_data_segmented_out_filter , yc_data_combined, frame_corners, 'r');
+   // FINDME: Bypassing median filter
+   corner_detect( yc_data_segmented_out , yc_data_combined, frame_corners);
       
    ycbcr2rgb_pad(yc_data_combined,rgb_data_out, frame_com ,frame_corners );
 
 }
-
-

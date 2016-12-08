@@ -59,7 +59,7 @@ ap_uint<1> lineBuff7;
 
 
 ////Median Filter with a passthrough of the current color pixel
-void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned short median_pix[NUMROWS*NUMCOLS])
+void median_char_filter_pass( ap_uint<2> input_pix[NUMROWS*NUMCOLS], ap_uint<2> median_pix[NUMROWS*NUMCOLS])
 {
 	#pragma AP INTERFACE ap_fifo port=input_pix
 	#pragma AP INTERFACE ap_fifo port=median_pix
@@ -80,8 +80,11 @@ void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned
 			if(row < NUMROWS && col < NUMCOLS)  { pixel_in = input_pix[row*NUMCOLS + col];} 			
 			
 			//change [0,255] to [0,1] for easy counting			
-			if (pixel_in == 255) {pixel_in = 1;}
-			else 				 {pixel_in = 0;}
+                        // this need to change based on 1, 2, 3, 0 values for colors?
+                        // probably should just leave pixel in values as is
+                        // FINDME: REmoving because keeping pixel values as 1, 2, 3, or 0
+			// if (pixel_in == 255) {pixel_in = 1;}
+			// else {pixel_in = 0;}
 
 //update lineBuffer
 			if ( col < NUMCOLS) {
@@ -111,13 +114,15 @@ void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned
 				window.insert( lineBuff1, 2, 0);
 				window.insert( lineBuff2, 3, 0);
 				window.insert( lineBuff3, 4, 0);
-                window.insert( lineBuff4, 5, 0);
+                		window.insert( lineBuff4, 5, 0);
 				window.insert( lineBuff5, 6, 0);
 				window.insert( lineBuff6, 7, 0);
 				window.insert( lineBuff7, 8, 0);
 				window.insert( pixel_in, 0, 0);
 			}
 //count window and assign value out
+// FINDME: Needs to be updated to assign the correct output
+//    countTwos, countThrees, etc
 	
 			unsigned int countOnes = 0;
 			

@@ -11,10 +11,9 @@
 
 #define COM_COUNT 6
 
-void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT], unsigned char color)
+void centerOfMass(ap_uint<2> yc_data_in[NUMROWS*NUMCOLS], ap_uint<2> yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
 {
 
-   // Do i need these? not using a FIFO from the HW?
    #pragma AP INTERFACE ap_fifo port= yc_data_in
    #pragma AP INTERFACE ap_fifo port= yc_data_out
 
@@ -49,25 +48,24 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
          #pragma AP PIPELINE II = 1
          pixel = yc_data_in[row*NUMCOLS + col]; // / 255;
 
-         if (pixel == 80) {
+         if (pixel == 1) {
             // red: need to normalize pixel values for moment calculation
-            red_m00 += pixel / 80;
-            red_m10 += (pixel / 80) * col;
-            red_m01 += (pixel / 80) * row;
+            red_m00 += pixel;
+            red_m10 += (pixel) * col;
+            red_m01 += (pixel) * row;
          }
-         else if (pixel == 160) {
-            // blue: Normalize by 160
-            blue_m00 += pixel / 160;
-            blue_m10 += (pixel / 160) * col;
-            blue_m01 += (pixel / 160) * row;
+         else if (pixel == 2) {
+            // blue: Normalize by 2
+            blue_m00 += pixel >> 1; // shift once is divde by 2
+            blue_m10 += (pixel >> 1) * col;
+            blue_m01 += (pixel >> 1) * row;
          }
-         else if (pixel == 240) {
-            // green: normalize by 240
-            green_m00 += pixel / 240;
-            green_m10 += (pixel / 240) * col;
-            green_m01 += (pixel / 240) * row;
+         else if (pixel == 3) {
+            // green: normalize by 3
+            green_m00 += pixel / 3;
+            green_m10 += (pixel / 3) * col;
+            green_m01 += (pixel / 3) * row;
          }
-
 
          // output pixel
          yc_data_out[row*NUMCOLS +col] = yc_data_in[row*NUMCOLS + col];
@@ -91,17 +89,5 @@ void centerOfMass(unsigned short yc_data_in[NUMROWS*NUMCOLS], unsigned short yc_
    frame_com[3] = blue_yBar;
    frame_com[4] = green_xBar;
    frame_com[5] = green_yBar;
-
-   // switch(color) {
-   //    case('r'):
-   //       frame_com[0] = xBar;
-   //       frame_com[1] = yBar;
-   //    case('b'):
-   //       frame_com[2] = xBar;
-   //       frame_com[3] = yBar;
-   //    case('g'):
-   //       frame_com[4] = xBar;
-   //       frame_com[5] = yBar;
-   // }
 
 }
