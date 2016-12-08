@@ -41,15 +41,6 @@ char yc_data_segmented_out_filter[NUMROWS*NUMCOLS];
 
 char yc_data_combined[NUMROWS*NUMCOLS];
 
-// local arrays to hold blue and red robot center of mass points
-// unsigned int blueCOM[2];
-// unsigned int redCOM[2];
-// unsigned int greenCOM[2];
-// 
-// // local arrays for red and blue robot corner points
-// unsigned int blueCorners[8];
-// unsigned int redCorners[8];
-
 // add more parameters here to pass center of masses, points, etc to main
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com, unsigned int * frame_corners)
 {

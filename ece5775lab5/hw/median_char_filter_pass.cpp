@@ -150,6 +150,7 @@ void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[N
                            if (countOnes > 50) { median_pix[row*NUMCOLS + col] = 1; } // red
                            else if (countTwos > 50) { median_pix[row*NUMCOLS + col] = 2; } // blue
                            else if (countThrees > 50) { median_pix[row*NUMCOLS + col] = 3; } // green
+                           else {median_pix[row*NUMCOLS + col] = 0; // black (background)
                         }
 
 		}
