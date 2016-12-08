@@ -46,7 +46,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
   int col;
 
 
-  for(row = 0; row < NUMROWS; row++){
+  for(row = 100; row < NUMROWS - 100; row++){
     for(col = 0; col < NUMCOLS; col++){
 #pragma AP PIPELINE II = 1
 
@@ -70,7 +70,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
 
          // assign different colored pixels to different greyscale values to distinguish them from each other
          // if (v > 160) {
-         if (v > 160 && u > 70) {
+         if (v > 160 && u > 64) {
             // red object
             yc_data_out[row*NUMCOLS+col] = 80; // red objects will have pixel value of 80
          }
