@@ -4,6 +4,7 @@
 extern "C" {
 #endif
 
+#include "ap_video.h"
 
 #pragma SDS data mem_attribute(rgb_data_in:PHYSICAL_CONTIGUOUS|NON_CACHEABLE)
 #pragma SDS data access_pattern(rgb_data_in:SEQUENTIAL, yc_data_out:SEQUENTIAL)
