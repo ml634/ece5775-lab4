@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
-// #include "ap_video.h"
 
 #define COM_COUNT 6
 
