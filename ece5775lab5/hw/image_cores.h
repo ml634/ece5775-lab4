@@ -13,7 +13,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], ap_uint<2> yc_d
 void centerOfMass(ap_uint<2> yc_data_in[NUMROWS*NUMCOLS], ap_uint<2> yc_data_out[NUMROWS*NUMCOLS], unsigned int frame[COM_COUNT]);
 
 #pragma SDS data access_pattern(median_out:SEQUENTIAL,  corner_data_out:SEQUENTIAL)
-void corner_detect(ap_unt<2> median_out[NUMROWS*NUMCOLS], ap_uint<2> corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS]);
+void corner_detect(ap_uint<2> median_out[NUMROWS*NUMCOLS], ap_uint<2> corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS]);
 
 // #pragma SDS data access_pattern(inter_pix:SEQUENTIAL, output_edge:SEQUENTIAL)
 // void sobel_filter(unsigned short inter_pix[NUMROWS*NUMCOLS],unsigned char output_edge[NUMROWS*NUMCOLS]);
