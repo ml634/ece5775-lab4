@@ -37,6 +37,8 @@
 
 unsigned short yc_data_segmented[NUMROWS*NUMCOLS]; 
 unsigned short yc_data_segmented_out[NUMROWS*NUMCOLS]; 
+unsigned short yc_data_segmented_out_filter[NUMROWS*NUMCOLS]; 
+
 
 unsigned short yc_data_red_out_filtered[NUMROWS*NUMCOLS];
 unsigned short yc_data_blue_out_filtered[NUMROWS*NUMCOLS];  
@@ -73,9 +75,9 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
  
    //median_char_filter_pass(yc_data_red_out,yc_data_red_out_filtered );
    //median_char_filter_pass(yc_data_blue_out,yc_data_blue_out_filtered );
-   //median_char_filter_pass(yc_data_green_out,yc_data_green_out_filtered );
+   median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
 
-   corner_detect(yc_data_segmented_out, yc_data_combined, frame_corners, 'r');
+   corner_detect( yc_data_segmented_out_filter , yc_data_combined, frame_corners, 'r');
       
    ycbcr2rgb_pad(yc_data_combined,rgb_data_out, frame_com ,frame_corners );
 

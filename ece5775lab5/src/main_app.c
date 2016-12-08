@@ -110,7 +110,7 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 	}
 	else if ( !isNetworkAlive ) {
 		// if network somehow failed, then initiate again
-		//isNetworkAlive = init_network();
+		isNetworkAlive = init_network();
 	}
 
 	return;
@@ -154,7 +154,7 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 	  goalCOM[1] = *(unsigned int *)(frame_com_array + 20 );
 
 	//hardcode goalCOM to be right middle of screen (1500,500)
-	goalCOM[0] = 1500;
+	goalCOM[0] = 1800;
 	goalCOM[1] = 500;
 
 	//calculate distance deltaX,deltaY
@@ -230,13 +230,13 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 		if(robotToGoalDistance > arrivedTolerance) {
 
 	
-			if( robot1AngleDifference > robotToleranceAngle) {printf("goRight"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
-			if( robot1AngleDifference < -1*robotToleranceAngle) {printf("goLeft"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
-			else {printf("goStraight"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
+			if( robot1AngleDifference < -1*robotToleranceAngle) {printf("goRight \n"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
+			if( robot1AngleDifference >  robotToleranceAngle) {printf("goLeft \n"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
+			else {printf("goStraight \n"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
 		} 
 
 	
-		else {printf("STOP"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
+		else {printf("STOP \n"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
 
 		return;
 	}
@@ -362,7 +362,7 @@ int main(int argc, char **argv)
 	printf("\n START CODE \n");
 	init_all();
 	//initialize the server -> will be blocking until both robots connected	
-	//isNetworkAlive = init_network();
+	isNetworkAlive = init_network();
 	thread_sw_sync(); // Sample code - loop forever, exit with Ctrl-C
 
 
