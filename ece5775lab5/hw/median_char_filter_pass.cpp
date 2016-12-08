@@ -125,16 +125,32 @@ void median_char_filter_pass( ap_uint<2> input_pix[NUMROWS*NUMCOLS], ap_uint<2> 
 //    countTwos, countThrees, etc
 	
 			unsigned int countOnes = 0;
+			unsigned int countTwos = 0;
+			unsigned int countThrees = 0;
 			
 			for (windowRow = 0; windowRow < MF_SIZE; windowRow ++) {
 				for (windowCol = 0; windowCol < MF_SIZE; windowCol ++) {
-					countOnes += window.getval(windowRow,windowCol);
+                                        if (window.getval(windowRow, windowCol) == 1) {
+                                           countOnes++;
+                                        }
+                                        else if (window.getval(windowRow, windowCol) == 2) {
+                                           countTwos++;
+                                        }
+                                        else if (window.getval(windowRow, windowCol) == 3) {
+                                           countThrees++;
+                                        }
+					// countOnes += window.getval(windowRow,windowCol);
 
 				}
 		
 			}
 
-			if ( row < NUMROWS && col < NUMCOLS ) {  median_pix[row*NUMCOLS + col] = (countOnes > 50) ? 255:0; }
+			// if ( row < NUMROWS && col < NUMCOLS ) {  median_pix[row*NUMCOLS + col] = (countOnes > 50) ? 255:0; }
+			if ( row < NUMROWS && col < NUMCOLS ) {  
+                           if (countOnes > 50) { median_pix[row*NUMCOLS + col] = 1; } // red
+                           else if (countTwos > 50) { median_pix[row*NUMCOLS + col] = 2; } // blue
+                           else if (countThrees > 50) { median_pix[row*NUMCOLS + col] = 3; } // green
+                        }
 
 		}
 

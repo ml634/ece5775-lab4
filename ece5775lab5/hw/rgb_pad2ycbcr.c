@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
+#include "ap_video.h"
 
 // FINDME: can yc_data_out be a ap_uint<2> and we can just change it back to whatever it needs for HDMI output later?
 // void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short  yc_data_out[NUMROWS*NUMCOLS], char color)

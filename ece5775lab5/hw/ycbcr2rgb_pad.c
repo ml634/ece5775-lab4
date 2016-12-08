@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
+#include "ap_video.h"
 
 //Main function for ycbcr2rgb with padding to 2048 pixel line
 void ycbcr2rgb_pad(unsigned short yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16])
