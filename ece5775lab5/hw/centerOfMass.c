@@ -8,11 +8,11 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
-#include "ap_video.h"
+// #include "ap_video.h"
 
 #define COM_COUNT 6
 
-void centerOfMass(ap_uint<2> yc_data_in[NUMROWS*NUMCOLS], ap_uint<2> yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
+void centerOfMass(char yc_data_in[NUMROWS*NUMCOLS], char yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
 {
 
    #pragma AP INTERFACE ap_fifo port= yc_data_in

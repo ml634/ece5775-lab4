@@ -35,9 +35,9 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-unsigned short yc_data_segmented[NUMROWS*NUMCOLS]; 
-unsigned short yc_data_segmented_out[NUMROWS*NUMCOLS]; 
-unsigned short yc_data_segmented_out_filter[NUMROWS*NUMCOLS]; 
+char yc_data_segmented[NUMROWS*NUMCOLS]; 
+char yc_data_segmented_out[NUMROWS*NUMCOLS]; 
+char yc_data_segmented_out_filter[NUMROWS*NUMCOLS]; 
 
 
 // unsigned short yc_data_red_out_filtered[NUMROWS*NUMCOLS];
