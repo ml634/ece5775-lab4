@@ -69,7 +69,8 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
         // printf("yuv: %d, %d, %d \n",y ,u ,v);
 
          // assign different colored pixels to different greyscale values to distinguish them from each other
-         if (v > 160) {
+         // if (v > 160) {
+         if (v > 200) {
             // red object
             yc_data_out[row*NUMCOLS+col] = 80; // red objects will have pixel value of 80
          }
@@ -77,11 +78,15 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
             // blue object
             yc_data_out[row*NUMCOLS+col] = 160; // blue objects will have pixel value of 160
 		}
-         else if ( (200 > y) && (y > 100) && (u < 110) && (v < 110) ) {
-            // green object
-            yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
+         // else if ( (200 > y) && (y > 100) && (u < 110) && (v < 110) ) {
+         //    // green object
+         //    yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
+         // }
+         else if (v > 155 && v < 170) {
+            // orange object
+            yc_data_out[row*NUMCOLS+col] = 240;
          }
-		else { yc_data_out[row*NUMCOLS+col] = 0; } 
+	 else { yc_data_out[row*NUMCOLS+col] = 0; } 
 
    // switch(color) {
    //    case('r'):

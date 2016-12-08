@@ -90,7 +90,7 @@ void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned
 				lineBuff1 = lineBuffer.getval(1, col);
 				lineBuff2 = lineBuffer.getval(2, col);
 				lineBuff3 = lineBuffer.getval(3, col);
-                lineBuff4 = lineBuffer.getval(4, col);
+		                lineBuff4 = lineBuffer.getval(4, col);
 				lineBuff5 = lineBuffer.getval(5, col);
 				lineBuff6 = lineBuffer.getval(6, col);
 				lineBuff7 = lineBuffer.getval(7, col);
@@ -135,10 +135,4 @@ void median_char_filter_pass( unsigned short input_pix[NUMROWS*NUMCOLS],unsigned
 
 	}
 
-
-
-	
-
 }
-
-
