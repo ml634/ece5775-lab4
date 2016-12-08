@@ -35,20 +35,21 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short  yc_data_out[NUMROWS*NUMCOLS], char color)
+// FINDME: can yc_data_out be a ap_uint<2> and we can just change it back to whatever it needs for HDMI output later?
+// void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short  yc_data_out[NUMROWS*NUMCOLS], char color)
+void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], ap_uint<2>  yc_data_out[NUMROWS*NUMCOLS])
 {
 
-#pragma AP INTERFACE ap_fifo port= rgb_data_in
-#pragma AP INTERFACE ap_fifo port= yc_data_out
+  #pragma AP INTERFACE ap_fifo port= rgb_data_in
+  #pragma AP INTERFACE ap_fifo port= yc_data_out
   unsigned char in_R, in_G, in_B;
 
   int row;
   int col;
 
-
   for(row = 100; row < NUMROWS - 100; row++){
     for(col = 0; col < NUMCOLS; col++){
-#pragma AP PIPELINE II = 1
+	#pragma AP PIPELINE II = 1
 
         unsigned short  u = 0;
         unsigned short  v = 0;
@@ -72,47 +73,31 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
          // if (v > 160) {
          if (v > 160 && y < 130) { // && u > 74) { // try adding Y value check?
             // red object
-            yc_data_out[row*NUMCOLS+col] = 80; // red objects will have pixel value of 80
+            yc_data_out[row*NUMCOLS+col] = 1; // red objects will have pixel value of 1
          } 
          else if (u > 150) {
             // blue object
-            yc_data_out[row*NUMCOLS+col] = 160; // blue objects will have pixel value of 160
+            yc_data_out[row*NUMCOLS+col] = 2; // blue objects will have pixel value of 2
 		}
          // else if ( (200 > y) && (y > 100) && (u < 110) && (v < 110) ) {
          //    // green object
-         //    yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
+         //    yc_data_out[row*NUMCOLS+col] = 3; // green objects will have pixel value of 3
          // }
          // else if (v > 150 && v < 160 && u < 63) { // try looking if Y value is greater than 120?
          // else if (v < 160 && v > 120 && u < 150 && u > 110) {
          //    // green object
-         //    yc_data_out[row*NUMCOLS+col] = 240;
+         //    yc_data_out[row*NUMCOLS+col] = 3;
          // }
-	 else { yc_data_out[row*NUMCOLS+col] = 0; } 
-
-   // switch(color) {
-   //    case('r'):
-   //       // Set pixels to be 1 for red
-   //       yc_data_out[row*NUMCOLS+col] = ( v > 160) ? 255:0;
-   //       // calculate COM for red
-   //       break;
-   //    case('b'):
-   //       // set pixels to be 2 for blue
-   //       yc_data_out[row*NUMCOLS+col] = ( u > 150) ? 255:0;
-   //      	 // calculate COM for blue
-   //       break;
-   //    case('g'):
-   //       // set pixels to be 3 for green
-   //       yc_data_out[row*NUMCOLS+col] = ( ( 200 > y ) && ( y > 100) && (u < 110) && (v < 110) ) ? 255:0;
-   //       break;
-   // }
-
-
+	 else { 
+            // black object (background)
+            yc_data_out[row*NUMCOLS+col] = 0;
+         }
 
     }
 
     for (col = NUMCOLS; col < NUMPADCOLS; col++) {
         volatile unsigned int pixel0;
-#pragma AP PIPELINE II = 1
+	#pragma AP PIPELINE II = 1
 	pixel0 = rgb_data_in[row*NUMPADCOLS+col];
     }
  }

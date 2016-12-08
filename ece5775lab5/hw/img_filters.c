@@ -63,12 +63,11 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    int i =0;
 
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
-   rgb_pad2ycbcr(rgb_data_in, yc_data_segmented, 'r');
+   rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
 
 
    // calculate the center of mass for red robot, blue robot, and green goal
    centerOfMass(yc_data_segmented, yc_data_segmented_out, frame_com, 'r');
-
 
    // Process image to capture corners for both robots
    //call median filter for each RBG --> and corner detect for each filtered output RBG
