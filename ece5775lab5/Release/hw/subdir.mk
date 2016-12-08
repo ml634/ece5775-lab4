@@ -35,7 +35,7 @@ SDSFLAGS += -sds-pf $(PLATFORM) \
 	-sds-hw rgb_pad2ycbcr rgb_pad2ycbcr.c -clkid 1 -sds-end \
 	-sds-hw ycbcr2rgb_pad ycbcr2rgb_pad.c -clkid 1 -sds-end \
 	-sds-hw centerOfMass centerOfMass.c -clkid 1 -sds-end \
-	-sds-hw corner_detect corner_detect.c -clkid 1 -sds-end \
+	-sds-hw corner_detect corner_detect.cpp -clkid 1 -sds-end \
 	-dmclkid 1
 
 # 	-sds-hw sobel_filter sobel_filter.cpp -clkid 1 -sds-end \
