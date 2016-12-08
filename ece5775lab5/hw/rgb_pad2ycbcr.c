@@ -83,7 +83,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short 
          //    yc_data_out[row*NUMCOLS+col] = 240; // green objects will have pixel value of 240
          // }
          // else if (v > 150 && v < 160 && u < 63) { // try looking if Y value is greater than 120?
-         else if (v > 160 && y > 150)
+         else if (v > 160 && y > 150) {
             // orange object
             yc_data_out[row*NUMCOLS+col] = 240;
          }
