@@ -26,7 +26,9 @@ OBJS += ./hw/sobel_filter_pass.o \
 C_DEPS += ./hw/img_filters.d
 
 
-
+# FINDME: clock frequency info
+# -clkid 1 has a target clock frequency of 142 MHz
+# can use 2 for a target frequency of 100MHz if need be
 SDSFLAGS += -sds-pf $(PLATFORM) \
 	-sds-hw sobel_filter sobel_filter.cpp -clkid 1 -sds-end \
 	-sds-hw sobel_filter_pass sobel_filter_pass.cpp -clkid 1 -sds-end \
