@@ -13,7 +13,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], ap_uint<8> yc_d
 void centerOfMass(ap_uint<8> yc_data_in[NUMROWS*NUMCOLS], ap_uint<8> yc_data_out[NUMROWS*NUMCOLS], unsigned int frame[COM_COUNT]);
 
 #pragma SDS data access_pattern(median_out:SEQUENTIAL,  corner_data_out:SEQUENTIAL)
-void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS]);
+void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_data_out[NUMROWS*NUMCOLS], unsigned int local_com_in[6], unsigned int local_com_out[6], unsigned int local_corners_out[CORNER_ELEMENTS]);
 
 // #pragma SDS data access_pattern(inter_pix:SEQUENTIAL, output_edge:SEQUENTIAL)
 // void sobel_filter(unsigned short inter_pix[NUMROWS*NUMCOLS],unsigned char output_edge[NUMROWS*NUMCOLS]);
@@ -41,7 +41,7 @@ void median_char_filter_pass(ap_uint<8> input_pix[NUMROWS*NUMCOLS], ap_uint<8> m
 //void ycbcr2rgb_pad(ap_uint<2> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS]);
 //commented out bc 
 //ERROR: [SDSoC 0-0] Function 'ycbcr2rgb_pad' argument 'frame_com' maps onto a hardware port of type bram, which is currently unsupported. 
-void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int com_temp[6], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16]);
+void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int com_temp_in[6],  unsigned int corners_temp_in[16], unsigned int frame_com_out[6], unsigned int frame_corners_out[16]);
 
 //#ifdef __cplusplus
 //};
