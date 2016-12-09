@@ -41,6 +41,8 @@ char yc_data_segmented_out_filter[NUMROWS*NUMCOLS];
 
 char yc_data_combined[NUMROWS*NUMCOLS];
 
+unsigned int com_temp[6];
+
 // add more parameters here to pass center of masses, points, etc to main
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com, unsigned int * frame_corners)
 {
@@ -55,16 +57,18 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    // median_char_filter_pass(yc_data_segmented, yc_data_segmented_out_filter );
 
    // calculate the center of mass for red robot, blue robot, and green goal
-   centerOfMass(yc_data_segmented, yc_data_segmented_out, frame_com);
+   // centerOfMass(yc_data_segmented, yc_data_segmented_out, frame_com);
+   centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
 
    // Process image to capture corners for both robots
    //call median filter for each RBG --> and corner detect for each filtered output RBG
 
    // FINDME: Bypassing corner detect to test median filter
-   corner_detect( yc_data_segmented_out , yc_data_combined, frame_corners);
+   // corner_detect( yc_data_segmented_out , yc_data_combined, frame_corners);
       
    // ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );
    // ycbcr2rgb_pad(yc_data_segmented_out_filter, rgb_data_out, frame_com ,frame_corners );
-   ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );
+   // FINDME: Outputs should always be in the last function
+   ycbcr2rgb_pad(yc_data_segmented_out, rgb_data_out, frame_com ,frame_corners );
 
 }
