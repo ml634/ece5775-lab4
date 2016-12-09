@@ -58,6 +58,10 @@ void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUM
   }
   
   signed int temp_x, temp_y;
+
+  // FINDME: hardcode green center of mass
+  frame_com[4] = 1800
+  frame_com[5] = 500
   
   // Draw COMs in 31*31 (bigger) cyan squares
   for (i = 0; i < 5; i = i + 2){
