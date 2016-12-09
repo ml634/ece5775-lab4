@@ -42,8 +42,8 @@ void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_dat
 	static ap_uint<11> fifo_frame_corners_blue[CORNER_HISTORY_FRAME_NUMBER][CORNER_ELEMENTS] = {0};
 //#pragma AP array_partition variable=fifo_frame_corners complete dim=0
 
-	static ap_uint<11> sorted_corners_red[CORNER_HISTORY_FRAME_NUMBER][CORNER_ELEMENTS] = {0};
-	static ap_uint<11> sorted_corners_blue[CORNER_HISTORY_FRAME_NUMBER][CORNER_ELEMENTS] = {0};
+	//static ap_uint<11> sorted_corners_red[CORNER_HISTORY_FRAME_NUMBER][CORNER_ELEMENTS] = {0};
+	//static ap_uint<11> sorted_corners_blue[CORNER_HISTORY_FRAME_NUMBER][CORNER_ELEMENTS] = {0};
 //#pragma AP array_partition variable=sorted_corners complete dim=0
 
 	static unsigned int corner_frame_counter_red = 0;
@@ -132,7 +132,7 @@ void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_dat
     } // print out all the corners at the end*/
 
   } // end of row iteration
-	  
+	/*  
   ap_uint<11> temp_corner0_red;
   ap_uint<11> temp_corner1_red;
   ap_uint<11> temp_corner2_red;
@@ -263,5 +263,22 @@ void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_dat
   frame_corners[13] = sorted_corners_blue[5][5]; //  B(Y) = B[1]	
   frame_corners[14] = sorted_corners_blue[5][6]; //  D(X) = D[0]	
   frame_corners[15] = sorted_corners_blue[5][7]; //  D(Y) = D[1]
+  */
+  frame_corners[0] = temp_corners_red[0]; //  A(X) = A[0]	
+  frame_corners[1] = temp_corners_red[1]; //  A(y) = A[1]	
+  frame_corners[2] = temp_corners_red[2]; //  C(X) = C[0]
+  frame_corners[3] = temp_corners_red[3]; //  C(Y) = C[1]	
+  frame_corners[4] = temp_corners_red[4]; //  B(X) = B[0]	
+  frame_corners[5] = temp_corners_red[5]; //  B(Y) = B[1]	
+  frame_corners[6] = temp_corners_red[6]; //  D(X) = D[0]	
+  frame_corners[7] = temp_corners_red[7]; //  D(Y) = D[1]
+  frame_corners[8] = temp_corners_blue[0]; //  A(X) = A[0]	
+  frame_corners[9] = temp_corners_blue[1]; //  A(y) = A[1]	
+  frame_corners[10] = temp_corners_blue[2]; //  C(X) = C[0]
+  frame_corners[11] = temp_corners_blue[3]; //  C(Y) = C[1]	
+  frame_corners[12] = temp_corners_blue[4]; //  B(X) = B[0]	
+  frame_corners[13] = temp_corners_blue[5]; //  B(Y) = B[1]	
+  frame_corners[14] = temp_corners_blue[6]; //  D(X) = D[0]	
+  frame_corners[15] = temp_corners_blue[7]; //  D(Y) = D[1]
 		
 }
