@@ -194,7 +194,7 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 
 		robotAngle1 = (signed int)(atan(divisionCornerDC)* 180 / 3.14 );
 		//robotAngle1 = 90 - robotAngle1;
-		printf("robot1 angle = %d \n", robotAngle1);
+		//printf("robot1 angle = %d \n", robotAngle1);
 	}
 
 	//get angle from COMs
@@ -204,13 +204,15 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 		divisionRobot1Goal = (double) (( signed int)robot1COM[1] - ( signed int)goalCOM[1] ) / (( signed int)goalCOM[0] - (signed int)robot1COM[0]); //y is flipped order bc pixel y coordinate
 
 		robot1Angle2Goal = (signed int)(atan(divisionRobot1Goal)* 180 / 3.14 );
-		printf("angle2Goal: = %d \n", robot1Angle2Goal);
 		//robot1Angle2Goal = 90 -robot1Angle2Goal;
 		// printf("angle2Goal: = %d \n", robot1Angle2Goal);
 
 	}
 
-
+		//get difference in theta
+		robot1AngleDifference = robot1Angle2Goal - robotAngle1 ;
+		printf("robot1 angle = %d, angle2Goal: %d,differenceAngle: = %d \n", robotAngle1, robot1Angle2Goal, robot1AngleDifference);
+		
 
 
 	// area is big enough and not noise
@@ -221,17 +223,17 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 		robotToGoalDistance = ( ( robot1COM[1] - goalCOM[1] ) * ( robot1COM[1] - goalCOM[1] ) )+ ( (goalCOM[0] - robot1COM[0]) * (goalCOM[0] - robot1COM[0]));
 
 
-		//get difference in theta
-		robot1AngleDifference = robot1Angle2Goal - robotAngle1 ;
-		printf("differenceAngle: = %d \n", robot1AngleDifference);
-		
-
 		//determine L,R,Straight,Stop commands based on robot angle until reach tolerance radius to goal
 		if(robotToGoalDistance > arrivedTolerance) {
 
 	
-			if( robot1AngleDifference < -1*robotToleranceAngle) {printf("goRight \n"); serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);}
-			if( robot1AngleDifference >  robotToleranceAngle) {printf("goLeft \n"); serialDataOverNetwork[0] = (char)2; sendCommand(serialDataOverNetwork, socket_robot1);}
+			if( robot1AngleDifference < -1*robotToleranceAngle) {
+				printf("goRight \n"); 
+				
+				serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);
+				printf("serialData: = %d \n", serialDataOverNetwork[0] ); 
+			}
+			else if( robot1AngleDifference >  robotToleranceAngle) {printf("goLeft \n"); serialDataOverNetwork[0] = (char)2; printf("serialData: = %d \n", serialDataOverNetwork[0] ); sendCommand(serialDataOverNetwork, socket_robot1);}
 			else {printf("goStraight \n"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
 		} 
 
