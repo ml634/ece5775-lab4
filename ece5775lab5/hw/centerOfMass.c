@@ -22,15 +22,15 @@ void centerOfMass(char yc_data_in[NUMROWS*NUMCOLS], char yc_data_out[NUMROWS*NUM
    int row;
    int col;
   
-   unsigned short red_m00, blue_m00, green_m00;
+   unsigned int red_m00, blue_m00, green_m00;
  
    unsigned int  red_m01, red_m10; // moment variables for red
    unsigned int  blue_m01, blue_m10; // moment variables for blue
    unsigned int  green_m01, green_m10; // moment variables for green
 
-   unsigned short red_xBar, red_yBar; // center of mass coords for red
-   unsigned short blue_xBar, blue_yBar; // center of mass coords for blue
-   unsigned short green_xBar, green_yBar; // center of mass coords for green
+   unsigned int red_xBar, red_yBar; // center of mass coords for red
+   unsigned int blue_xBar, blue_yBar; // center of mass coords for blue
+   unsigned int green_xBar, green_yBar; // center of mass coords for green
 
    // initialize moment values m00 != 0 to prevent floating pt error
    red_m00 = 1;

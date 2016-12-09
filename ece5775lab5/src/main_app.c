@@ -56,7 +56,7 @@ char serialDataOverNetwork[1];
 
 #define arrivedTolerance    100
 #define robotToleranceAngle 1
-
+#define robotDriveTolerance 50
 
 
 char init_network()
@@ -110,7 +110,7 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 	}
 	else if ( !isNetworkAlive ) {
 		// if network somehow failed, then initiate again
-		isNetworkAlive = init_network();
+		// isNetworkAlive = init_network();
 	}
 
 	return;
@@ -129,6 +129,8 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 	
 	signed int deltaXrobot1 = 0;
 	signed int deltaYrobot1 = 0;
+	signed int deltaXrobot2 = 0;
+	signed int deltaYrobot2 = 0;
 
 	unsigned int deltaXCornerAB = 0;
 	unsigned int deltaYCornerAB = 0;
@@ -160,6 +162,9 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 	//calculate distance deltaX,deltaY
 	deltaXrobot1 =    ( goalCOM[0] - robot1COM[0] );
 	deltaYrobot1 =    ( goalCOM[1] - robot1COM[1] );
+
+	deltaXrobot2 =    ( goalCOM[0] - robot2COM[0] ); 
+	deltaXrobot2 =    ( goalCOM[1] - robot2COM[1] );
 
 	//calculate area of red, blue box from 4 corners each
 	//corners stored order: A (xmin) C(xmax) B (ymin) D(ymax)
@@ -216,7 +221,7 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 
 
 	// area is big enough and not noise
-	if( area > 10000 ) {
+	
 
 
 		//get robot to goal distance
@@ -224,24 +229,40 @@ void robotCommand(unsigned int frame_com_array, unsigned int frame_corner_array)
 
 
 		//determine L,R,Straight,Stop commands based on robot angle until reach tolerance radius to goal
-		if(robotToGoalDistance > arrivedTolerance) {
+		if(deltaXrobot1 > arrivedTolerance) {
 
 	
-			if( robot1AngleDifference < -1*robotToleranceAngle) {
-				printf("goRight \n"); 
+			if( deltaYrobot1 > robotDriveTolerance) {
+				printf("1goRight \n"); 
 				
-				serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);
-				printf("serialData: = %d \n", serialDataOverNetwork[0] ); 
+				// serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot1);
+				// printf("serialData: = %d \n", serialDataOverNetwork[0] ); 
 			}
-			else if( robot1AngleDifference >  robotToleranceAngle) {printf("goLeft \n"); serialDataOverNetwork[0] = (char)2; printf("serialData: = %d \n", serialDataOverNetwork[0] ); sendCommand(serialDataOverNetwork, socket_robot1);}
-			else {printf("goStraight \n"); serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
+			else if( deltaYrobot1 < -1*robotDriveTolerance) {printf("1goLeft \n");} // serialDataOverNetwork[0] = (char)2; printf("serialData: = %d \n", serialDataOverNetwork[0] ); sendCommand(serialDataOverNetwork, socket_robot1);}
+			else {printf("1goStraight \n");} // serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot1);}
 		} 
 
 	
-		else {printf("STOP \n"); serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
+		else {printf("1STOP \n");} // serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot1);}
 
+		//determine L,R,Straight,Stop commands based on robot angle until reach tolerance radius to goal
+		if(deltaXrobot2 > arrivedTolerance) {
+
+	
+			if( deltaYrobot2 > robotDriveTolerance) {
+				printf("2goRight \n"); 
+				
+				// serialDataOverNetwork[0] = (char)0; sendCommand(serialDataOverNetwork, socket_robot2);
+				printf("serialData: = %d \n", serialDataOverNetwork[0] ); 
+			}
+			else if( deltaYrobot2 < -1*robotDriveTolerance) {printf("2goLeft \n"); }// serialDataOverNetwork[0] = (char)2; printf("serialData: = %d \n", serialDataOverNetwork[0] ); sendCommand(serialDataOverNetwork, socket_robot2);}
+			else {printf("2goStraight \n");} // serialDataOverNetwork[0] = (char)1; sendCommand(serialDataOverNetwork, socket_robot2);}
+		} 
+
+	
+		else {printf("2STOP \n"); }// serialDataOverNetwork[0] = (char)3; sendCommand(serialDataOverNetwork, socket_robot2);}
 		return;
-	}
+
 }
 
 
@@ -251,6 +272,7 @@ void motion_demo_processing( unsigned int in_buffer, unsigned int out_buffer, un
 	
 
 	//unsigned int testCOM[6];
+	printf("Calling img_process\n");
 
 TIME_STAMP_INIT
 	img_process( (unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer, (unsigned int *) corner_buffer); // more parameters here for values passed from img_process
@@ -364,7 +386,7 @@ int main(int argc, char **argv)
 	printf("\n START CODE \n");
 	init_all();
 	//initialize the server -> will be blocking until both robots connected	
-	isNetworkAlive = init_network();
+	// isNetworkAlive = init_network();
 	thread_sw_sync(); // Sample code - loop forever, exit with Ctrl-C
 
 

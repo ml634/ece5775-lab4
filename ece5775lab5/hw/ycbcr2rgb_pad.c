@@ -8,7 +8,7 @@
 // #include "ap_video.h"
 
 //Main function for ycbcr2rgb with padding to 2048 pixel line
-void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16])
+void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS])
 {
   int row;
   int col;
@@ -60,8 +60,8 @@ void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUM
   signed int temp_x, temp_y;
 
   // FINDME: hardcode green center of mass
-  frame_com[4] = 1800
-  frame_com[5] = 500
+  frame_com[4] = 1800;
+  frame_com[5] = 500;
   
   // Draw COMs in 31*31 (bigger) cyan squares
   for (i = 0; i < 5; i = i + 2){
