@@ -69,6 +69,6 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    // ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );
    // ycbcr2rgb_pad(yc_data_segmented_out_filter, rgb_data_out, frame_com ,frame_corners );
    // FINDME: Outputs should always be in the last function
-   ycbcr2rgb_pad(yc_data_segmented_out, rgb_data_out, frame_com ,frame_corners );
+   ycbcr2rgb_pad(yc_data_segmented_out, com_temp, rgb_data_out, frame_com ,frame_corners );
 
 }
