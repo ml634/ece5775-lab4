@@ -34,6 +34,9 @@
 #include "img_filters.h"
 #include "sds_lib.h"
 #include "apf_lib.h"
+
+#include <math.h>
+
 #define TIME_STAMP_INIT  unsigned long long clock_start, clock_end;  clock_start = sds_clock_counter();  
 #define TIME_STAMP  { clock_end = sds_clock_counter(); printf("elapsed time %llu \n", clock_end-clock_start); clock_start = sds_clock_counter();  }
 

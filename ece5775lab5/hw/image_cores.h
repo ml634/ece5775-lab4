@@ -1,18 +1,19 @@
 #ifndef _IMAGE_CORES_H_
 #define _IMAGE_CORES_H_
-#ifdef __cplusplus
-extern "C" {
-#endif
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
+#include "ap_video.h"
 
 #pragma SDS data mem_attribute(rgb_data_in:PHYSICAL_CONTIGUOUS|NON_CACHEABLE)
 #pragma SDS data access_pattern(rgb_data_in:SEQUENTIAL, yc_data_out:SEQUENTIAL)
-void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], char yc_data_out[NUMROWS*NUMCOLS]);
+void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], ap_uint<8> yc_data_out[NUMROWS*NUMCOLS]);
 
 #pragma SDS data access_pattern(yc_data_in:SEQUENTIAL, yc_data_out:SEQUENTIAL)
-void centerOfMass(char yc_data_in[NUMROWS*NUMCOLS], char yc_data_out[NUMROWS*NUMCOLS], unsigned int frame[COM_COUNT]);
+void centerOfMass(ap_uint<8> yc_data_in[NUMROWS*NUMCOLS], ap_uint<8> yc_data_out[NUMROWS*NUMCOLS], unsigned int frame[COM_COUNT]);
 
 #pragma SDS data access_pattern(median_out:SEQUENTIAL,  corner_data_out:SEQUENTIAL)
-void corner_detect(char median_out[NUMROWS*NUMCOLS], char corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS]);
+void corner_detect(ap_uint<8> median_out[NUMROWS*NUMCOLS], ap_uint<8> corner_data_out[NUMROWS*NUMCOLS], unsigned int frame_corners[CORNER_ELEMENTS]);
 
 // #pragma SDS data access_pattern(inter_pix:SEQUENTIAL, output_edge:SEQUENTIAL)
 // void sobel_filter(unsigned short inter_pix[NUMROWS*NUMCOLS],unsigned char output_edge[NUMROWS*NUMCOLS]);
@@ -32,14 +33,17 @@ void corner_detect(char median_out[NUMROWS*NUMCOLS], char corner_data_out[NUMROW
 
 #pragma SDS data access_pattern(input_pix:SEQUENTIAL)
 #pragma SDS data access_pattern(median_pix:SEQUENTIAL)
-void median_char_filter_pass(char input_pix[NUMROWS*NUMCOLS], char median_pix[NUMROWS*NUMCOLS]);
+void median_char_filter_pass(ap_uint<8> input_pix[NUMROWS*NUMCOLS], ap_uint<8> median_pix[NUMROWS*NUMCOLS]);
 
 #pragma SDS data mem_attribute(rgb_out:PHYSICAL_CONTIGUOUS|NON_CACHEABLE)
 #pragma SDS data access_pattern(yc_in:SEQUENTIAL)
 #pragma SDS data access_pattern(rgb_out:SEQUENTIAL)
-void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS]);
+//void ycbcr2rgb_pad(ap_uint<2> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS]);
+//commented out bc 
+//ERROR: [SDSoC 0-0] Function 'ycbcr2rgb_pad' argument 'frame_com' maps onto a hardware port of type bram, which is currently unsupported. 
+void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS]);
 
-#ifdef __cplusplus
-};
-#endif
+//#ifdef __cplusplus
+//};
+//#endif
 #endif

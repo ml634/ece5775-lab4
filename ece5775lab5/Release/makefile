@@ -64,21 +64,21 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 #	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
 
 # FINDME: Removing median filter from synthesis to try to free up LUT space
-# ./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
-# 	sds++ -c -o"$@" "$<" 
-# 	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
+./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
+	sds++ -c -o"$@" "$<" 
+	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
-./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.c
-	sdscc -c  -o"$@" "$<" 
-	#sdscc -c $(SDSFLAGS) -o"$@" "$<"
+./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.cpp
+	sds++ -c  -o"$@" "$<" 
+	#sds++ -c $(SDSFLAGS) -o"$@" "$<"
  
-./hw/ycbcr2rgb_pad.o: ../hw/ycbcr2rgb_pad.c
-	sdscc -c -o"$@" "$<" 
-	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
+./hw/ycbcr2rgb_pad.o: ../hw/ycbcr2rgb_pad.cpp
+	sds++ -c -o"$@" "$<" 
+	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
-./hw/centerOfMass.o: ../hw/centerOfMass.c
-	sdscc -c -o"$@" "$<" 
-	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
+./hw/centerOfMass.o: ../hw/centerOfMass.cpp
+	sds++ -c -o"$@" "$<" 
+	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
 ./hw/corner_detect.o: ../hw/corner_detect.cpp
 	sds++ -c -o"$@" "$<" 

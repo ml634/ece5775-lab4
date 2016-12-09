@@ -68,15 +68,15 @@
 #ifndef IMG_FILTERS_H_
 #define IMG_FILTERS_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
 /* Sobel Modules declarations */
 void img_process( unsigned int *rgb_in_strm, unsigned int *rgb_out_strm, unsigned int *com_strm, unsigned int *corner_strm);
 
-#ifdef __cplusplus
-};
-#endif
+//#ifdef __cplusplus
+//};
+//#endif
 
 #endif /* IMG_FILTERS_H_ */
 

@@ -32,10 +32,6 @@
 #include <stdio.h>
 #include "frame_size.h"
 #include "image_cores.h"
-
-
-
-
 #include "image_demo.h"
 
 #define MF_SIZE 9
@@ -59,7 +55,7 @@ ap_uint<2> lineBuff7;
 
 
 ////Median Filter with a passthrough of the current color pixel
-void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[NUMROWS*NUMCOLS])
+void median_char_filter_pass( ap_uint<8> input_pix[NUMROWS*NUMCOLS], ap_uint<8> median_pix[NUMROWS*NUMCOLS])
 {
 	#pragma AP INTERFACE ap_fifo port=input_pix
 	#pragma AP INTERFACE ap_fifo port=median_pix
