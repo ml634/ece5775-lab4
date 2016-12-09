@@ -65,7 +65,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    // calculate the center of mass for red robot, blue robot, and green goal
    // data in, data out, local com out
-   centerOfMass(yc_data_segmented_out, yc_data_segmented_out, com_temp);
+   //centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
    //printf("com done\n");
 
    // Process image to capture corners for both robots
@@ -73,7 +73,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    // FINDME: Bypassing corner detect to test median filter
    // data in, data out, local com from com func in, unchanged com out, local corners out
-   // corner_detect( yc_data_segmented, yc_data_combined, com_temp, com_temp_after_corners, corners_temp);
+   corner_detect( yc_data_segmented, yc_data_combined, com_temp, com_temp_after_corners, corners_temp);
    // printf("corner done\n");
       
    //ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );

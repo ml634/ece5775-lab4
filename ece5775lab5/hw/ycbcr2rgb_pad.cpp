@@ -8,7 +8,7 @@
 #include "ap_video.h"
 
 //Main function for ycbcr2rgb with padding to 2048 pixel line
-void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16])
+void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int com_temp_in[6],  unsigned int corners_temp_in[16], unsigned int frame_com_out[6], unsigned int frame_corners_out[16])
 //void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS])
 {
   int row;
@@ -68,13 +68,13 @@ void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMRO
   
   // Draw COMs in 31*31 (bigger) cyan squares
   for (i = 0; i < 5; i = i + 2){
-    if ((frame_com[i] > 0) && (frame_com[i+1] > 0)){
+    if ((com_temp_in[i] > 0) && (com_temp_in[i+1] > 0)){
       for (j = -6; j < 7; j++){
-        temp_x = frame_com[i] + j;
+        temp_x = com_temp_in[i] + j;
         if (temp_x >= 0){
           for (k = -6; k < 7; k++){
             #pragma AP PIPELINE II = 1
-            temp_y = frame_com[i+1] + k;
+            temp_y = com_temp_in[i+1] + k;
             if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0x00FFFF;
           }
         }
@@ -84,18 +84,27 @@ void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMRO
   
   // Draw corners in 15*15 (smaller) yellow squares
   for (i = 0; i < 15; i = i + 2){
-    if ((frame_corners[i] > 0) && (frame_corners[i+1] > 0)){
+    if ((corners_temp_in[i] > 0) && (corners_temp_in[i+1] > 0)){
       for (j = -6; j < 7; j++){
-        temp_x = frame_corners[i] + j;
+        temp_x = corners_temp_in[i] + j;
         if (temp_x >= 0){
           for (k = -6; k < 7; k++){
             #pragma AP PIPELINE II = 1
-            temp_y = frame_corners[i+1] + k;
+            temp_y = corners_temp_in[i+1] + k;
             if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0xFFFF00;
           }
         }
       }
     }
   } 
+  
+  for (i = 0; i < 6; i++){
+    frame_com_out[i] = com_temp_in[i];
+  }
+  
+  for (i = 0; i < 16; i++){
+    frame_corners_out[i] = corners_temp_in[i];
+  }
+  
 }
 
