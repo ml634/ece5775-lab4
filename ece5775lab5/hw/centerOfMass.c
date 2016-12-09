@@ -17,7 +17,7 @@ void centerOfMass(char yc_data_in[NUMROWS*NUMCOLS], char yc_data_out[NUMROWS*NUM
    #pragma AP INTERFACE ap_fifo port= yc_data_in
    #pragma AP INTERFACE ap_fifo port= yc_data_out
 
-   unsigned short pixel;
+   char pixel;
    
    int row;
    int col;
@@ -56,15 +56,15 @@ void centerOfMass(char yc_data_in[NUMROWS*NUMCOLS], char yc_data_out[NUMROWS*NUM
          }
          else if (pixel == 2) {
             // blue: Normalize by 2
-            blue_m00 += pixel >> 1; // shift once is divde by 2
-            blue_m10 += (pixel >> 1) * col;
-            blue_m01 += (pixel >> 1) * row;
+            blue_m00 += 1; // pixel >> 1; // shift once is divde by 2
+            blue_m10 += 1 * col; // (pixel >> 1) * col;
+            blue_m01 += 1 * row; // (pixel >> 1) * row;
          }
          else if (pixel == 3) {
             // green: normalize by 3
-            green_m00 += pixel / 3;
-            green_m10 += (pixel / 3) * col;
-            green_m01 += (pixel / 3) * row;
+            green_m00 += 1; // pixel / 3;
+            green_m10 += 1 * col; // (pixel / 3) * col;
+            green_m01 += 1 * row; // (pixel / 3) * row;
          }
 
          // output pixel

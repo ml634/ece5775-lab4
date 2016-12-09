@@ -23,7 +23,7 @@ void ycbcr2rgb_pad(char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUM
       unsigned char y;
       unsigned int pixval;
       short c, d=0, e=0, r, g, b;
-      unsigned short input_data;
+      char  input_data;
       unsigned short tmp_uv;
       
       input_data = yc_in[row*NUMCOLS+col];

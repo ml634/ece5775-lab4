@@ -63,9 +63,10 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 #	sdscc -c -o"$@" "$<" 
 #	#sdscc -c $(SDSFLAGS) -o"$@" "$<" 
 
-./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
-	sds++ -c -o"$@" "$<" 
-	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
+# FINDME: Removing median filter from synthesis to try to free up LUT space
+# ./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
+# 	sds++ -c -o"$@" "$<" 
+# 	#sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
 ./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.c
 	sdscc -c  -o"$@" "$<" 
