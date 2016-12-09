@@ -48,14 +48,14 @@
 typedef ap_window<unsigned char,MF_SIZE,MF_SIZE> MF_WINDOW;
 typedef ap_linebuffer<unsigned short,MF_SIZE_MINUS1, NUMCOLS> MEDIAN_LINE_BUFFER;
 
-ap_uint<1> lineBuff0;
-ap_uint<1> lineBuff1;
-ap_uint<1> lineBuff2;
-ap_uint<1> lineBuff3;  
-ap_uint<1> lineBuff4;
-ap_uint<1> lineBuff5;
-ap_uint<1> lineBuff6;
-ap_uint<1> lineBuff7;  
+ap_uint<2> lineBuff0;
+ap_uint<2> lineBuff1;
+ap_uint<2> lineBuff2;
+ap_uint<2> lineBuff3;  
+ap_uint<2> lineBuff4;
+ap_uint<2> lineBuff5;
+ap_uint<2> lineBuff6;
+ap_uint<2> lineBuff7;  
 
 
 ////Median Filter with a passthrough of the current color pixel
@@ -114,7 +114,7 @@ void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[N
 				window.insert( lineBuff1, 2, 0);
 				window.insert( lineBuff2, 3, 0);
 				window.insert( lineBuff3, 4, 0);
-                		window.insert( lineBuff4, 5, 0);
+        window.insert( lineBuff4, 5, 0);
 				window.insert( lineBuff5, 6, 0);
 				window.insert( lineBuff6, 7, 0);
 				window.insert( lineBuff7, 8, 0);
@@ -150,7 +150,7 @@ void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[N
                            if (countOnes > 50) { median_pix[row*NUMCOLS + col] = 1; } // red
                            else if (countTwos > 50) { median_pix[row*NUMCOLS + col] = 2; } // blue
                            else if (countThrees > 50) { median_pix[row*NUMCOLS + col] = 3; } // green
-                           else {median_pix[row*NUMCOLS + col] = 0; // black (background)
+                           else median_pix[row*NUMCOLS + col] = 0; // black (background)
                         }
 
 		}
@@ -158,3 +158,4 @@ void median_char_filter_pass( char input_pix[NUMROWS*NUMCOLS], char median_pix[N
 	}
 
 }
+
