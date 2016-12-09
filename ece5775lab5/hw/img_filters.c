@@ -44,7 +44,7 @@ char yc_data_combined[NUMROWS*NUMCOLS];
 // add more parameters here to pass center of masses, points, etc to main
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com, unsigned int * frame_corners)
 {
-    
+#pragma AP dataflow     
    // int i =0;
 
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
