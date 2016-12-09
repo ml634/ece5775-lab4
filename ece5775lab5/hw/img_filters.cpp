@@ -51,11 +51,11 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 {
    #pragma AP DATAFLOW
    // int i =0;
-   printf("starting img_process\n");
+   //printf("starting img_process\n");
    // Convert rgb to YUV and threshold to segment red robot, blue robot, and green goal
    // data in, data out
    rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
-   printf("rgb2ycbcr done\n");
+   //printf("rgb2ycbcr done\n");
 
    // median filter
    // median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
@@ -65,7 +65,7 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    // calculate the center of mass for red robot, blue robot, and green goal
    // data in, data out, local com out
-   //centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
+   centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
    //printf("com done\n");
 
    // Process image to capture corners for both robots
@@ -73,12 +73,12 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
    // FINDME: Bypassing corner detect to test median filter
    // data in, data out, local com from com func in, unchanged com out, local corners out
-   corner_detect( yc_data_segmented, yc_data_combined, com_temp, com_temp_after_corners, corners_temp);
+   corner_detect( yc_data_segmented_out, yc_data_combined, com_temp, com_temp_after_corners, corners_temp);
    // printf("corner done\n");
       
    //ycbcr2rgb_pad(yc_data_combined, rgb_data_out, frame_com ,frame_corners );
    // data int, data out, local com after corners in, local corners in, frame com out, frame corners out
    ycbcr2rgb_pad(yc_data_combined, rgb_data_out, com_temp_after_corners, corners_temp, frame_com, frame_corners);
-   printf("obviously ycbcr2rgb done\n");
+   //printf("obviously ycbcr2rgb done\n");
 
 }
