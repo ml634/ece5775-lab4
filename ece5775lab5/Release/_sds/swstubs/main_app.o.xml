@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xd:data xmlns:xd="http://www.xilinx.com/xd">
-  <xd:source name="main_app.c" compiler="gcc" objfile="src/main_app.o" srcpath="/home/student/ml634/ece5775lab5/src" flags="-I/home/student/ml634/ece5775lab5/src -I/home/student/ml634/ece5775lab5/hw -Wall -O3 -fmessage-length=0 -MMD -MP -D __SDSCC__"/>
-</xd:data>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xd:data xmlns:xd="http://www.xilinx.com/xd">
-  <xd:source name="sobel_filter.cpp" compiler="g++" objfile="hw/sobel_filter.o" srcpath="/home/student/ml634/ece5775lab5/hw" flags="-I/home/student/ml634/ece5775lab5/hw  -D __SDSCC__"/>
-</xd:data>

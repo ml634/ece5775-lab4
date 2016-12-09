@@ -41,7 +41,7 @@ void median_char_filter_pass(ap_uint<8> input_pix[NUMROWS*NUMCOLS], ap_uint<8> m
 //void ycbcr2rgb_pad(ap_uint<2> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[COM_COUNT], unsigned int frame_corners[CORNER_ELEMENTS]);
 //commented out bc 
 //ERROR: [SDSoC 0-0] Function 'ycbcr2rgb_pad' argument 'frame_com' maps onto a hardware port of type bram, which is currently unsupported. 
-void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16]);
+void ycbcr2rgb_pad(ap_uint<8> yc_in[NUMROWS*NUMCOLS], unsigned int com_temp[6], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int frame_com[6], unsigned int frame_corners[16]);
 
 //#ifdef __cplusplus
 //};
