@@ -9,7 +9,7 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-#define COM_COUNT 12 // each color has 3 moment values which would be size of 9 but need buffer size multiple of 4
+#define COM_COUNT 8 // each color has 3 moment values which would be size of 9 but need buffer size multiple of 4
 
 void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
 {
