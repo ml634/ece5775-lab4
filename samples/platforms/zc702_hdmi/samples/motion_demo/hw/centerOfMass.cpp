@@ -50,29 +50,29 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
             red_m00 += 1;
             red_m10 += col;
             red_m01 += row;
+
+            red_xBar = red_m10 / red_m00;
+            red_yBar = red_m01 / red_m00;
          }
          else if (pixel == 2) {
             // blue
             blue_m00 += 1; // pixel >> 1; // shift once is divde by 2
             blue_m10 += col; // (pixel >> 1) * col;
             blue_m01 += row; // (pixel >> 1) * row;
+
+            blue_xBar = blue_m10 / blue_m00;
+            blue_yBar = blue_m01 / blue_m00;
          }
          else if (pixel == 3) {
             // green
             green_m00 += 1; // pixel / 3;
             green_m10 += col; // (pixel / 3) * col;
             green_m01 += row; // (pixel / 3) * row;
+
+            green_xBar = green_m10 / green_m00;
+            green_yBar = green_m01 / green_m00;
          }
 
-         // calculate COM points from each color's moment values
-         red_xBar = red_m10 / red_m00;
-         red_yBar = red_m01 / red_m00;
-
-         blue_xBar = blue_m10 / blue_m00;
-         blue_yBar = blue_m01 / blue_m00;
-
-         green_xBar = green_m10 / green_m00;
-         green_yBar = green_m01 / green_m00;
 
          // assign center of mass coordinates to appropriate position in frame_com
          // try to create this in a fifo loop instead
