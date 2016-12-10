@@ -35,38 +35,90 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned short  yc_data_out[NUMROWS*NUMCOLS])
+void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned char  yc_data_out[NUMROWS*NUMCOLS])
 {
+#pragma AP INTERFACE ap_fifo port= rgb_data_in
+#pragma AP INTERFACE ap_fifo port= yc_data_out
+
   unsigned char in_R, in_G, in_B;
 
   int row;
   int col;
 
-  for(row = 0; row < NUMROWS; row++){
+//outside interest range of bottom, top 100 rows
+ for(row = 0; row < 100; row++){
+    for(col = 0; col < NUMCOLS; col++){
+#pragma AP PIPELINE II = 1
+	
+		yc_data_out[row*NUMCOLS+col] = 0;
+
+	}
+	for (col = NUMCOLS; col < NUMPADCOLS; col++) {
+        volatile unsigned int pixelBotJunk;
+#pragma AP PIPELINE II = 1
+	pixelBotJunk = rgb_data_in[row*NUMPADCOLS+col];
+    }
+}
+
+//within image range
+  for(row = 100; row < NUMROWS-100; row++){
     for(col = 0; col < NUMCOLS; col++){
 #pragma AP PIPELINE II = 1
         unsigned short  u = 0;
         unsigned short  v = 0;
         unsigned short  y = 0;
-	unsigned short   pixel_out0, pixel_out1; 
+		unsigned short   pixel_out0, pixel_out1; 
         unsigned int pixel;
-	pixel = rgb_data_in[row*NUMPADCOLS+col];
-	in_B = ((pixel) & 0x000000FF);
-	in_G = (((pixel) >>8 )& 0x000000FF);
-	in_R = (((pixel) >>16)& 0x000000FF);
-	y = ((66 * in_R + 129 * in_G + 25 * in_B + 128) >> 8) + 16;
-        u =  (112*in_B - 74*in_G -38*in_R +128); // u
-        v = (112*in_R - 94*in_G -18*in_B +128); // v
-        pixel_out0 = ((y << 8) & 0xff00) | (((u >>8) +128 )  &0x00ff);
-        pixel_out1 = ((y << 8) & 0xff00) | (((v >>8) +128 )  &0x00ff);
-        yc_data_out[row*NUMCOLS+col] = (col%2 == 0) ? pixel_out0 : pixel_out1;
+	
+		pixel = rgb_data_in[row*NUMPADCOLS+col];
+		in_B = ((pixel) & 0x000000FF);
+		in_G = (((pixel) >>8 )& 0x000000FF);
+		in_R = (((pixel) >>16)& 0x000000FF);
+
+		y = ((66 * in_R + 129 * in_G + 25 * in_B + 128) >> 8) + 16;
+        u =  ( (112*in_B - 74*in_G -38*in_R) >> 8) +128; // u
+        v = ( (112*in_R - 94*in_G -18*in_B) >> 8)  +128; // v
+
+ 		// assign different colored pixels to different greyscale values to distinguish them from each other
+		if (v > 160 && y < 130) { // && u > 74) { // try adding Y value check?
+            // red object
+            yc_data_out[row*NUMCOLS+col] = 1; // red objects will have pixel value of 1
+         } 
+        
+		else if (u > 150) {
+            // blue object
+            yc_data_out[row*NUMCOLS+col] = 2; // blue objects will have pixel value of 2
+		}
+
+		else { 
+            // black object (background)
+            yc_data_out[row*NUMCOLS+col] = 0;
+         }
+
     }
 
     for (col = NUMCOLS; col < NUMPADCOLS; col++) {
-        volatile unsigned int pixel0;
+        volatile unsigned int pixel1;
 #pragma AP PIPELINE II = 1
-	pixel0 = rgb_data_in[row*NUMPADCOLS+col];
+	pixel1 = rgb_data_in[row*NUMPADCOLS+col];
     }
  }
+
+
+//outside interest range of bottom, top 100 rows
+ for(row = NUMROWS-100; row < NUMROWS; row++){
+    for(col = 0; col < NUMCOLS; col++){
+#pragma AP PIPELINE II = 1
+
+		yc_data_out[row*NUMCOLS+col] = 0;
+
+	}
+	for (col = NUMCOLS; col < NUMPADCOLS; col++) {
+        volatile unsigned int pixelBotJunk;
+#pragma AP PIPELINE II = 1
+	pixelBotJunk = rgb_data_in[row*NUMPADCOLS+col];
+    	}
+	}
+
 }
 

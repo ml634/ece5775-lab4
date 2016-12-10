@@ -44,25 +44,18 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-./hw/sobel_filter.o: ../hw/sobel_filter.cpp
-	sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
-./hw/sobel_filter_pass.o: ../hw/sobel_filter_pass.cpp
-	sds++ -c $(SDSFLAGS) -o"$@" "$<" 
-
-./hw/diff_image.o: ../hw/diff_image.c
-	sdscc -c $(SDSFLAGS) -o"$@" "$<" 
-
-./hw/combo_image.o: ../hw/combo_image.c
-	sdscc -c $(SDSFLAGS) -o"$@" "$<" 
 
 ./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
+	#sds++ -c -o"$@" "$<"
 	sds++ -c $(SDSFLAGS) -o"$@" "$<" 
 
 ./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.c
-	sdscc -c $(SDSFLAGS) -o"$@" "$<" 
+	#sdscc -c -o"$@" "$<" 
+	sdscc -c $(SDSFLAGS) -o"$@" "$<"
 
 ./hw/ycbcr2rgb_pad.o: ../hw/ycbcr2rgb_pad.c
+	#sdscc -c -o"$@" "$<"
 	sdscc -c $(SDSFLAGS) -o"$@" "$<" 
 
 
