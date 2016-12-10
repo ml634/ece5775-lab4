@@ -46,7 +46,7 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned char  
 
 
 //within image range
-  for(row = 0; row < NUMROWS; row++){
+  for(row = 100; row < NUMROWS-100; row++){
     for(col = 0; col < NUMCOLS; col++){
 #pragma AP PIPELINE II = 1
         unsigned short  u = 0;

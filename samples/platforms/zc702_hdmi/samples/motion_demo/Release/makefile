@@ -45,6 +45,9 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 	@echo ' '
 
 
+./hw/centerOfMass.o: ../hw/centerOfMass.cpp
+	#sds++ -c -o"$@" "$<"
+	sds++ -c $(SDSFLAGS) -o"$@" "$<"
 
 ./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.c
 	#sdscc -c -o"$@" "$<" 

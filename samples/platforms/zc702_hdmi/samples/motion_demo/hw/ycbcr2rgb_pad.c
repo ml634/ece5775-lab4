@@ -6,11 +6,15 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
+#define COM_COUNT 8
+
 //Main function for ycbcr2rgb with padding to 2048 pixel line
-void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS])
+void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int com_temp_in[COM_COUNT], unsigned int frame_com_out[COM_COUNT])
 {
   int row;
   int col;
+  int i;
+
   //#pragma AP DATAFLOW
   for(row = 0; row < NUMROWS; row++){
     for(col = 0; col < NUMCOLS; col++){
@@ -51,6 +55,11 @@ void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NU
 #pragma AP PIPELINE II = 1
       rgb_out[row*NUMPADCOLS+col] = 0;
     }
+  }
+
+//pass the COM in to the *com_buffer
+  for (i = 0; i < COM_COUNT; i++){
+    frame_com_out[i] = com_temp_in[i];
   }
 }
 

@@ -73,7 +73,7 @@
 #define TIME_STAMP
 #endif
 
-#define COM_COUNT 6
+#define COM_COUNT 8
 #define CORNER_ELEMENTS 8
 #define CORNER_COUNT 16 
 
@@ -87,6 +87,9 @@ void motion_demo_processing(unsigned int in_buffer, unsigned int out_buffer, uns
 TIME_STAMP_INIT
 	img_process((unsigned int *)in_buffer, (unsigned int *)out_buffer, (unsigned int *)com_buffer, (unsigned int *)corner_buffer);
 TIME_STAMP
+
+	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
+
 
 }
 

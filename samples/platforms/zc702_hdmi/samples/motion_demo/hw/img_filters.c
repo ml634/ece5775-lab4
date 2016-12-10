@@ -35,16 +35,23 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-unsigned char yc_data_out[NUMROWS*NUMCOLS];
+#define COM_COUNT 8
+
+unsigned char yc_data_segmented[NUMROWS*NUMCOLS];
+unsigned char yc_data_segmented_out[NUMROWS*NUMCOLS];
+
+unsigned int com_temp[COM_COUNT]; //need to be 4x for FIFO interface
 
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com,unsigned int *frame_corners)
 {
 
 #pragma AP dataflow
 
-    rgb_pad2ycbcr(rgb_data_in, yc_data_out);
+    rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
 
-    ycbcr2rgb_pad(yc_data_out, rgb_data_out);
+	centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
+
+    ycbcr2rgb_pad( yc_data_segmented_out, rgb_data_out, com_temp, frame_com);
 }
 
 
