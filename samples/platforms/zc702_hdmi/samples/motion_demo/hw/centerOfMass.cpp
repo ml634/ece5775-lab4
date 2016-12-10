@@ -9,7 +9,7 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-#define COM_COUNT 8
+#define COM_COUNT 12 // each color has 3 moment values which would be size of 9 but need buffer size multiple of 4
 
 void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_data_out[NUMROWS*NUMCOLS], unsigned int frame_com[COM_COUNT])
 {
@@ -51,8 +51,8 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
             red_m10 += col;
             red_m01 += row;
 
-            red_xBar = red_m10 / red_m00;
-            red_yBar = red_m01 / red_m00;
+            // red_xBar = red_m10 / red_m00;
+            // red_yBar = red_m01 / red_m00;
          }
          else if (pixel == 2) {
             // blue
@@ -60,8 +60,8 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
             blue_m10 += col; // (pixel >> 1) * col;
             blue_m01 += row; // (pixel >> 1) * row;
 
-            blue_xBar = blue_m10 / blue_m00;
-            blue_yBar = blue_m01 / blue_m00;
+            // blue_xBar = blue_m10 / blue_m00;
+            // blue_yBar = blue_m01 / blue_m00;
          }
          else if (pixel == 3) {
             // green
@@ -69,8 +69,8 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
             green_m10 += col; // (pixel / 3) * col;
             green_m01 += row; // (pixel / 3) * row;
 
-            green_xBar = green_m10 / green_m00;
-            green_yBar = green_m01 / green_m00;
+            // green_xBar = green_m10 / green_m00;
+            // green_yBar = green_m01 / green_m00;
          }
 
 
@@ -108,11 +108,15 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
    // green_yBar = green_m01 / green_m00;
 
    // assign center of mass coordinates to appropriate position in frame_com
-   frame_com[0] = red_xBar;
-   frame_com[1] = red_yBar;
-   frame_com[2] = blue_xBar;
-   frame_com[3] = blue_yBar;
-   frame_com[4] = green_xBar;
-   frame_com[5] = green_yBar;
+   // FINDME: Outputting color moments and let software do the division
+   frame_com[0] = red_m00;
+   frame_com[1] = red_m10;
+   frame_com[2] = red_m01;
+   frame_com[3] = blue_m00;
+   frame_com[4] = blue_m10;
+   frame_com[5] = blue_m01;
+   frame_com[6] = green_m00;
+   frame_com[7] = green_m10;
+   frame_com[8] = green_m01;
 
 }
