@@ -61,10 +61,17 @@
 
 #include "img_filters.h"
 #include "sds_lib.h"
+
+//User Includes.
+#ifndef APF_NOMMAP
+#include "apf_lib.h"
 #define TIME_STAMP_INIT  unsigned long long clock_start, clock_end;  clock_start = sds_clock_counter();  
 #define TIME_STAMP  { clock_end = sds_clock_counter(); printf("elapsed time %llu \n", clock_end-clock_start); clock_start = sds_clock_counter();  }
 
-//User Includes.
+#else
+#define TIME_STAMP_INIT
+#define TIME_STAMP
+#endif
 
 #define COM_COUNT 6
 #define CORNER_ELEMENTS 8

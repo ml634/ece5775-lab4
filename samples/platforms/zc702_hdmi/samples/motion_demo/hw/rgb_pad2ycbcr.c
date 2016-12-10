@@ -37,31 +37,16 @@
 
 void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned char  yc_data_out[NUMROWS*NUMCOLS])
 {
-#pragma AP INTERFACE ap_fifo port= rgb_data_in
-#pragma AP INTERFACE ap_fifo port= yc_data_out
 
   unsigned char in_R, in_G, in_B;
 
   int row;
   int col;
 
-//outside interest range of bottom, top 100 rows
- for(row = 0; row < 100; row++){
-    for(col = 0; col < NUMCOLS; col++){
-#pragma AP PIPELINE II = 1
-	
-		yc_data_out[row*NUMCOLS+col] = 0;
 
-	}
-	for (col = NUMCOLS; col < NUMPADCOLS; col++) {
-        volatile unsigned int pixelBotJunk;
-#pragma AP PIPELINE II = 1
-	pixelBotJunk = rgb_data_in[row*NUMPADCOLS+col];
-    }
-}
 
 //within image range
-  for(row = 100; row < NUMROWS-100; row++){
+  for(row = 0; row < NUMROWS; row++){
     for(col = 0; col < NUMCOLS; col++){
 #pragma AP PIPELINE II = 1
         unsigned short  u = 0;
@@ -105,20 +90,6 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned char  
  }
 
 
-//outside interest range of bottom, top 100 rows
- for(row = NUMROWS-100; row < NUMROWS; row++){
-    for(col = 0; col < NUMCOLS; col++){
-#pragma AP PIPELINE II = 1
-
-		yc_data_out[row*NUMCOLS+col] = 0;
-
-	}
-	for (col = NUMCOLS; col < NUMPADCOLS; col++) {
-        volatile unsigned int pixelBotJunk;
-#pragma AP PIPELINE II = 1
-	pixelBotJunk = rgb_data_in[row*NUMPADCOLS+col];
-    	}
-	}
 
 }
 

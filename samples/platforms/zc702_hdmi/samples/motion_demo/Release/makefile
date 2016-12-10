@@ -46,10 +46,6 @@ motion_demo.elf: $(OBJS)  $(USER_OBJS)
 
 
 
-./hw/median_char_filter_pass.o: ../hw/median_char_filter_pass.cpp
-	#sds++ -c -o"$@" "$<"
-	sds++ -c $(SDSFLAGS) -o"$@" "$<" 
-
 ./hw/rgb_pad2ycbcr.o: ../hw/rgb_pad2ycbcr.c
 	#sdscc -c -o"$@" "$<" 
 	sdscc -c $(SDSFLAGS) -o"$@" "$<"

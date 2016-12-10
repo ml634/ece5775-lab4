@@ -35,7 +35,7 @@
 #include "frame_size.h"
 #include "image_cores.h"
 
-unsigned short yc_data_out[NUMROWS*NUMCOLS];
+unsigned char yc_data_out[NUMROWS*NUMCOLS];
 
 void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com,unsigned int *frame_corners)
 {
@@ -44,9 +44,6 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
 
     rgb_pad2ycbcr(rgb_data_in, yc_data_out);
 
- 
-   
-    //median_char_filter_pass(threshold, motion_image_tmp1, yc_out_tmp2, motion_image_tmp2, yc_out_tmp3);
     ycbcr2rgb_pad(yc_data_out, rgb_data_out);
 }
 
