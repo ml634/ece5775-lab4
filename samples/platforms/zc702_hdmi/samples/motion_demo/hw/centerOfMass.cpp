@@ -64,27 +64,45 @@ void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_da
             green_m01 += row; // (pixel / 3) * row;
          }
 
+         // calculate COM points from each color's moment values
+         red_xBar = red_m10 / red_m00;
+         red_yBar = red_m01 / red_m00;
+
+         blue_xBar = blue_m10 / blue_m00;
+         blue_yBar = blue_m01 / blue_m00;
+
+         green_xBar = green_m10 / green_m00;
+         green_yBar = green_m01 / green_m00;
+
+         // assign center of mass coordinates to appropriate position in frame_com
+         frame_com[0] = red_xBar;
+         frame_com[1] = red_yBar;
+         frame_com[2] = blue_xBar;
+         frame_com[3] = blue_yBar;
+         frame_com[4] = green_xBar;
+         frame_com[5] = green_yBar;
+
          // output pixel
          yc_data_out[row*NUMCOLS +col] = yc_data_in[row*NUMCOLS + col];
       }
    }
 
    // calculate COM points from each color's moment values
-   red_xBar = red_m10 / red_m00;
-   red_yBar = red_m01 / red_m00;
+   // red_xBar = red_m10 / red_m00;
+   // red_yBar = red_m01 / red_m00;
 
-   blue_xBar = blue_m10 / blue_m00;
-   blue_yBar = blue_m01 / blue_m00;
+   // blue_xBar = blue_m10 / blue_m00;
+   // blue_yBar = blue_m01 / blue_m00;
 
-   green_xBar = green_m10 / green_m00;
-   green_yBar = green_m01 / green_m00;
+   // green_xBar = green_m10 / green_m00;
+   // green_yBar = green_m01 / green_m00;
 
-   // assign center of mass coordinates to appropriate position in frame_com
-   frame_com[0] = red_xBar;
-   frame_com[1] = red_yBar;
-   frame_com[2] = blue_xBar;
-   frame_com[3] = blue_yBar;
-   frame_com[4] = green_xBar;
-   frame_com[5] = green_yBar;
+   // // assign center of mass coordinates to appropriate position in frame_com
+   // frame_com[0] = red_xBar;
+   // frame_com[1] = red_yBar;
+   // frame_com[2] = blue_xBar;
+   // frame_com[3] = blue_yBar;
+   // frame_com[4] = green_xBar;
+   // frame_com[5] = green_yBar;
 
 }
