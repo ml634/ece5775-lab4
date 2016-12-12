@@ -9,11 +9,13 @@
 #define COM_COUNT 8
 
 //Main function for ycbcr2rgb with padding to 2048 pixel line
-void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int com_temp_in[COM_COUNT], unsigned int frame_com_out[COM_COUNT])
+void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS])
 {
+
+
   int row;
   int col;
-  int i;
+  int i, j, k;
 
   //#pragma AP DATAFLOW
   for(row = 0; row < NUMROWS; row++){
@@ -56,10 +58,24 @@ void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NU
       rgb_out[row*NUMPADCOLS+col] = 0;
     }
   }
+/*
+	signed int temp_x, temp_y;
 
-//pass the COM in to the *com_buffer
-  for (i = 0; i < COM_COUNT; i++){
-    frame_com_out[i] = com_temp_in[i];
-  }
+	// Draw COMs in 31*31 (bigger) cyan squares
+  for (i = 0; i < 5; i = i + 2){
+    if ((com_temp_in[i] > 0) && (com_temp_in[i+1] > 0)){
+      for (j = -6; j < 7; j++){
+        temp_x = com_temp_in[i] + j;
+        if (temp_x >= 0){
+          for (k = -6; k < 7; k++){
+            #pragma AP PIPELINE II = 1
+            temp_y = com_temp_in[i+1] + k;
+            if (temp_y >= 0) rgb_out[temp_y * NUMPADCOLS + temp_x] = 0x00FFFF;
+          }
+        }
+      }
+    }
+  } */
+
 }
 

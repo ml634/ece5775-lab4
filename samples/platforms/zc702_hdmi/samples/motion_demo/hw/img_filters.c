@@ -42,16 +42,14 @@ unsigned char yc_data_segmented_out[NUMROWS*NUMCOLS];
 
 unsigned int com_temp[COM_COUNT]; //need to be 4x for FIFO interface
 
-void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigned int *frame_com,unsigned int *frame_corners)
+void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
 {
-
-#pragma AP dataflow
 
     rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
 
-	centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
+	centerOfMass( yc_data_segmented, yc_data_segmented_out);
 
-    ycbcr2rgb_pad( yc_data_segmented_out, rgb_data_out, com_temp, frame_com);
+    ycbcr2rgb_pad( yc_data_segmented_out, rgb_data_out);
 }
 
 
