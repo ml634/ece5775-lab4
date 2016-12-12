@@ -36,7 +36,6 @@
  *
  * THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS PART OF THIS FILE
  * AT ALL TIMES.
- *
  *******************************************************************************/
 
 /*****************************************************************************
@@ -73,7 +72,7 @@
 #define TIME_STAMP
 #endif
 
-#define COM_COUNT 8
+#define COM_COUNT 12
 #define CORNER_ELEMENTS 8
 #define CORNER_COUNT 16 
 
@@ -82,6 +81,12 @@
 
 void motion_demo_processing(unsigned int in_buffer, unsigned int out_buffer)
 {
+	unsigned int com_red_x;
+	unsigned int com_red_y;
+	unsigned int com_blue_x;
+	unsigned int com_blue_y;
+	unsigned int com_green_x;
+	unsigned int com_green_y;
 	
 	printf("start img proc \n");
 TIME_STAMP_INIT
@@ -89,6 +94,9 @@ TIME_STAMP_INIT
 TIME_STAMP
 
 
+
+	printf("COM= %u, %u, %u, %u, %u, %u \n", com_red_x, com_red_y, com_blue_x, com_blue_y, com_green_x, com_green_y); 
+	
 }
 
 
