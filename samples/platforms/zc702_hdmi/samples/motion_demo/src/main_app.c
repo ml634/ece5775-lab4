@@ -81,21 +81,13 @@
 
 void motion_demo_processing(unsigned int in_buffer, unsigned int out_buffer)
 {
-	unsigned int com_red_x;
-	unsigned int com_red_y;
-	unsigned int com_blue_x;
-	unsigned int com_blue_y;
-	unsigned int com_green_x;
-	unsigned int com_green_y;
+	
 	
 	printf("start img proc \n");
 TIME_STAMP_INIT
 	img_process((unsigned int *)in_buffer, (unsigned int *)out_buffer);
 TIME_STAMP
 
-
-
-	printf("COM= %u, %u, %u, %u, %u, %u \n", com_red_x, com_red_y, com_blue_x, com_blue_y, com_green_x, com_green_y); 
 	
 }
 

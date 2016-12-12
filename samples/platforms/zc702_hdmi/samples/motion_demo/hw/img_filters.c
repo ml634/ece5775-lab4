@@ -47,9 +47,9 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out)
 
     rgb_pad2ycbcr(rgb_data_in, yc_data_segmented);
 
-	centerOfMass( yc_data_segmented, yc_data_segmented_out);
+	centerOfMass( yc_data_segmented, yc_data_segmented_out, com_temp );
 
-    ycbcr2rgb_pad( yc_data_segmented_out, rgb_data_out);
+    ycbcr2rgb_pad( yc_data_segmented_out, rgb_data_out, com_temp );
 }
 
 

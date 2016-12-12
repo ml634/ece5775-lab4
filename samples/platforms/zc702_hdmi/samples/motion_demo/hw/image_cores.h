@@ -12,13 +12,13 @@ void rgb_pad2ycbcr(unsigned int rgb_data_in[NUMROWS*NUMPADCOLS], unsigned char  
 
 
 #pragma SDS data access_pattern(yc_data_in:SEQUENTIAL, yc_data_out_com:SEQUENTIAL)
-void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_data_out_com[NUMROWS*NUMCOLS]);
+#pragma SDS data access_pattern(local_com_out:SEQUENTIAL)
+void centerOfMass(unsigned char yc_data_in[NUMROWS*NUMCOLS], unsigned char yc_data_out_com[NUMROWS*NUMCOLS], unsigned int local_com_out[COM_COUNT] );
 
 #pragma SDS data mem_attribute(rgb_out:PHYSICAL_CONTIGUOUS|NON_CACHEABLE)
 #pragma SDS data access_pattern(yc_in:SEQUENTIAL, rgb_out:SEQUENTIAL)
-//#pragma SDS data access_pattern(rgb_out:SEQUENTIAL)
-//void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS], unsigned int com_temp_in[COM_COUNT]);
-void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS]);
+#pragma SDS data access_pattern(local_com_in:SEQUENTIAL)
+void ycbcr2rgb_pad(unsigned char yc_in[NUMROWS*NUMCOLS], unsigned int rgb_out[NUMROWS*NUMPADCOLS],unsigned int local_com_in[COM_COUNT] );
 
 #ifdef __cplusplus
 };
