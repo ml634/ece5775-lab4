@@ -113,7 +113,7 @@ void sendCommand(char *serialDataOverNetwork, int socket)
 	}
 	else if ( !isNetworkAlive ) {
 		// if network somehow failed, then initiate again
-		isNetworkAlive = init_network();
+		//isNetworkAlive = init_network();
 	}
 
 	return;
@@ -262,10 +262,10 @@ TIME_STAMP
 
 	printf("COM= %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(com_buffer + 0), *(unsigned int *)(com_buffer + 4),*(unsigned int *)(com_buffer + 8), *(unsigned int *)(com_buffer + 12), *(unsigned int *)(com_buffer + 16), *(unsigned int *)(com_buffer + 20)); 
 
-	//printf("corners= %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(corner_buffer + 0), *(unsigned int *)(corner_buffer + 4),*(unsigned int *)(corner_buffer + 8), *(unsigned int *)(corner_buffer + 12), *(unsigned int *)(corner_buffer + 16), *(unsigned int *)(corner_buffer + 20) , *(unsigned int *)(corner_buffer + 24), *(unsigned int *)(corner_buffer + 28), *(unsigned int *)(corner_buffer + 32), *(unsigned int *)(corner_buffer + 36), *(unsigned int *)(corner_buffer + 40), *(unsigned int *)(corner_buffer + 44), *(unsigned int *)(corner_buffer + 48), *(unsigned int *)(corner_buffer + 52), *(unsigned int *)(corner_buffer + 56), *(unsigned int *)(corner_buffer + 60)); 
+	printf("corners= %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u \n", *(unsigned int *)(corner_buffer + 0), *(unsigned int *)(corner_buffer + 4),*(unsigned int *)(corner_buffer + 8), *(unsigned int *)(corner_buffer + 12), *(unsigned int *)(corner_buffer + 16), *(unsigned int *)(corner_buffer + 20) , *(unsigned int *)(corner_buffer + 24), *(unsigned int *)(corner_buffer + 28), *(unsigned int *)(corner_buffer + 32), *(unsigned int *)(corner_buffer + 36), *(unsigned int *)(corner_buffer + 40), *(unsigned int *)(corner_buffer + 44), *(unsigned int *)(corner_buffer + 48), *(unsigned int *)(corner_buffer + 52), *(unsigned int *)(corner_buffer + 56), *(unsigned int *)(corner_buffer + 60)); 
 
 	//call robot command function with COM (and later corner)
-	robotCommand(com_buffer, corner_buffer );
+	//robotCommand(com_buffer, corner_buffer );
 
 }
 
@@ -367,7 +367,7 @@ int main(int argc, char **argv)
 	printf("\n START CODE \n");
 	init_all();
 	//initialize the server -> will be blocking until both robots connected	
-	isNetworkAlive = init_network();
+	//isNetworkAlive = init_network();
 	thread_sw_sync(); // Sample code - loop forever, exit with Ctrl-C
 
 

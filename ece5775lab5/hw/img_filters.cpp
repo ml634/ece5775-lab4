@@ -60,12 +60,12 @@ void img_process( unsigned int *rgb_data_in, unsigned int *rgb_data_out, unsigne
    // median filter
    // median_char_filter_pass(yc_data_segmented_out,yc_data_segmented_out_filter );
    // data in, data out
-   //median_char_filter_pass(yc_data_segmented, yc_data_segmented_out_filter );
+   median_char_filter_pass(yc_data_segmented, yc_data_segmented_out_filter );
    //printf("median done\n");
 
    // calculate the center of mass for red robot, blue robot, and green goal
    // data in, data out, local com out
-   centerOfMass(yc_data_segmented, yc_data_segmented_out, com_temp);
+   centerOfMass(yc_data_segmented_out_filter , yc_data_segmented_out, com_temp);
    //printf("com done\n");
 
    // Process image to capture corners for both robots
